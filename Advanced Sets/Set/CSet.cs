@@ -26,6 +26,7 @@ namespace Advanced_Sets.Set
 
             //Get the string representation of the set tree
             this.ElementString = ToSetString(tree);
+            this.ElementString = ElementString.Replace(",", " , ").Replace("{", "{ ").Replace("}"," }");
         }//BuildSet
         //private string
         private string ToSetString(CSetTree tree)
