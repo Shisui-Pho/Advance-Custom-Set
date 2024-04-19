@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Advanced_Sets.Set
+namespace Sets
 {
-    public class CSetTree
+    internal class CSetTree
     {
         public string RootElement { get; private set; }
         public List<CSetTree> SubSets { get; private set; }

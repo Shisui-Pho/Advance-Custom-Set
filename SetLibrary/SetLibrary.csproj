@@ -44,9 +44,9 @@
     <Compile Include="GenericSet\GenericExtraction.cs" />
     <Compile Include="GenericSet\GenericSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Set\BracesEvaluation.cs" />
+    <Compile Include="Service\BracesEvaluation.cs" />
     <Compile Include="Set\CSet.cs" />
-    <Compile Include="Set\CSetTree.cs" />
+    <Compile Include="Model\CSetTree.cs" />
     <Compile Include="Set\TreeExtraction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

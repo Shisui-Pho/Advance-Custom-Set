@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Advanced_Sets.Set
+namespace Sets
 {
-    public static class TreeExtraction
+    internal static class TreeExtraction
     {
         /// <summary>
         /// This method takes in a string that has been evaluated for braces and then do some extraction to build a tree of relation of all the elements

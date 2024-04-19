@@ -1,13 +1,9 @@
-﻿using Advanced_Sets.Set;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Advanced_Sets.GenericSet
+namespace Sets.Generic
 {
-    public class GenericExtraction<T>
+    internal class GenericExtraction<T>
         where T : IComparable
     {
         private readonly char seperator;

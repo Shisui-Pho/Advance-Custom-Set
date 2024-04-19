@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Advanced_Sets.Set
+namespace Sets
 {
     public class CSet
     {

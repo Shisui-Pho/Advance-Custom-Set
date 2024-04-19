@@ -1,7 +1,5 @@
-﻿using Advanced_Sets.GenericSet;
-using Advanced_Sets.Set;
-using System;
-namespace Advanced_Sets.GenericSets
+﻿using System;
+namespace Sets.Generic
 {
     public class GenericSet<T> where T : IComparable
     {
