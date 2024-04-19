@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Globalization;
-using Advanced_Sets.Set;
-using Advanced_Sets.GenericSets;
+using Sets;
+using Sets.Generic;
 namespace Advanced_Sets
 {
     class Program
