@@ -43,14 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericSet\GenericExtraction.cs" />
-    <Compile Include="GenericSet\GenericSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Set\BracesEvaluation.cs" />
-    <Compile Include="Set\CSet.cs" />
-    <Compile Include="Set\TreeExtraction.cs" />
-    <Compile Include="Set\CSetTree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
