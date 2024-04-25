@@ -12,9 +12,15 @@ namespace SetLibrary
         int Cardinality { get; }
         int NumberOfSubsets { get; }
         ISetTree<T> this[int index]{get;}
+        IEnumerable<ISetTree<T>> GetSubsetsEnumarator();
         void AddSubSetTree(ISetTree<T> tree);
         void AddElement(string element);
+        void AddElement(T element);
+        void MergeSets(ISet<T> element);
         bool RemoveElement(string element);
+        bool RemoveElement(ISetTree<T> element);
+        bool RemoveSetElements(ISet<T> element);
+        int IndexOf(string element);
         string ToString();
     }//class
 }//namespace

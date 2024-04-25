@@ -7,27 +7,44 @@ namespace SetLibrary
     public class CSetTree<T> : ISetTree<T>
         where T : IComparable
     {
-        public string RootElement { get; private set; }
+        //private data members to hold the data
+        private string _rootElement = "";
         private List<ISetTree<T>> lstSubsets;
-        public int Cardinality { get; private set; }
+        private List<T> lstRootElements;
+
+        //Public data members to represent the internal data
+        public string RootElement => string.Join(",",this.lstRootElements);
+        public int Cardinality => lstRootElements.Count + lstSubsets.Count;
         public int NumberOfSubsets => this.lstSubsets.Count;
         public ISetTree<T> this[int index] 
         {
             get
             {
-                if (index >= NumberOfSubsets || index < 0)
+                if (index >= Cardinality || index < 0)
                     throw new IndexOutOfRangeException();
+
+                if (index < lstRootElements.Count)
+                    return new CSetTree<T>(lstRootElements[index]);//use the private constructor to build a new set of one element
+                
+                //Scale the index to macth the 
+                index = index - lstRootElements.Count;
+                //Return the subset
                 return this.lstSubsets[index];
             }//end getter
         }//INDEXER
-        public CSetTree(string rootElement, int cardinality = 0)
+        private CSetTree(T element)
+        {
+            lstRootElements = new List<T>();
+            lstSubsets = new List<ISetTree<T>>();
+            lstRootElements.Add(element);
+        }//ctor private
+        public CSetTree(List<T> rootElement)
         {
             lstSubsets = new List<ISetTree<T>>();
-            this.RootElement = rootElement;
-            this.Cardinality = cardinality;
+            this.lstRootElements = rootElement;
         }//ctor 01 
-        public CSetTree(string rootElement,List<ISetTree<T>> SubSets, int cardinality = 0)
-            : this(rootElement,cardinality)
+        public CSetTree(List<T> rootElement,List<ISetTree<T>> SubSets)
+            : this(rootElement)
         {
             this.lstSubsets = SubSets;
         }//ctor 02
@@ -36,13 +53,7 @@ namespace SetLibrary
             if (IndexOfSet(tree.ToString()) >= 0)
                 return;
             lstSubsets.Add(tree);
-            Cardinality++;
-            Sort();
         }//AddSubTree
-        private void Sort()
-        {
-            this.lstSubsets.Sort();
-        }//Sort
         public int CompareTo(object obj)
         {
             return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
@@ -57,30 +68,33 @@ namespace SetLibrary
                     throw new ArgumentException("The braces are not matching, please re-check them");
 
                 //then extract the tree
-
                 ISetTree<T> newSubSet = GenericExtraction<T>.Extract(element, ","); //GenericExtraction<T>.Extract(element);
 
                 //Now add the subtree as an element to this tree if it is unique
-                if (!this.lstSubsets.Contains(newSubSet))
+                if (IndexOfSet(newSubSet.ToString()) < 0)
                 {
                     this.AddSubSetTree(newSubSet);
-                    this.Cardinality++;
                 }//Only add the new subset if it is unique
             }//end if
             else
             {
                 //The element does not contain braces, which means that we can just add it in the root element
-                this.RootElement = GenericExtraction<T>.SortAndRemoveDuplicates(this.RootElement + "," + element,",", out int cardinality);
-                if (cardinality != this.Cardinality)
-                    this.Cardinality++;
+                List<T> ls = GenericExtraction<T>.SortAndRemoveDuplicates(element, ",");
+                for (int i = 0; i < ls.Count; i++)
+                    if (!lstRootElements.Contains(ls[i]))
+                        lstRootElements.Add(ls[i]);
+                //Sort the root elements
+                lstRootElements.Sort();
+
+                //Build the rootString
+                _rootElement = string.Join(",", lstRootElements.ToArray());
             }//end else
         }//AddElement
         public bool RemoveElement(string element)
         {
             if (RootElement.Contains(element))
             {
-                this.RootElement = this.RootElement.Remove(this.RootElement.IndexOf(element), element.Length);
-                Cardinality--;
+                _rootElement = this.RootElement.Remove(this.RootElement.IndexOf(element), element.Length);
                 return true;
             }//end if
             else if (element.StartsWith("{") && element.EndsWith("}"))
@@ -98,8 +112,6 @@ namespace SetLibrary
                 //Remove the element/set
                 this.lstSubsets.RemoveAt(index);
 
-                //Decreament the cardinality
-                Cardinality--;
                 return true;
             }//And if subset
 
@@ -112,6 +124,46 @@ namespace SetLibrary
                     return i;
             return -1;
         }//IndexOfSet
+        public int IndexOf(string element)
+        {
+            return IndexOfSet(element);
+        }//IndexOf
+        public bool RemoveElement(ISetTree<T> element)
+        {
+            int index = IndexOfSet(element.ToString());
+            if (index < 0)
+                return false;
+
+            this.lstSubsets.RemoveAt(index);
+            return true;
+        }//RemoveElement
+
+        public bool RemoveSetElements(ISet<T> element)
+        {
+            int index = IndexOfSet(element.ElementString);
+            if (index < 0)
+                return false;
+            this.lstSubsets.RemoveAt(index);
+            return true;
+        }//RemoveElement
+
+        public void AddElement(T element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MergeSets(ISet<T> element)
+        {
+            
+        }//AddElement
+
+        public IEnumerable<ISetTree<T>> GetSubsetsEnumarator()
+        {
+            foreach (var item in this.lstSubsets)
+            {
+                yield return item;
+            }
+        }//
         public override string ToString()
         {
             return CSetTree<T>.ToSetString(this);
@@ -124,9 +176,8 @@ namespace SetLibrary
                 return "{" + tree.RootElement + "}";
             }//end if
             string root = "{" + tree.RootElement;
-            for(int i = 0; i< tree.NumberOfSubsets;i++) //( in tree.SubSets)
+            foreach (ISetTree<T> subTree in tree.GetSubsetsEnumarator())
             {
-                ISetTree<T> subTree = tree[i];
                 string nested = ToSetString(subTree);
 
                 if (root != "{")

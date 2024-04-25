@@ -27,8 +27,8 @@ namespace SetLibrary.Generic
             //Base case
             if (!expression.Contains("}") && !expression.Contains("{"))
             {
-                string rootElement = SortAndRemoveDuplicates(expression,seperator, out int count);
-                return new CSetTree<T>(rootElement, count);
+               List<T> rootElements = SortAndRemoveDuplicates(expression,seperator);
+                return new CSetTree<T>(rootElements);
             }//end expression
 
 
@@ -81,7 +81,7 @@ namespace SetLibrary.Generic
             }//Build for all the elements
             return tree;
         }//Extract
-        public static string SortAndRemoveDuplicates(string rootElements,string seperator, out int count)
+        public static List<T> SortAndRemoveDuplicates(string rootElements,string seperator)
         {
             rootElements = rootElements.Replace(" ", "");
             //Get the elements
@@ -109,8 +109,7 @@ namespace SetLibrary.Generic
 
 
             uniqueElements.Sort();
-            count = uniqueElements.Count;
-            return String.Join(seperator, uniqueElements.ToArray());//Return the dorted set
+            return uniqueElements;
         }//SortAndRemoveDuplicates
     }//Eval
 }
