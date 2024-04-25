@@ -75,7 +75,7 @@ namespace Sets
             }//Build for all the elements
             return tree;
         }//BuildTree
-        private static string SortAndRemoveDuplicates(string rootElements, out int count)
+        public static string SortAndRemoveDuplicates(string rootElements, out int count)
         {
             rootElements = rootElements.Replace(" ", "");
             //Get the elements
