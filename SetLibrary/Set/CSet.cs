@@ -5,6 +5,9 @@ namespace Sets
     {
         public string ElementString { get; private set; }
         public int Cardinality { get; private set; }
+        
+        //This will save the elements  
+        private CSetTree tree;
         public CSet(string elementString)
         {
             BuildSet(elementString);
@@ -20,7 +23,7 @@ namespace Sets
 
             //Extract the set tree
             CSetTree tree = TreeExtraction.Extract(expression);
-
+            this.tree = tree;
             //The cardinality will be the Count of the first/root set
             this.Cardinality = tree.Cardinality;
 
@@ -31,22 +34,22 @@ namespace Sets
         //private string
         private string ToSetString(CSetTree tree)
         {
-            //Base case
-            if(tree.SubSets.Count == 0)
-            {
-                return "{"+tree.RootElement+"}";
-            }//end if
-            string root = "{" + tree.RootElement;
-            foreach (CSetTree subTree in tree.SubSets)
-            {
-               string nested = ToSetString(subTree);
-
-                if (root != "{")
-                    root += "," + nested;
-                else
-                    root += nested;
-            }//end 
-            return root + "}";
+            return tree.ToString();
         }//ToSetString
+        public void AddElement(string element)
+        {
+            this.tree.AddElement(element);
+        }//AddElement
+        public bool RemoveElement(string element)
+        {
+            bool sucess = tree.RemoveElement(element);
+            if (sucess)
+            {
+                ElementString = tree.ToString();
+                this.Cardinality = tree.Cardinality;
+            }
+                
+            return sucess;
+        }//RemoveElement
     }//class
 }//namespace
