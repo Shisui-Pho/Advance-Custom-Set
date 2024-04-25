@@ -17,6 +17,7 @@ namespace SetLibrary
         /// Gets the Cardinality of the evaluated set.
         /// </summary>
         int Cardinality { get; }
+        ISetTree<T> this[int index] { get; }
         /// <summary>
         /// Adds a new element in the current set. If the element already exists it will not be added.
         /// </summary>
@@ -38,7 +39,7 @@ namespace SetLibrary
         /// Adds a set as a subset of the current set. This set will be an element on the first nesting level of the current set.
         /// </summary>
         /// <param name="set"></param>
-        void AddElement(ISet<T> set);
+        void MergeSets(ISet<T> set);
         /// <summary>
         /// Removes an element in the current set. This element could be a set or just an single element.
         /// This element must be on the first nesting level.
