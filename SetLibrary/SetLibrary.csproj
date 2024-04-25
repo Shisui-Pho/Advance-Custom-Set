@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericSet\GenericExtraction.cs" />
+    <Compile Include="Service\GenericExtraction.cs" />
     <Compile Include="GenericSet\GenericSet.cs" />
     <Compile Include="ISet.cs" />
     <Compile Include="ISetTree.cs" />
