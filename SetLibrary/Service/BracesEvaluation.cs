@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-namespace Sets
+namespace SetLibrary
 {
     internal static class BracesEvaluation
     {

@@ -1,6 +1,5 @@
-﻿using SetLibrary;
-using System;
-namespace Sets.Generic
+﻿using System;
+namespace SetLibrary.Generic
 {
     public class GenericSet<T> :  ISet<T> 
         where T : IComparable

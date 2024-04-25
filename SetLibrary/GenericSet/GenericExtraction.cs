@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SetLibrary;
-namespace Sets.Generic
+namespace SetLibrary.Generic
 {
     internal class GenericExtraction<T>
         where T : IComparable
@@ -82,7 +81,7 @@ namespace Sets.Generic
             }//Build for all the elements
             return tree;
         }//Extract
-        private static string SortAndRemoveDuplicates(string rootElements,string seperator, out int count)
+        public static string SortAndRemoveDuplicates(string rootElements,string seperator, out int count)
         {
             rootElements = rootElements.Replace(" ", "");
             //Get the elements

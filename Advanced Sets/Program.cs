@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using Sets;
-using Sets.Generic;
+using SetLibrary;
+using SetLibrary.Generic;
 namespace Advanced_Sets
 {
     class Program
@@ -9,8 +9,8 @@ namespace Advanced_Sets
         static void Main(string[] args)
         {
             //Test CSet
-            string expression = "{2,{10,8},{8}}";
-            CSet set = new CSet(expression);
+            string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
+            ISet<int> set = new GenericSet<int>(expression, ',');
             Console.WriteLine("The expression is :  {0} ", expression);
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
             Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);

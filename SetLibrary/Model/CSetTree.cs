@@ -1,9 +1,8 @@
-﻿using SetLibrary;
-using Sets.Generic;
+﻿using SetLibrary.Generic;
 using System;
 using System.Collections.Generic;
 
-namespace Sets
+namespace SetLibrary
 {
     public class CSetTree<T> : ISetTree<T>
         where T : IComparable
@@ -73,7 +72,7 @@ namespace Sets
             else
             {
                 //The element does not contain braces, which means that we can just add it in the root element
-                this.RootElement = TreeExtraction.SortAndRemoveDuplicates(this.RootElement + "," + element, out int cardinality);
+                this.RootElement = GenericExtraction<T>.SortAndRemoveDuplicates(this.RootElement + "," + element,",", out int cardinality);
                 if (cardinality != this.Cardinality)
                     this.Cardinality++;
             }//end else

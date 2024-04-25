@@ -1,6 +1,6 @@
 ﻿using System;
-using SetLibrary;
-namespace Sets
+using SetLibrary.Generic;
+namespace SetLibrary
 {
     public class CSet : ISet<string>
     {
@@ -23,7 +23,7 @@ namespace Sets
             //At this point the braces are correct
 
             //Extract the set tree
-            ISetTree<string> tree = TreeExtraction.Extract(expression);
+            ISetTree<string> tree = GenericExtraction<string>.Extract(expression, ",");
             this.tree = tree;
             //The cardinality will be the Count of the first/root set
             this.Cardinality = tree.Cardinality;
