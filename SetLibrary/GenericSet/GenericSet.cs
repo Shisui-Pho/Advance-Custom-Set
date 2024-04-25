@@ -7,9 +7,20 @@ namespace SetLibrary.Generic
         public string ElementString { get; private set; }
         public int Cardinality { get; private set; }
 
+        public ISetTree<T> this[int index] 
+        {
+            get
+            {
+                if (index >= tree.Cardinality || index < 0)
+                    throw new IndexOutOfRangeException();
+                return this.tree[index];
+            }//end getter
+        }//end if
+
         //Data members for conversion
         private readonly GenericExtraction<T> extractor;
         private readonly char seperator;
+        private ISetTree<T> tree;
         public GenericSet(string setString, char seperator)
         {
             extractor = new GenericExtraction<T>(seperator);
@@ -19,7 +30,7 @@ namespace SetLibrary.Generic
 
         private void BuildSet(string expression)
         {
-            ISetTree<T> tree = extractor.Extract(expression);
+            tree = extractor.Extract(expression);
 
 
             //The cardinality will be the Count of the first/root set
@@ -50,7 +61,7 @@ namespace SetLibrary.Generic
             throw new NotImplementedException();
         }
 
-        public void AddElement(ISet<T> set)
+        public void MergeSets(ISet<T> set)
         {
             throw new NotImplementedException();
         }
