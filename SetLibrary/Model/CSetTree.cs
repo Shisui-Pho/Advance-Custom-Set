@@ -11,7 +11,6 @@ namespace SetLibrary
         private List<ISetTree<T>> lstSubsets;
         public int Cardinality { get; private set; }
         public int NumberOfSubsets => this.lstSubsets.Count;
-
         public ISetTree<T> this[int index] 
         {
             get
@@ -21,7 +20,6 @@ namespace SetLibrary
                 return this.lstSubsets[index];
             }//end getter
         }//INDEXER
-
         public CSetTree(string rootElement, int cardinality = 0)
         {
             lstSubsets = new List<ISetTree<T>>();
