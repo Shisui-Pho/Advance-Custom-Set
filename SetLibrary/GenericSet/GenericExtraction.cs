@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SetLibrary;
 namespace Sets.Generic
 {
     internal class GenericExtraction<T>
@@ -11,7 +12,11 @@ namespace Sets.Generic
         {
             seperator = _seperator;
         }
-        public CSetTree Extract(string expression)
+        public ISetTree<T>  Extract(string expression)
+        {
+            return GenericExtraction<T>.Extract(expression, this.seperator.ToString());
+        }//BuildTree
+        public static ISetTree<T> Extract(string expression, string seperator)
         {
             //Remove the first and last brace
             if (expression.StartsWith("{") && expression.EndsWith("}"))
@@ -23,8 +28,8 @@ namespace Sets.Generic
             //Base case
             if (!expression.Contains("}") && !expression.Contains("{"))
             {
-                string rootElement = SortAndRemoveDuplicates(expression, out int count);
-                return new CSetTree(rootElement, count);
+                string rootElement = SortAndRemoveDuplicates(expression,seperator, out int count);
+                return new CSetTree<T>(rootElement, count);
             }//end expression
 
 
@@ -67,21 +72,21 @@ namespace Sets.Generic
             }//end for
 
             //Create the set tree with the root element
-            CSetTree tree = Extract(expression);//(SortAndRemoveDuplicates(expression));
+            ISetTree<T> tree = Extract(expression, seperator);//(SortAndRemoveDuplicates(expression));
 
             //Loop through all the subsets and create their respective trees and add them as a subtree to the root "tree"
             while (subsets.Count > 0)
             {
                 string ex = subsets.Pop();
-                tree.AddSubSetTree(Extract(ex));
+                tree.AddSubSetTree(Extract(ex, seperator));
             }//Build for all the elements
             return tree;
-        }//BuildTree
-        private string SortAndRemoveDuplicates(string rootElements, out int count)
+        }//Extract
+        private static string SortAndRemoveDuplicates(string rootElements,string seperator, out int count)
         {
             rootElements = rootElements.Replace(" ", "");
             //Get the elements
-            string[] elements = rootElements.Split(new char[] {seperator }, StringSplitOptions.RemoveEmptyEntries);
+            string[] elements = rootElements.Split(new string[] { seperator }, StringSplitOptions.RemoveEmptyEntries);
 
             //Create a list of elements that are unique
             List<T> uniqueElements = new List<T>();
@@ -92,21 +97,21 @@ namespace Sets.Generic
                 T item = default;
                 try
                 {
-                    item = (T)Convert.ChangeType(element, typeof(T)); 
+                    item = (T)Convert.ChangeType(element, typeof(T));
                 }
                 catch
                 {
                     throw;
                 }
                 IEqualityComparer<T> c = EqualityComparer<T>.Default;
-                if (!uniqueElements.Contains(item,c))//check if it is unique
+                if (!uniqueElements.Contains(item, c))//check if it is unique
                     uniqueElements.Add(item);//add if unique
             }//end foreach
-                
+
 
             uniqueElements.Sort();
             count = uniqueElements.Count;
-            return String.Join(this.seperator.ToString(), uniqueElements.ToArray());//Return the dorted set
+            return String.Join(seperator, uniqueElements.ToArray());//Return the dorted set
         }//SortAndRemoveDuplicates
     }//Eval
 }

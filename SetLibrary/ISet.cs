@@ -27,13 +27,13 @@ namespace SetLibrary
         /// This element could be a set or just an single element and will be on the first nesting level.
         /// </summary>
         /// <param name="tree"></param>
-        void AddElement(CSetTree tree);
+        void AddElement(ISetTree<T> tree);
         /// <summary>
         /// Adds a new tree as an element in the current set. If the tree already exists it will not be added.
         /// The tree will be on the first nesting level of the current set.
         /// </summary>
         /// <param name="tree">The tree to be removed</param>
-        bool RemoveElement(CSet tree);
+        bool RemoveElement(ISetTree<T> tree);
         /// <summary>
         /// Adds a set as a subset of the current set. This set will be an element on the first nesting level of the current set.
         /// </summary>
@@ -58,7 +58,7 @@ namespace SetLibrary
         /// </summary>
         /// <param name="tree">The </param>
         /// <returns>Returns true if the it is in the set</returns>
-        bool Contains(CSetTree tree);
+        bool Contains(ISetTree<T> tree);
         /// <summary>
         /// Checks if the current set is a subset of setB.
         /// </summary>

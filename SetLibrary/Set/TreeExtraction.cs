@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SetLibrary;
+using System;
 using System.Collections.Generic;
 namespace Sets
 {
@@ -9,7 +10,7 @@ namespace Sets
         /// </summary>
         /// <param name="expression">An evaluated string expression.</param>
         /// <returns>A set tree of all the elements and nested sets</returns>
-        public static CSetTree Extract(string expression)
+        public static ISetTree<string> Extract(string expression)
         {
             //Remove the first and last brace
             if (expression.StartsWith("{") && expression.EndsWith("}"))
@@ -22,7 +23,7 @@ namespace Sets
             if(!expression.Contains("}") && !expression.Contains("{"))
             {
                 string rootElement = SortAndRemoveDuplicates(expression, out int count);
-                return new CSetTree(rootElement, count);
+                return new CSetTree<string>(rootElement, count);
             }//end expression
 
 
@@ -65,7 +66,7 @@ namespace Sets
             }//end for
 
             //Create the set tree with the root element
-            CSetTree tree = Extract(expression);//(SortAndRemoveDuplicates(expression));
+            ISetTree<string> tree = Extract(expression);//(SortAndRemoveDuplicates(expression));
 
             //Loop through all the subsets and create their respective trees and add them as a subtree to the root "tree"
             while(subsets.Count > 0)

@@ -1,13 +1,14 @@
 ﻿using System;
+using SetLibrary;
 namespace Sets
 {
-    public class CSet
+    public class CSet : ISet<string>
     {
         public string ElementString { get; private set; }
         public int Cardinality { get; private set; }
         
         //This will save the elements  
-        private CSetTree tree;
+        private ISetTree<string> tree;
         public CSet(string elementString)
         {
             BuildSet(elementString);
@@ -22,7 +23,7 @@ namespace Sets
             //At this point the braces are correct
 
             //Extract the set tree
-            CSetTree tree = TreeExtraction.Extract(expression);
+            ISetTree<string> tree = TreeExtraction.Extract(expression);
             this.tree = tree;
             //The cardinality will be the Count of the first/root set
             this.Cardinality = tree.Cardinality;
@@ -32,7 +33,7 @@ namespace Sets
             this.ElementString = ElementString.Replace(",", " , ").Replace("{", "{ ").Replace("}"," }");
         }//BuildSet
         //private string
-        private string ToSetString(CSetTree tree)
+        private string ToSetString(ISetTree<string> tree)
         {
             return tree.ToString();
         }//ToSetString
@@ -48,8 +49,42 @@ namespace Sets
                 ElementString = tree.ToString();
                 this.Cardinality = tree.Cardinality;
             }
-                
             return sucess;
         }//RemoveElement
+
+        public void AddElement(ISetTree<string> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveElement(ISet<string> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddElement(ISet<string> set)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(string Element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(ISetTree<string> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsSubSetOf(ISet<string> setB)
+        {
+            throw new NotImplementedException();
+        }//
+
+        public bool RemoveElement(ISetTree<string> tree)
+        {
+            throw new NotImplementedException();
+        }
     }//class
 }//namespace

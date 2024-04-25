@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SetLibrary;
+using System;
 namespace Sets.Generic
 {
-    public class GenericSet<T> where T : IComparable
+    public class GenericSet<T> :  ISet<T> 
+        where T : IComparable
     {
         public string ElementString { get; private set; }
         public int Cardinality { get; private set; }
@@ -18,7 +20,7 @@ namespace Sets.Generic
 
         private void BuildSet(string expression)
         {
-            CSetTree tree = extractor.Extract(expression);
+            ISetTree<T> tree = extractor.Extract(expression);
 
 
             //The cardinality will be the Count of the first/root set
@@ -29,24 +31,49 @@ namespace Sets.Generic
             this.ElementString = ElementString.Replace(seperator.ToString(), " " + seperator.ToString() + " ").Replace("{", "{ ").Replace("}", " }");
 
         }//BuildSet
-        private string ToSetString(CSetTree tree)
+        private string ToSetString(ISetTree<T> tree)
         {
-            //Base case
-            if (tree.SubSets.Count == 0)
-            {
-                return "{" + tree.RootElement + "}";
-            }//end if
-            string root = "{" + tree.RootElement;
-            foreach (CSetTree subTree in tree.SubSets)
-            {
-                string nested = ToSetString(subTree);
+            return tree.ToString();
+        }
 
-                if (root != "{")
-                    root += seperator.ToString() + nested;
-                else
-                    root += nested;
-            }//end 
-            return root + "}";
+        public void AddElement(T Element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddElement(ISetTree<T> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveElement(ISetTree<T> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddElement(ISet<T> set)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveElement(T Element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(T Element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(ISetTree<T> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsSubSetOf(ISet<T> setB)
+        {
+            throw new NotImplementedException();
         }
     }//
 }//namespace

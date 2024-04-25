@@ -1,40 +1,54 @@
-﻿using System;
+﻿using SetLibrary;
+using Sets.Generic;
+using System;
 using System.Collections.Generic;
 
 namespace Sets
 {
-    public class CSetTree : IComparable
+    public class CSetTree<T> : ISetTree<T>
+        where T : IComparable
     {
         public string RootElement { get; private set; }
-        public List<CSetTree> SubSets { get; private set; }
+        private List<ISetTree<T>> lstSubsets;
         public int Cardinality { get; private set; }
+        public int NumberOfSubsets => this.lstSubsets.Count;
+
+        public ISetTree<T> this[int index] 
+        {
+            get
+            {
+                if (index >= NumberOfSubsets || index < 0)
+                    throw new IndexOutOfRangeException();
+                return this.lstSubsets[index];
+            }//end getter
+        }//INDEXER
+
         public CSetTree(string rootElement, int cardinality = 0)
         {
-            SubSets = new List<CSetTree>();
+            lstSubsets = new List<ISetTree<T>>();
             this.RootElement = rootElement;
             this.Cardinality = cardinality;
         }//ctor 01 
-        public CSetTree(string rootElement,List<CSetTree> SubSets, int cardinality = 0)
+        public CSetTree(string rootElement,List<ISetTree<T>> SubSets, int cardinality = 0)
             : this(rootElement,cardinality)
         {
-            this.SubSets = SubSets;
+            this.lstSubsets = SubSets;
         }//ctor 02
-        public void AddSubSetTree(CSetTree tree)
+        public void AddSubSetTree(ISetTree<T> tree)
         {
             if (IndexOfSet(tree.ToString()) >= 0)
                 return;
-            SubSets.Add(tree);
+            lstSubsets.Add(tree);
             Cardinality++;
             Sort();
         }//AddSubTree
         private void Sort()
         {
-            this.SubSets.Sort();
+            this.lstSubsets.Sort();
         }//Sort
-
         public int CompareTo(object obj)
         {
-            return string.Compare(this.RootElement, ((CSetTree)obj).RootElement);
+            return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
         }//CompareTo
         public void AddElement(string element)
         {
@@ -46,10 +60,11 @@ namespace Sets
                     throw new ArgumentException("The braces are not matching, please re-check them");
 
                 //then extract the tree
-                CSetTree newSubSet = TreeExtraction.Extract(element);
+
+                ISetTree<T> newSubSet = GenericExtraction<T>.Extract(element, ","); //GenericExtraction<T>.Extract(element);
 
                 //Now add the subtree as an element to this tree if it is unique
-                if (!this.SubSets.Contains(newSubSet))
+                if (!this.lstSubsets.Contains(newSubSet))
                 {
                     this.AddSubSetTree(newSubSet);
                     this.Cardinality++;
@@ -77,14 +92,14 @@ namespace Sets
                 if (!BracesEvaluation.AreBracesCorrect(element))
                     return false;
 
-                CSetTree toremove = TreeExtraction.Extract(element);
+                ISetTree<T> toremove = GenericExtraction<T>.Extract(element,",");
 
                 int index = IndexOfSet(toremove.ToString());
                 if (index < 0)
                     return false;//Element string was not found
 
                 //Remove the element/set
-                this.SubSets.RemoveAt(index);
+                this.lstSubsets.RemoveAt(index);
 
                 //Decreament the cardinality
                 Cardinality--;
@@ -95,25 +110,26 @@ namespace Sets
         }//RemoveElement
         private int IndexOfSet(string element)
         {
-            for (int i = 0; i < this.SubSets.Count; i++)
-                if (this.SubSets[i].ToString() == element)
+            for (int i = 0; i < this.lstSubsets.Count; i++)
+                if (this.lstSubsets[i].ToString() == element)
                     return i;
             return -1;
         }//IndexOfSet
         public override string ToString()
         {
-            return CSetTree.ToSetString(this);
+            return CSetTree<T>.ToSetString(this);
         }//ToString
-        public static string ToSetString(CSetTree tree)
+        public static string ToSetString(ISetTree<T> tree)
         {
             //Base case
-            if (tree.SubSets.Count == 0)
+            if (tree.NumberOfSubsets == 0)
             {
                 return "{" + tree.RootElement + "}";
             }//end if
             string root = "{" + tree.RootElement;
-            foreach (CSetTree subTree in tree.SubSets)
+            for(int i = 0; i< tree.NumberOfSubsets;i++) //( in tree.SubSets)
             {
+                ISetTree<T> subTree = tree[i];
                 string nested = ToSetString(subTree);
 
                 if (root != "{")
