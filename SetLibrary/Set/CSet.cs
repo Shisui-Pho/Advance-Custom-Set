@@ -2,6 +2,9 @@
 using SetLibrary.Generic;
 namespace SetLibrary
 {
+    /// <summary>
+    /// A set object for strings only
+    /// </summary>
     public class CSet : ISet<string>
     {
         public string ElementString { get; private set; }
