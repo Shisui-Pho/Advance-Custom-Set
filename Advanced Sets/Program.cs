@@ -9,14 +9,13 @@ namespace Advanced_Sets
         static void Main(string[] args)
         {
             //Test CSet
+            string expression = "{2,{10,8},{8}}";
+            CSet set = new CSet(expression);
+            Console.WriteLine("The expression is :  {0} ", expression);
+            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
             //TestCSet();
             //TestGenericSetWithNumbers();
-            Person p = new Person() { Name = "Phiwo", Surname = "Kwakhe" };
-            string s = p.ToString();
-            Console.WriteLine(p);
-            //Person a = (Person)Convert.ChangeType(s, typeof(Person));
-            PropertyInfo info = typeof(Person).GetProperty(s);
-            
             Console.ReadLine();
         }//Main
         private static void TestCSet()
@@ -28,7 +27,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             Console.WriteLine();
 
-            string expression = "{5,5,3,{6,{5,8},{5,3},5,6},{6,{5,8},{5,3},5,6},7}";
+            string expression = "{1,{2,{5,{6,6,7,{6},{6}}},{7}},{8}}";
             Console.WriteLine("The expression is : " + expression);
             CSet set = new CSet(expression);
             Console.WriteLine("The element string will be : " + set.ElementString);
@@ -42,30 +41,13 @@ namespace Advanced_Sets
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
-            expression = "{1,{2,{5},{7}},{8}}";
+            expression = "{5,5,3,{6,{5,8},{5,3},5,6},{6,{5,8},{5,3},5,6},7}";
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("The expression is : " + expression);
             set = new CSet(expression);
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
-            expression = "{5,2,1,0}";
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
-            set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
-            expression = "{ 8, 7, 5, 2, 14, 1, { 5, 8, 9, 6, 33 } }";
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
-            set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
 
             expression = "{5,2,1,0}";
             Console.WriteLine();
@@ -129,23 +111,6 @@ namespace Advanced_Sets
             set = new GenericSet<int>(expression, ',');
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
-            expression = "{5,2,1,0}";
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
-            expression = "{ 8, 7, 5, 2, 14, 1, { 5, 8, 9, 6, 33 } }";
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
 
             expression = "{5,2,1,0}";
             Console.WriteLine();
