@@ -49,7 +49,6 @@
     <Compile Include="Service\BracesEvaluation.cs" />
     <Compile Include="Set\CSet.cs" />
     <Compile Include="Model\CSetTree.cs" />
-    <Compile Include="Set\TreeExtraction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
