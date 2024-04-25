@@ -14,6 +14,7 @@ namespace Advanced_Sets
             Console.WriteLine("The expression is :  {0} ", expression);
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
             Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
+            Console.WriteLine("The set/element in index {0} is {1} ", 3, set[3]);
             //TestCSet();
             //TestGenericSetWithNumbers();
             Console.ReadLine();
