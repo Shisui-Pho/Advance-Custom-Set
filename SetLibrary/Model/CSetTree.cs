@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sets
 {
-    internal class CSetTree : IComparable
+    public class CSetTree : IComparable
     {
         public string RootElement { get; private set; }
         public List<CSetTree> SubSets { get; private set; }

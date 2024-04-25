@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="GenericSet\GenericExtraction.cs" />
     <Compile Include="GenericSet\GenericSet.cs" />
+    <Compile Include="ISet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BracesEvaluation.cs" />
     <Compile Include="Set\CSet.cs" />
