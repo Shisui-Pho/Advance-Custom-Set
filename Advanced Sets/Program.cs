@@ -10,11 +10,23 @@ namespace Advanced_Sets
         {
             //Test CSet
             string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
-            ISet<int> set = new GenericSet<int>(expression, ',');
+            ISet<string> set = new CSet(expression);
+            ISetTree<string> tree = set[3];
             Console.WriteLine("The expression is :  {0} ", expression);
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
             Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
             Console.WriteLine("The set/element in index {0} is {1} ", 3, set[3]);
+            set.RemoveElement(tree);
+            Console.WriteLine("Removed the following tree : {0}", tree);
+            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
+            set.RemoveElement("2");
+            Console.WriteLine("Remove the following element : \"2\"");
+            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
+            tree.AddElement("{2,6,7}");
+            tree.AddElement("{2,2}");
+            set.AddElement(tree);
+            Console.WriteLine("Added the following element: {0}", tree);
+            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
             //TestCSet();
             //TestGenericSetWithNumbers();
             Console.ReadLine();

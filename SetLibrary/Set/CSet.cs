@@ -10,7 +10,7 @@ namespace SetLibrary
 
         //This will save the elements  
         private ISetTree<string> tree;
-        public string ElementString { get; private set; }
+        public string ElementString => tree.ToString();
         public int Cardinality { get; private set; }
 
         public ISetTree<string> this[int index] 
@@ -42,8 +42,8 @@ namespace SetLibrary
             this.Cardinality = tree.Cardinality;
 
             //Get the string representation of the set tree
-            this.ElementString = tree.ToString();
-            this.ElementString = ElementString.Replace(",", " , ").Replace("{", "{ ").Replace("}"," }");
+            //this.ElementString = tree.ToString();
+            //this.ElementString = ElementString.Replace(",", " , ").Replace("{", "{ ").Replace("}"," }");
         }//BuildSet
 
         #region Removing and adding elements
@@ -60,7 +60,7 @@ namespace SetLibrary
             bool sucess = tree.RemoveElement(element);
             if (sucess)
             {
-                ElementString = tree.ToString();
+                //ElementString = tree.ToString();
                 this.Cardinality = tree.Cardinality;
             }
             return sucess;
