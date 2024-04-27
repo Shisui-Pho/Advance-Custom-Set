@@ -4,8 +4,8 @@ namespace SetLibrary.Generic
     public class GenericSet<T> :  ISet<T> 
         where T : IComparable
     {
-        public string ElementString { get; private set; }
-        public int Cardinality { get; private set; }
+        public string ElementString => this.tree.ToString();
+        public int Cardinality => this.tree.Cardinality;
 
         public ISetTree<T> this[int index] 
         {
@@ -27,63 +27,70 @@ namespace SetLibrary.Generic
             this.seperator = seperator;
             BuildSet(setString);
         }//ctor
-
+        public GenericSet()
+        {
+            extractor = new GenericExtraction<T>(',');
+            this.seperator = ',';
+            this.tree = new CSetTree<T>(new System.Collections.Generic.List<T>());
+        }//CTOR
         private void BuildSet(string expression)
         {
+            if (!BracesEvaluation.AreBracesCorrect(expression))
+                throw new ArgumentException("Braces are not matching");
+
             tree = extractor.Extract(expression);
-
-
-            //The cardinality will be the Count of the first/root set
-            this.Cardinality = tree.Cardinality;
-
-            //Get the string representation of the set tree
-            this.ElementString = ToSetString(tree);
-            this.ElementString = ElementString.Replace(seperator.ToString(), " " + seperator.ToString() + " ").Replace("{", "{ ").Replace("}", " }");
-
         }//BuildSet
         private string ToSetString(ISetTree<T> tree)
         {
             return tree.ToString();
-        }
+        }//ToSetString
 
+        #region Adding and removing elements
         public void AddElement(T Element)
         {
-            throw new NotImplementedException();
-        }
+            this.tree.AddElement(Element);
+        }//AddElement
 
         public void AddElement(ISetTree<T> tree)
         {
-            throw new NotImplementedException();
-        }
+            this.tree.AddSubSetTree(tree);
+        }//AddElement
 
         public bool RemoveElement(ISetTree<T> tree)
         {
-            throw new NotImplementedException();
-        }
-
-        public ISet<T> MergeWith(ISet<T> set)
-        {
-            throw new NotImplementedException();
-        }
-
+            return this.tree.RemoveElement(tree);
+        }//RemoveElement
         public bool RemoveElement(T Element)
         {
-            throw new NotImplementedException();
-        }
+            return this.tree.RemoveElement(Element);
+        }//RemoveElement
+        #endregion Adding and removing elements
+        public ISet<T> MergeWith(ISet<T> set)
+        {
+            string s1 = set.ToString();
+            string s2 = this.ToString();
+
+            string expression = s1.Remove(s1.Length - 1) + "," + s2.Remove(0, 1);
+            return new GenericSet<T>(expression, seperator);
+        }//MergeWith
 
         public bool Contains(T Element)
         {
-            throw new NotImplementedException();
-        }
+            return this.tree.IndexOf(Element) >= 0;
+        }//Contains
 
         public bool Contains(ISetTree<T> tree)
         {
-            throw new NotImplementedException();
-        }
+            return this.tree.IndexOf(tree.ToString()) >= 0;
+        }//Contains
 
         public bool IsSubSetOf(ISet<T> setB)
         {
             throw new NotImplementedException();
-        }
+        }//IsSubSetOf
+        public override string ToString()
+        {
+            return this.ElementString;
+        }//ToString
     }//
 }//namespace
