@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BracesEvaluation.cs" />
     <Compile Include="SetExtensions\SetOperations.cs" />
+    <Compile Include="SetExtensions\SetType.cs" />
     <Compile Include="Set\CSet.cs" />
     <Compile Include="Model\CSetTree.cs" />
   </ItemGroup>
