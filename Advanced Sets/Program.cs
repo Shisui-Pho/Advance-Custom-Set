@@ -1,23 +1,77 @@
 ﻿using System;
 using SetLibrary;
 using SetLibrary.Generic;
+using SetLibrary.Operations;
+
 namespace Advanced_Sets
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string expressionA = "{7,2,9,1,7,8,{3,1,2}}";
-            string expressionB = "{8,6,1,{{1,1}}}";
-
-            ISet<string> setA = new CSet(expressionA);
-            ISet<string> setB = new CSet(expressionB);
-
-            ISet<string> merged = setA.MergeWith(setB);
-            Console.ReadLine();
+            TestCSet();
+            TestGenericSetWithNumbers();
+            TestISetTree();
+            TestSetOperations();
+            Console.ReadKey();
         }//Main
+        private static void TestSetOperations()
+        {
+            Console.Clear();
+            //For a generic sts
+            Console.WriteLine("Testing set operations with a generic set class");
+            Console.WriteLine("=================================================");
+            Console.WriteLine();
+            int padding = 30;
+            string expression = "{2,6,1,73,10,15,{8,6,{3},{7,5}}}";
+            ISet<int> setA = new GenericSet<int>(expression,',');
+            Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
+            Console.WriteLine("Set A will be".PadRight(padding) + " : " + setA.ToString());
+
+            Console.WriteLine();
+            expression = "{5,{5,6,{2}},{8,{6}},2}";
+            ISet<int> setB = new GenericSet<int>(expression, ',');
+            Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
+            Console.WriteLine("Set B will be".PadRight(padding) + " : " + setB.ToString());
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Now the set operations
+
+
+            //Difference
+            Console.WriteLine("Difference : ");
+            ISet<int> differenceA = setA.Difference(setB);
+            Console.WriteLine("setA - setB".PadRight(padding) + " : " + differenceA.ToString());
+            Console.WriteLine();
+
+            ISet<int> differenceB = setB.Difference(setA);
+            Console.WriteLine("setB - setA".PadRight(padding) + " : " + differenceB.ToString());
+            Console.WriteLine();
+
+            ISet<int> differenceAA = setA.Difference(setA);
+            Console.WriteLine("setA - setA".PadRight(padding) + " : " + differenceAA.ToString());
+            Console.WriteLine();
+
+            //Union
+            Console.WriteLine("Union : ");
+            ISet<int> union = setA.Union(setB);
+            Console.WriteLine("setA union set B".PadRight(padding) + " : " + union.ToString());
+            Console.WriteLine();
+
+            //Complement
+            Console.WriteLine("Complement : ");
+            ISet<int> complement = setA.Complement(setB);
+            Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement.ToString());
+            Console.WriteLine();
+
+
+            Console.Write("Press any key to move on to the next test.......");
+            //Console.ReadKey();
+        }//TestSetOperations
         private static void TestISetTree()
         {
+            Console.Clear();
             //Test CSet
             string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
             ISet<string> set = new CSet(expression);
@@ -42,6 +96,7 @@ namespace Advanced_Sets
         }//TestISetTree
         private static void TestCSet()
         {
+            Console.Clear();
             Console.WriteLine("TESTING CSet : Non-Generic set");
             Console.WriteLine("===============================");
             Console.WriteLine();
@@ -105,6 +160,7 @@ namespace Advanced_Sets
         }//TestCSet
         private static void TestGenericSetWithNumbers()
         {
+            Console.Clear();
             Console.WriteLine("Test Generic set : Using intagers");
             Console.WriteLine("=================================");
             Console.WriteLine("Note that the integers are seperated by a comma (\",\")");
