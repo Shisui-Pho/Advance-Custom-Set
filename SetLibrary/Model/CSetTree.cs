@@ -106,6 +106,11 @@ namespace SetLibrary
             //Call the inside function
             return IndexOfSet(element.ToString());
         }//IndexOf
+        public int IndexOf(string element)
+        {
+            //Call the inside function
+            return IndexOfSet(element);
+        }//IndexOf
         public bool RemoveElement(ISetTree<T> element)
         {
             //Find the index of the element/subset in the tree
@@ -175,6 +180,8 @@ namespace SetLibrary
             //Base case
             if (tree.NumberOfSubsets == 0)
             {
+                if (tree.RootElement == "")
+                    return "{\u2205}";//An empty set
                 return "{" + tree.RootElement + "}";
             }//end if
             

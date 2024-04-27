@@ -19,6 +19,7 @@ namespace SetLibrary
         bool RemoveElement(T element);
         bool RemoveElement(ISetTree<T> element);
         int IndexOf(T element);
+        int IndexOf(string element);
         string ToString();
     }//class
 }//namespace
