@@ -9,9 +9,9 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
-            TestCSet();
-            TestGenericSetWithNumbers();
-            TestISetTree();
+            //TestCSet();
+            //TestGenericSetWithNumbers();
+            //TestISetTree();
             TestSetOperations();
             Console.ReadKey();
         }//Main
@@ -33,6 +33,11 @@ namespace Advanced_Sets
             ISet<int> setB = new GenericSet<int>(expression, ',');
             Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
             Console.WriteLine("Set B will be".PadRight(padding) + " : " + setB.ToString());
+
+            Console.WriteLine();
+            ISet<int> universal = setA.Union(setB);
+            Console.WriteLine("Universal set will be".PadRight(padding) + " : " + universal.ToString());
+
             Console.WriteLine();
             Console.WriteLine();
 
@@ -61,11 +66,29 @@ namespace Advanced_Sets
 
             //Complement
             Console.WriteLine("Complement : ");
-            ISet<int> complement = setA.Complement(setB);
-            Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement.ToString());
+            ISet<int> complement1 = setA.Complement(setB, out bool isUniversal);
+            Console.WriteLine("Set A complement Set B");
+            if (!isUniversal)
+            {
+                Console.WriteLine("setB is not universal to setA".PadRight(padding) + " : " + complement1.ToString());
+            }
+            else
+                Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement1.ToString());
+            
             Console.WriteLine();
 
+            ISet<int> complement2 = universal.Complement(setB, out isUniversal);
+            Console.WriteLine("Universal complement Set B");
+            if (!isUniversal)
+            {
+                Console.WriteLine("Set A is not subset of the universal set".PadRight(padding) + " : " + complement2.ToString());
+            }
+            else
+                Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement2.ToString());
 
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.Write("Press any key to move on to the next test.......");
             //Console.ReadKey();
         }//TestSetOperations
