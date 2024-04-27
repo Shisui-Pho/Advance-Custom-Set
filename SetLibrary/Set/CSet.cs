@@ -11,7 +11,7 @@ namespace SetLibrary
         //This will save the elements  
         private ISetTree<string> tree;
         public string ElementString => tree.ToString();
-        public int Cardinality { get; private set; }
+        public int Cardinality => tree.Cardinality;
 
         public ISetTree<string> this[int index] 
         {
@@ -38,12 +38,6 @@ namespace SetLibrary
             //Extract the set tree
             ISetTree<string> tree = GenericExtraction<string>.Extract(expression, ",");
             this.tree = tree;
-            //The cardinality will be the Count of the first/root set
-            this.Cardinality = tree.Cardinality;
-
-            //Get the string representation of the set tree
-            //this.ElementString = tree.ToString();
-            //this.ElementString = ElementString.Replace(",", " , ").Replace("{", "{ ").Replace("}"," }");
         }//BuildSet
 
         #region Removing and adding elements
@@ -57,19 +51,12 @@ namespace SetLibrary
         }//AddElement
         public bool RemoveElement(string element)
         {
-            bool sucess = tree.RemoveElement(element);
-            if (sucess)
-            {
-                //ElementString = tree.ToString();
-                this.Cardinality = tree.Cardinality;
-            }
-            return sucess;
+            return tree.RemoveElement(element);
         }//RemoveElement
         public bool RemoveElement(ISetTree<string> tree)
         {
             return this.tree.RemoveElement(tree);
         }//RemoveElement
-
         #endregion Removing and adding elements
 
         public bool Contains(string Element)
@@ -105,5 +92,9 @@ namespace SetLibrary
             return default;
         }//Without
         #endregion Set operations
+        public override string ToString()
+        {
+            return this.ElementString;
+        }//ToString
     }//class
 }//namespace
