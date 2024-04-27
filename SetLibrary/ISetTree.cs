@@ -11,6 +11,7 @@ namespace SetLibrary
         string RootElement { get; }
         int Cardinality { get; }
         int NumberOfSubsets { get; }
+        bool IsInRoot { get; }
         ISetTree<T> this[int index]{get;}
         IEnumerable<ISetTree<T>> GetSubsetsEnumarator();
         void AddSubSetTree(ISetTree<T> tree);

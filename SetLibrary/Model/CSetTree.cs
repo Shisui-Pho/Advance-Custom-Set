@@ -17,12 +17,7 @@ namespace SetLibrary
         public string RootElement => string.Join(",",this.lstRootElements);
         public int Cardinality => lstRootElements.Count + lstSubsets.Count;
         public int NumberOfSubsets => this.lstSubsets.Count;
-        /// <summary>
-        /// An indexer that returns a "Set" of an element inside the SetTree.
-        ///     If the the element is in the root, it will be returned in a "Set" format.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns>A set of ISetTree<typeparamref name="T"/></returns>
+        public bool IsInRoot { get; private set; }
         public ISetTree<T> this[int index] 
         {
             get
@@ -52,6 +47,9 @@ namespace SetLibrary
 
             //Add the element as a root of the set
             this.lstRootElements.Add(element);
+
+            //Set the flag to true to indicate that it is in the root
+            IsInRoot = true;
         }//ctor private
         public CSetTree(List<T> rootElement)
         {
@@ -60,12 +58,15 @@ namespace SetLibrary
 
             //Set the root to be the new list of roots
             this.lstRootElements = rootElement;
+
+            IsInRoot = false;
         }//ctor 01 
         public CSetTree(List<T> rootElement,List<ISetTree<T>> SubSets)
             : this(rootElement)
         {
             //Set the subsets
             this.lstSubsets = SubSets;
+            IsInRoot = false;
         }//ctor 02
         public int CompareTo(object obj)
         {

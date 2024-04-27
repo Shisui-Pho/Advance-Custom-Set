@@ -17,6 +17,12 @@ namespace SetLibrary
         /// Gets the Cardinality of the evaluated set.
         /// </summary>
         int Cardinality { get; }
+        /// <summary>
+        /// An indexer that returns a "Set" of an element inside the SetTree.
+        ///     If the the element is in the root, it will be returned in a "Set" format.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>A set of ISetTree<typeparamref name="T"/></returns>
         ISetTree<T> this[int index] { get; }
         /// <summary>
         /// Adds a new element in the current set. If the element already exists it will not be added.
