@@ -14,11 +14,10 @@ namespace SetLibrary
         ISetTree<T> this[int index]{get;}
         IEnumerable<ISetTree<T>> GetSubsetsEnumarator();
         void AddSubSetTree(ISetTree<T> tree);
-        void AddElement(string element);
         void AddElement(T element);
-        bool RemoveElement(string element);
+        bool RemoveElement(T element);
         bool RemoveElement(ISetTree<T> element);
-        int IndexOf(string element);
+        int IndexOf(T element);
         string ToString();
     }//class
 }//namespace
