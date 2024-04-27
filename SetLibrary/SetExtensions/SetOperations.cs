@@ -74,9 +74,15 @@ namespace SetLibrary.Operations
         /// <param name="setA">The current instance that exists in the universal set</param>
         /// <param name="universalSet">The universal set of which setA exists in.</param>
         /// <returns>A new set of type Iset<typeparamref name="T"/> that contains the complement elements.</returns>
-        public static ISet<T> Complement<T>(this ISet<T> setA, ISet<T> universalSet)
+        public static ISet<T> Complement<T>(this ISet<T> setA, ISet<T> universalSet, out bool isUniversal)
             where T : IComparable
         {
+            if(universalSet.ToString().IndexOf(setA.ToString())< 0)//if the set is not in the universal set, then it cannot be a subset on the universal set
+            {
+                isUniversal = false;
+                return setA; 
+            }//end if
+            isUniversal = true;
             return universalSet.Difference(setA);
         }//Complement
         /// <summary>
