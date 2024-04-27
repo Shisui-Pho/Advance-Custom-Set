@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using SetLibrary;
 using SetLibrary.Generic;
 namespace Advanced_Sets
@@ -7,6 +6,10 @@ namespace Advanced_Sets
     class Program
     {
         static void Main(string[] args)
+        {
+            Console.ReadLine();
+        }//Main
+        private static void TestISetTree()
         {
             //Test CSet
             string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
@@ -29,8 +32,7 @@ namespace Advanced_Sets
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
             //TestCSet();
             //TestGenericSetWithNumbers();
-            Console.ReadLine();
-        }//Main
+        }//TestISetTree
         private static void TestCSet()
         {
             Console.WriteLine("TESTING CSet : Non-Generic set");
