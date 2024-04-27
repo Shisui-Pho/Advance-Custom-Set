@@ -83,14 +83,15 @@ namespace SetLibrary
         {
             throw new NotImplementedException();
         }//IsSubSetOf
-        public ISet<string> MergeSets(ISet<string> set)
+        public ISet<string> MergeWith(ISet<string> set)
         {
             string s1 = set.ToString();
             string s2 = this.ToString();
 
-            //Now create
+            //Now create the string representation of the new merged set
+            string final = s1.Remove(s1.Length - 1) + "," + s2.Remove(0, 1);
 
-            return default;
+            return new CSet(final);
         }//MergeSets
         public ISet<string> Without(ISet<string> setB)
         {

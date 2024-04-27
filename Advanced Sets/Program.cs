@@ -7,6 +7,13 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
+            string expressionA = "{7,2,9,1,7,8,{3,1,2}}";
+            string expressionB = "{8,6,1,{{1,1}}}";
+
+            ISet<string> setA = new CSet(expressionA);
+            ISet<string> setB = new CSet(expressionB);
+
+            ISet<string> merged = setA.MergeWith(setB);
             Console.ReadLine();
         }//Main
         private static void TestISetTree()

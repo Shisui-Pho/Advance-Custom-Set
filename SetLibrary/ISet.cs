@@ -39,7 +39,7 @@ namespace SetLibrary
         /// Adds a set as a subset of the current set. This set will be an element on the first nesting level of the current set.
         /// </summary>
         /// <param name="set"></param>
-        ISet<T> MergeSets(ISet<T> set);
+        ISet<T> MergeWith(ISet<T> set);
         /// <summary>
         /// Removes an element in the current set. This element could be a set or just an single element.
         /// This element must be on the first nesting level.
