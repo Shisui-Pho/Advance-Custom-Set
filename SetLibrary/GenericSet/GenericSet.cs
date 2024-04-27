@@ -61,7 +61,7 @@ namespace SetLibrary.Generic
             throw new NotImplementedException();
         }
 
-        public void MergeSets(ISet<T> set)
+        public ISet<T> MergeSets(ISet<T> set)
         {
             throw new NotImplementedException();
         }

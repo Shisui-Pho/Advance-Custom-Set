@@ -83,9 +83,14 @@ namespace SetLibrary
         {
             throw new NotImplementedException();
         }//IsSubSetOf
-        public void MergeSets(ISet<string> set)
+        public ISet<string> MergeSets(ISet<string> set)
         {
-            
+            string s1 = set.ToString();
+            string s2 = this.ToString();
+
+            //Now create
+
+            return default;
         }//MergeSets
         public ISet<string> Without(ISet<string> setB)
         {
