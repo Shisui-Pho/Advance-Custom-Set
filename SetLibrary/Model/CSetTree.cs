@@ -137,16 +137,6 @@ namespace SetLibrary
             this.lstSubsets.RemoveAt(index);
             return true;
         }//RemoveElement
-
-        public bool RemoveSetElements(ISet<T> element)
-        {
-            int index = IndexOfSet(element.ElementString);
-            if (index < 0)
-                return false;
-            this.lstSubsets.RemoveAt(index);
-            return true;
-        }//RemoveElement
-
         public void AddElement(T element)
         {
             throw new NotImplementedException();

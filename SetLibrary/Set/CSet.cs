@@ -98,7 +98,7 @@ namespace SetLibrary
         }//IsSubSetOf
         public void MergeSets(ISet<string> set)
         {
-            this.tree.MergeSets(set);
+            
         }//MergeSets
         public ISet<string> Without(ISet<string> setB)
         {
