@@ -77,7 +77,9 @@ namespace Advanced_Sets
             
             Console.WriteLine();
 
-            ISet<int> complement2 = universal.Complement(setB, out isUniversal);
+            var a = setA.Complement(union, out isUniversal);
+
+            ISet<int> complement2 = setA.Complement(universal, out isUniversal);
             Console.WriteLine("Universal complement Set B");
             if (!isUniversal)
             {

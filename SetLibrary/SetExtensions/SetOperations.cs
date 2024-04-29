@@ -77,6 +77,12 @@ namespace SetLibrary.Operations
         public static ISet<T> Complement<T>(this ISet<T> setA, ISet<T> universalSet, out bool isUniversal)
             where T : IComparable
         {
+            string a = setA.ElementString;
+            string b = universalSet.ElementString;
+
+
+            bool bb = b.Contains(a);
+
             if(universalSet.ToString().IndexOf(setA.ToString())< 0)//if the set is not in the universal set, then it cannot be a subset on the universal set
             {
                 isUniversal = false;
