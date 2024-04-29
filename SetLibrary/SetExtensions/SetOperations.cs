@@ -13,6 +13,7 @@ namespace SetLibrary.Operations
         /// <param name="setB">The other set to be merged with</param>
         /// <returns>The set of type Iset<typeparamref name="T"/> that consists of all elements belonging to either set A or set B (or both)</returns>
         public static ISet<T> Union<T>(this ISet<T> setA, ISet<T> setB)
+            where T : IComparable
         {
             //Return the union
             return setA.MergeWith(setB);

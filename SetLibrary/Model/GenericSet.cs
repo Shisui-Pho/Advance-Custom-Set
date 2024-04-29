@@ -39,7 +39,7 @@ namespace SetLibrary.Generic
         {
             if (!BracesEvaluation.AreBracesCorrect(expression))
                 throw new ArgumentException("Braces are not matching");
-            tree = Settings.Extract(expression);
+            tree = SetExtraction.Extract(expression, Settings);
         }//BuildSet
         #region Adding and removing elements
         public void AddElement(T Element)

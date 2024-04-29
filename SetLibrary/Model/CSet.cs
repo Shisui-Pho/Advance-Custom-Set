@@ -13,6 +13,8 @@ namespace SetLibrary
         public string ElementString => tree.ToString();
         public int Cardinality => tree.Cardinality;
 
+        public SetExtractionSettings<string> Settings { get; private set; }
+
         public ISetTree<string> this[int index] 
         {
             get
@@ -24,10 +26,12 @@ namespace SetLibrary
         }//End if
         public CSet()
         {
+            Settings = new SetExtractionSettings<string>(",");
             tree = new CSetTree<string>(new System.Collections.Generic.List<string>());
         }//ctor default
         public CSet(string elementString)
         {
+            Settings = new SetExtractionSettings<string>(",");
             BuildSet(elementString);
         }//ctor main
         private void BuildSet(string expression)
@@ -40,7 +44,7 @@ namespace SetLibrary
             //At this point the braces are correct
 
             //Extract the set tree
-            ISetTree<string> tree = SetExtractionSettings<string>.Extract(expression, ",");
+            ISetTree<string> tree = SetExtraction.Extract(expression,Settings);
             this.tree = tree;
         }//BuildSet
 
@@ -72,7 +76,7 @@ namespace SetLibrary
             }//end if clean string/To look at the root
             if (Element.StartsWith("{") || Element.EndsWith("}"))
             {
-                string s = SetExtractionSettings<string>.Extract(Element, ",").ToString();
+                string s = SetExtraction.Extract(Element, Settings).ToString();
                 return this.tree.IndexOf(s) >= 0;
             }//end if a subset
             return false;

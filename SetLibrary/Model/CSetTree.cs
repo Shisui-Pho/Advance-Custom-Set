@@ -9,15 +9,17 @@ namespace SetLibrary
         where T : IComparable
     {
         //private data members to hold the data
-        //private List<ISetTree<T>> lstSubsets;
-        //private List<T> lstRootElements;
         private SortedElements<T> lstRootElements;
         private SortedSubSets<T> lstSubsets;
+
         //Public data members to represent the internal data
         public string RootElement => string.Join(",",this.lstRootElements);
         public int Cardinality => lstRootElements.Count + lstSubsets.Count;
         public int NumberOfSubsets => this.lstSubsets.Count;
         public bool IsInRoot { get; private set; }
+
+        public SetExtractionSettings<T> ExtractionSettings { get; private set; }
+
         public ISetTree<T> this[int index] 
         {
             get
@@ -29,7 +31,7 @@ namespace SetLibrary
 
                 //If it is in the root
                 if (index < lstRootElements.Count)
-                    return new CSetTree<T>(lstRootElements[index]);//use the private constructor to build a new set of one element
+                    return new CSetTree<T>(lstRootElements[index], this.ExtractionSettings);//use the private constructor to build a new set of one element
                 
                 //Scale the index to macth the 
                 index -= lstRootElements.Count;
@@ -39,12 +41,11 @@ namespace SetLibrary
             }//end getter
         }//INDEXER
 
+        #region Constructures
         //This will be used to return 
-        private CSetTree(T element)
+        private CSetTree(T element, SetExtractionSettings<T> settings)
         {
             //Create the new list of sets
-            //this.lstRootElements = new List<T>();
-            //this.lstSubsets = new List<ISetTree<T>>();
             this.lstRootElements = new SortedElements<T>();
             this.lstSubsets = new SortedSubSets<T>();
             //Add the element as a root of the set
@@ -52,28 +53,60 @@ namespace SetLibrary
 
            //Set the flag to true to indicate that it is in the root
             IsInRoot = true;
+
+            //Set the extraction settings
+            this.ExtractionSettings = settings;
         }//ctor private
-        public CSetTree(List<T> rootElement)
+        /// <summary>
+        /// Creates a new instance of a Set tree with the settings set to default.
+        /// </summary>
+        /// <param name="rootElements">The root elements</param>
+        public CSetTree(List<T> rootElements)
         {
-            ////Create a new list of subsets
-            //lstSubsets = new List<ISetTree<T>>();
-
-            ////Set the root to be the new list of roots
-            //this.lstRootElements = rootElement;
-
-            this.lstRootElements = new SortedElements<T>(rootElement);
+            //Create a new list of subsets
+            //Set the root to be the new list of roots
+            this.lstRootElements = new SortedElements<T>(rootElements);
             this.lstSubsets = new SortedSubSets<T>();
-
             IsInRoot = false;
+            ExtractionSettings = new SetExtractionSettings<T>(",");
+        }//ctor 01    
+        /// <summary>
+        /// Creates a new instance of a Set tree with the settings for extraction.
+        /// </summary>
+        /// <param name="rootElements">The root elements</param>
+        /// <param name="settings">The set extraction settings</param>
+        public CSetTree(List<T> rootElements, SetExtractionSettings<T> settings): this(rootElements)
+        {
+            ExtractionSettings = settings;
         }//ctor 01 
+
+        /// <summary>
+        /// Creates a new instance of a Set tree with the settings for extraction set to default.
+        /// </summary>
+        /// <param name="rootElement">The root elements.</param>
+        /// <param name="SubSets">The subsets</param>
         public CSetTree(List<T> rootElement,List<ISetTree<T>> SubSets)
             : this(rootElement)
         {
-            ////Set the subsets
-            //this.lstSubsets = SubSets;
+            //Use the set settings
+            if(SubSets.Count > 0)
+                this.ExtractionSettings = SubSets[0].ExtractionSettings;
             this.lstSubsets = new SortedSubSets<T>(SubSets);
             IsInRoot = false;
-        }//ctor 02
+        }//ctor 03
+        /// <summary>
+        ///  Creates a new instance of a Set tree with the settings for extraction.
+        /// </summary>
+        /// <param name="rootElements">The root elements.</param>
+        /// <param name="SubSets">The subsets</param>
+        /// <param name="settings">The extraction settings</param>
+        public CSetTree(List<T> rootElements,List<ISetTree<T>> SubSets, SetExtractionSettings<T> settings)
+            : this(rootElements, SubSets)
+        {
+            this.ExtractionSettings = settings;
+        }//ctor 04
+        #endregion Constructers
+
         public int CompareTo(object obj)
         {
             return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
@@ -148,7 +181,7 @@ namespace SetLibrary
             if (!this.lstRootElements.Contains(element) && !elem.Contains("}") && !elem.Contains("{"))
             {
                 //Get the unique elements
-                List<T> elements = SetExtractionSettings<T>.SortAndRemoveDuplicates(elem, ",");
+                List<T> elements = SetExtraction.SortAndRemoveDuplicates(elem, ExtractionSettings);
 
                 //Add to the lsist of root elements
                 this.lstRootElements.AddRange(elements);
@@ -160,7 +193,7 @@ namespace SetLibrary
                 if (!BracesEvaluation.AreBracesCorrect(elem))
                     throw new ArgumentException("The braces are not matching, please re-check them");
 
-                ISetTree<T> tree = SetExtractionSettings<T>.Extract(elem, ",");
+                ISetTree<T> tree = SetExtraction.Extract(elem, ExtractionSettings);
                 this.AddSubSetTree(tree);
             }//end else
         }//AddElement
