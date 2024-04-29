@@ -11,8 +11,12 @@ namespace SetLibrary
             //Stack that will contain all the 
             Stack<char> elements = new Stack<char>();
             //{5,{6,7,{9,6,{5,5}}}}
+
+            int lengthOfString = expression.Length;
+            int Count = 0;
             foreach (char character in expression)
             {
+                Count++;
                 if (character == '{')
                 {
                     elements.Push(character);
@@ -36,6 +40,13 @@ namespace SetLibrary
 
                     //Remove the oppening brace
                     elements.Pop();
+
+                    //Handle edge case for a string like this : 
+                    //-{1,2},{3,4}
+                    //-Without this condition the Brace evaluation will pass
+                    if (elements.Count == 0 && Count != lengthOfString)
+                        return false;
+
                     continue;
                 }//end if oppening
 
