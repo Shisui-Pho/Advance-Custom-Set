@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SetLibrary;
+using SetLibrary.Generic;
+
 namespace SetLibrary
 {
     public interface ISet<T>
+        where T : IComparable
     {
         /// <summary>
         /// Get the evaluated string representation of the set.
@@ -24,6 +27,10 @@ namespace SetLibrary
         /// <param name="index"></param>
         /// <returns>A set of ISetTree<typeparamref name="T"/></returns>
         ISetTree<T> this[int index] { get; }
+        /// <summary>
+        /// Gets the current settings of the set extractor.
+        /// </summary>
+        SetExtractionSettings<T> Settings { get; }
         /// <summary>
         /// Adds a new element in the current set. If the element already exists it will not be added.
         /// </summary>

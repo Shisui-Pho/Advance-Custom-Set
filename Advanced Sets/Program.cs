@@ -24,13 +24,13 @@ namespace Advanced_Sets
             Console.WriteLine();
             int padding = 30;
             string expression = "{2,6,1,73,10,15,{8,6,{3},{7,5}}}";
-            ISet<int> setA = new GenericSet<int>(expression,',');
+            ISet<int> setA = new GenericSet<int>(expression,",");
             Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
             Console.WriteLine("Set A will be".PadRight(padding) + " : " + setA.ToString());
 
             Console.WriteLine();
             expression = "{5,{5,6,{2}},{8,{6}},2}";
-            ISet<int> setB = new GenericSet<int>(expression, ',');
+            ISet<int> setB = new GenericSet<int>(expression, ",");
             Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
             Console.WriteLine("Set B will be".PadRight(padding) + " : " + setB.ToString());
 
@@ -195,7 +195,7 @@ namespace Advanced_Sets
 
             string expression = "{5,5,3,{6,{5,8},{5,3},5,6},{6,{5,8},{5,3},5,6},7}";
             Console.WriteLine("The expression is : " + expression);
-            GenericSet<int> set = new GenericSet<int>(expression, ',');
+            GenericSet<int> set = new GenericSet<int>(expression, ",");
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
@@ -203,7 +203,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
+            set = new GenericSet<int>(expression, ",");
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
@@ -211,7 +211,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
+            set = new GenericSet<int>(expression, ",");
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
@@ -219,7 +219,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
+            set = new GenericSet<int>(expression, ",");
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
@@ -227,7 +227,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
+            set = new GenericSet<int>(expression, ",");
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
@@ -235,7 +235,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("The expression is : " + expression);
-            set = new GenericSet<int>(expression, ',');
+            set = new GenericSet<int>(expression, ",");
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 

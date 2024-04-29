@@ -6,14 +6,14 @@ namespace SetLibrary.Generic
     public class SetExtractionSettings<T>
         where T : IComparable
     {
-        private readonly char seperator;
-        public SetExtractionSettings(char _seperator)
+        public string Seperator { get; private set; }
+        public SetExtractionSettings(string _seperator)
         {
-            seperator = _seperator;
+            Seperator = _seperator;
         }
         public ISetTree<T>  Extract(string expression)
         {
-            return SetExtractionSettings<T>.Extract(expression, this.seperator.ToString());
+            return SetExtractionSettings<T>.Extract(expression, this.Seperator);
         }//BuildTree
         public static ISetTree<T> Extract(string expression, string seperator)
         {
@@ -112,4 +112,4 @@ namespace SetLibrary.Generic
             return uniqueElements;
         }//SortAndRemoveDuplicates
     }//Eval
-}
+}//namespace

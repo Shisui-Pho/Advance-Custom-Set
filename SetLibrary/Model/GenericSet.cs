@@ -18,27 +18,28 @@ namespace SetLibrary.Generic
         }//end if
 
         //Data members for conversion
-        private readonly SetExtractionSettings<T> extractor;
-        private readonly char seperator;
+        public SetExtractionSettings<T> Settings { get; private set; }
         private ISetTree<T> tree;
-        public GenericSet(string setString, char seperator)
-        {
-            extractor = new SetExtractionSettings<T>(seperator);
-            this.seperator = seperator;
-            BuildSet(setString);
-        }//ctor
         public GenericSet()
         {
-            extractor = new SetExtractionSettings<T>(',');
-            this.seperator = ',';
-            this.tree = new CSetTree<T>(new System.Collections.Generic.List<T>());
+            Settings = new SetExtractionSettings<T>(",");
+            tree = new CSetTree<T>(new System.Collections.Generic.List<T>()); 
+        }//ctor 01
+        public GenericSet(string setString,SetExtractionSettings<T> settings)
+        {
+            this.Settings = settings;
+            BuildSet(setString);
         }//CTOR
+        public GenericSet(string setString, string seperator)
+        {
+            Settings = new SetExtractionSettings<T>(seperator);
+            BuildSet(setString);
+        }//ctor
         private void BuildSet(string expression)
         {
             if (!BracesEvaluation.AreBracesCorrect(expression))
                 throw new ArgumentException("Braces are not matching");
-
-            tree = extractor.Extract(expression);
+            tree = Settings.Extract(expression);
         }//BuildSet
         #region Adding and removing elements
         public void AddElement(T Element)
@@ -66,7 +67,7 @@ namespace SetLibrary.Generic
             string s2 = this.ToString();
 
             string expression = s1.Remove(s1.Length - 1) + "," + s2.Remove(0, 1);
-            return new GenericSet<T>(expression, seperator);
+            return new GenericSet<T>(expression, Settings);
         }//MergeWith
 
         public bool Contains(T Element)
