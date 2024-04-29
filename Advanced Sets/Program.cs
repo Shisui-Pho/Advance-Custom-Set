@@ -10,9 +10,9 @@ namespace Advanced_Sets
         static void Main(string[] args)
         {
             TestCSet();
-            TestGenericSetWithNumbers();
-            TestISetTree();
-            TestSetOperations();
+           // TestGenericSetWithNumbers();
+           // TestISetTree();
+            //TestSetOperations();
             Console.ReadKey();
         }//Main
         private static void TestSetOperations()
