@@ -40,7 +40,7 @@ namespace SetLibrary
             //At this point the braces are correct
 
             //Extract the set tree
-            ISetTree<string> tree = GenericExtraction<string>.Extract(expression, ",");
+            ISetTree<string> tree = SetExtractionSettings<string>.Extract(expression, ",");
             this.tree = tree;
         }//BuildSet
 
@@ -72,7 +72,7 @@ namespace SetLibrary
             }//end if clean string/To look at the root
             if (Element.StartsWith("{") || Element.EndsWith("}"))
             {
-                string s = GenericExtraction<string>.Extract(Element, ",").ToString();
+                string s = SetExtractionSettings<string>.Extract(Element, ",").ToString();
                 return this.tree.IndexOf(s) >= 0;
             }//end if a subset
             return false;

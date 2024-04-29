@@ -148,7 +148,7 @@ namespace SetLibrary
             if (!this.lstRootElements.Contains(element) && !elem.Contains("}") && !elem.Contains("{"))
             {
                 //Get the unique elements
-                List<T> elements = GenericExtraction<T>.SortAndRemoveDuplicates(elem, ",");
+                List<T> elements = SetExtractionSettings<T>.SortAndRemoveDuplicates(elem, ",");
 
                 //Add to the lsist of root elements
                 this.lstRootElements.AddRange(elements);
@@ -160,7 +160,7 @@ namespace SetLibrary
                 if (!BracesEvaluation.AreBracesCorrect(elem))
                     throw new ArgumentException("The braces are not matching, please re-check them");
 
-                ISetTree<T> tree = GenericExtraction<T>.Extract(elem, ",");
+                ISetTree<T> tree = SetExtractionSettings<T>.Extract(elem, ",");
                 this.AddSubSetTree(tree);
             }//end else
         }//AddElement

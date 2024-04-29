@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 namespace SetLibrary.Generic
 {
-    internal class GenericExtraction<T>
+    public class SetExtractionSettings<T>
         where T : IComparable
     {
         private readonly char seperator;
-        public GenericExtraction(char _seperator)
+        public SetExtractionSettings(char _seperator)
         {
             seperator = _seperator;
         }
         public ISetTree<T>  Extract(string expression)
         {
-            return GenericExtraction<T>.Extract(expression, this.seperator.ToString());
+            return SetExtractionSettings<T>.Extract(expression, this.seperator.ToString());
         }//BuildTree
         public static ISetTree<T> Extract(string expression, string seperator)
         {

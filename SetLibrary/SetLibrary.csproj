@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\SortedSubSets.cs" />
-    <Compile Include="Service\GenericExtraction.cs" />
+    <Compile Include="Service\SetExtractionSettings.cs" />
     <Compile Include="Model\GenericSet.cs" />
     <Compile Include="Model\ISet.cs" />
     <Compile Include="Model\ISetTree.cs" />

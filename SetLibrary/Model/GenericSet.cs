@@ -18,18 +18,18 @@ namespace SetLibrary.Generic
         }//end if
 
         //Data members for conversion
-        private readonly GenericExtraction<T> extractor;
+        private readonly SetExtractionSettings<T> extractor;
         private readonly char seperator;
         private ISetTree<T> tree;
         public GenericSet(string setString, char seperator)
         {
-            extractor = new GenericExtraction<T>(seperator);
+            extractor = new SetExtractionSettings<T>(seperator);
             this.seperator = seperator;
             BuildSet(setString);
         }//ctor
         public GenericSet()
         {
-            extractor = new GenericExtraction<T>(',');
+            extractor = new SetExtractionSettings<T>(',');
             this.seperator = ',';
             this.tree = new CSetTree<T>(new System.Collections.Generic.List<T>());
         }//CTOR
