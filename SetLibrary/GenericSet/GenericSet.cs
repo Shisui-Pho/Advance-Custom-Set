@@ -40,11 +40,6 @@ namespace SetLibrary.Generic
 
             tree = extractor.Extract(expression);
         }//BuildSet
-        private string ToSetString(ISetTree<T> tree)
-        {
-            return tree.ToString();
-        }//ToSetString
-
         #region Adding and removing elements
         public void AddElement(T Element)
         {
@@ -83,14 +78,17 @@ namespace SetLibrary.Generic
         {
             return this.tree.IndexOf(tree.ToString()) >= 0;
         }//Contains
-
-        public bool IsSubSetOf(ISet<T> setB)
-        {
-            throw new NotImplementedException();
-        }//IsSubSetOf
         public override string ToString()
         {
             return this.ElementString;
         }//ToString
+        public bool IsSubSetOf(ISet<T> setB)
+        {
+            if (setB.Cardinality < this.Cardinality)
+                return false;
+
+
+            return true;
+        }//IsSubSetOf
     }//
 }//namespace
