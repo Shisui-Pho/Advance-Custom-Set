@@ -9,7 +9,7 @@ namespace SetLibrary
         where T : IComparable
     {
         //private data members to hold the data
-        private string _rootElement;
+        //private string _rootElement;
         private List<ISetTree<T>> lstSubsets;
         private List<T> lstRootElements;
 
