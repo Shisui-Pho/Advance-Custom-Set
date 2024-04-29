@@ -9,10 +9,10 @@ namespace SetLibrary
         where T : IComparable
     {
         //private data members to hold the data
-        //private string _rootElement;
-        private List<ISetTree<T>> lstSubsets;
-        private List<T> lstRootElements;
-
+        //private List<ISetTree<T>> lstSubsets;
+        //private List<T> lstRootElements;
+        private SortedElements<T> lstRootElements;
+        private SortedSubSets<T> lstSubsets;
         //Public data members to represent the internal data
         public string RootElement => string.Join(",",this.lstRootElements);
         public int Cardinality => lstRootElements.Count + lstSubsets.Count;
@@ -22,6 +22,7 @@ namespace SetLibrary
         {
             get
             {
+                
                 //Error handling
                 if (index >= Cardinality || index < 0)
                     throw new IndexOutOfRangeException();
@@ -34,7 +35,7 @@ namespace SetLibrary
                 index -= lstRootElements.Count;
 
                 //Return the subset
-                return this.lstSubsets[index];
+                return (ISetTree<T>)this.lstSubsets[index];
             }//end getter
         }//INDEXER
 
@@ -42,30 +43,35 @@ namespace SetLibrary
         private CSetTree(T element)
         {
             //Create the new list of sets
-            this.lstRootElements = new List<T>();
-            this.lstSubsets = new List<ISetTree<T>>();
-
+            //this.lstRootElements = new List<T>();
+            //this.lstSubsets = new List<ISetTree<T>>();
+            this.lstRootElements = new SortedElements<T>();
+            this.lstSubsets = new SortedSubSets<T>();
             //Add the element as a root of the set
             this.lstRootElements.Add(element);
 
-            //Set the flag to true to indicate that it is in the root
+           //Set the flag to true to indicate that it is in the root
             IsInRoot = true;
         }//ctor private
         public CSetTree(List<T> rootElement)
         {
-            //Create a new list of subsets
-            lstSubsets = new List<ISetTree<T>>();
+            ////Create a new list of subsets
+            //lstSubsets = new List<ISetTree<T>>();
 
-            //Set the root to be the new list of roots
-            this.lstRootElements = rootElement;
+            ////Set the root to be the new list of roots
+            //this.lstRootElements = rootElement;
+
+            this.lstRootElements = new SortedElements<T>(rootElement);
+            this.lstSubsets = new SortedSubSets<T>();
 
             IsInRoot = false;
         }//ctor 01 
         public CSetTree(List<T> rootElement,List<ISetTree<T>> SubSets)
             : this(rootElement)
         {
-            //Set the subsets
-            this.lstSubsets = SubSets;
+            ////Set the subsets
+            //this.lstSubsets = SubSets;
+            this.lstSubsets = new SortedSubSets<T>(SubSets);
             IsInRoot = false;
         }//ctor 02
         public int CompareTo(object obj)
@@ -80,7 +86,7 @@ namespace SetLibrary
 
             //Add and sort the elements
             this.lstSubsets.Add(tree);
-            this.lstSubsets = this.lstSubsets.OrderBy(x => x.Cardinality).ToList();
+            //this.lstSubsets = this.lstSubsets.OrderBy(x => x.Cardinality).ToList();
         }//AddSubTree
         private int IndexOfSet(string element)
         {
@@ -146,7 +152,7 @@ namespace SetLibrary
 
                 //Add to the lsist of root elements
                 this.lstRootElements.AddRange(elements);
-                this.lstRootElements.Sort();
+                //this.lstRootElements.Sort();
             }//end if
             else
             {
