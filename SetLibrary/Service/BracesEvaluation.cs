@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 namespace SetLibrary
 {
-    internal static class BracesEvaluation
+    public static class BracesEvaluation
     {
         public static bool AreBracesCorrect(string expression)
         {
