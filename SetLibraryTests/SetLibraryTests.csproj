@@ -77,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BraceEvaluationTests.cs" />
+    <Compile Include="CSetTests\AddElementTests.cs" />
+    <Compile Include="CSetTests\SetContainsSingleElement.cs" />
     <Compile Include="CSetTests\SetExceptions.cs" />
     <Compile Include="CSetTests\SetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
