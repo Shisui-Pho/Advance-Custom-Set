@@ -5,6 +5,9 @@ namespace SetLibrary
     {
         public static bool AreBracesCorrect(string expression)
         {
+            //First check the opening and clossing braces if they exist
+            if (!expression.StartsWith("{") || !expression.EndsWith("}"))
+                return false;
             //Stack that will contain all the 
             Stack<char> elements = new Stack<char>();
             //{5,{6,7,{9,6,{5,5}}}}
