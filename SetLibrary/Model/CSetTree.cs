@@ -178,8 +178,12 @@ namespace SetLibrary
             string elem = element.ToString();
 
             //Check if it is posible subset or not
-            if (!this.lstRootElements.Contains(element) && !elem.Contains("}") && !elem.Contains("{"))
+            if (!elem.Contains("}") && !elem.Contains("{"))
             {
+                //Check if the element is already there
+                if (this.lstRootElements.Contains(element))
+                    return;
+
                 //Get the unique elements
                 List<T> elements = SetExtraction.SortAndRemoveDuplicates(elem, ExtractionSettings);
 
