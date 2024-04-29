@@ -9,14 +9,10 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
-            string exp = "{{5},1,2,{5,5}, {6,7,8}, {6}}";
-            CSet st = new CSet(exp);
-            Console.WriteLine(exp);
-            Console.WriteLine(st);
-            //TestCSet();
-            //TestGenericSetWithNumbers();
-            //TestISetTree();
-            //TestSetOperations();
+            TestCSet();
+            TestGenericSetWithNumbers();
+            TestISetTree();
+            TestSetOperations();
             Console.ReadKey();
         }//Main
         private static void TestSetOperations()

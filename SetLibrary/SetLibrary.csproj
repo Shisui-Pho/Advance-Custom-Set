@@ -41,17 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\SortedSubSets.cs" />
     <Compile Include="Service\GenericExtraction.cs" />
-    <Compile Include="GenericSet\GenericSet.cs" />
-    <Compile Include="ISet.cs" />
-    <Compile Include="ISetTree.cs" />
+    <Compile Include="Model\GenericSet.cs" />
+    <Compile Include="Model\ISet.cs" />
+    <Compile Include="Model\ISetTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BracesEvaluation.cs" />
     <Compile Include="SetExtensions\SetOperations.cs" />
     <Compile Include="SetExtensions\SetType.cs" />
-    <Compile Include="Set\CSet.cs" />
+    <Compile Include="Model\CSet.cs" />
     <Compile Include="Model\CSetTree.cs" />
-    <Compile Include="SortedElements.cs" />
+    <Compile Include="Model\SortedElements.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
