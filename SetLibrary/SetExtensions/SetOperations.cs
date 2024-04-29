@@ -53,7 +53,7 @@ namespace SetLibrary.Operations
         private static ISet<T> FindIntsersection<T>(ISet<T> setA, ISet<T> setB)
             where T : IComparable
         {
-            ISet<T> intersection = new GenericSet<T>();
+            ISet<T> intersection = new GenericSet<T>(setA.Settings);
             for (int i = 0; i < setB.Cardinality; i++)
             {
                 ISetTree<T> tree = setB[i];
@@ -105,7 +105,7 @@ namespace SetLibrary.Operations
             //The methods reads as setA without setB
 
             //Create the new set
-            ISet<T> difference = new GenericSet<T>();
+            ISet<T> difference = new GenericSet<T>(setA.Settings);
 
             //If they are the same set, then the difference will be nothing
             if (setA.ToString() == setB.ToString())

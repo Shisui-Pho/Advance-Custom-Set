@@ -23,7 +23,7 @@ namespace SetLibrary
             if (!expression.Contains("}") && !expression.Contains("{"))
             {
                 List<T> rootElements = SortAndRemoveDuplicates(expression, settings);
-                return new CSetTree<T>(rootElements);
+                return new CSetTree<T>(rootElements,settings);
             }//end expression
 
 

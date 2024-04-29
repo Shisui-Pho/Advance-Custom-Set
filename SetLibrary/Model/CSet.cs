@@ -27,7 +27,7 @@ namespace SetLibrary
         public CSet()
         {
             Settings = new SetExtractionSettings<string>(",");
-            tree = new CSetTree<string>(new System.Collections.Generic.List<string>());
+            tree = new CSetTree<string>(new System.Collections.Generic.List<string>(), Settings);
         }//ctor default
         public CSet(string elementString)
         {

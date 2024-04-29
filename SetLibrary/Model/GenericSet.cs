@@ -25,16 +25,17 @@ namespace SetLibrary.Generic
             Settings = new SetExtractionSettings<T>(",");
             tree = new CSetTree<T>(new System.Collections.Generic.List<T>()); 
         }//ctor 01
+        public GenericSet(SetExtractionSettings<T> settings)
+        {
+            Settings = new SetExtractionSettings<T>(",");
+            tree = new CSetTree<T>(new System.Collections.Generic.List<T>());
+        }//ctor 01
         public GenericSet(string setString,SetExtractionSettings<T> settings)
         {
             this.Settings = settings;
             BuildSet(setString);
         }//CTOR
-        public GenericSet(string setString, string seperator)
-        {
-            Settings = new SetExtractionSettings<T>(seperator);
-            BuildSet(setString);
-        }//ctor
+
         private void BuildSet(string expression)
         {
             if (!BracesEvaluation.AreBracesCorrect(expression))
