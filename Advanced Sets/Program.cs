@@ -1,6 +1,7 @@
 ﻿using System;
 using SetLibrary;
 using SetLibrary.Generic;
+using SetLibrary.Objects_Sets;
 using SetLibrary.Operations;
 
 namespace Advanced_Sets
@@ -9,12 +10,25 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
-            TestCSet();
-           // TestGenericSetWithNumbers();
-           // TestISetTree();
+            //TestCSet();
+            //TestGenericSetWithNumbers();
+            // TestISetTree();
             //TestSetOperations();
+            TestObjectsConverter<Person>();
             Console.ReadKey();
         }//Main
+        private static void TestObjectsConverter<T>()
+            where T : IObjectConverter<Person>
+        {
+            SetExtractionSettings<Person> settings = new SetExtractionSettings<Person>(",", " ", new Person());
+            string field = "{Phiwokwakhe Khathwane,Hellbraze Octa,{Fundi Dlamini, Anele Ntuli}}";
+            //Person p = settings.PlaceHolder.ToObject(field, settings);
+            ISetTree<Person> tree = SetExtraction.Extract(field, settings);
+            ISetTree<Person> p1 = tree[0];
+            ISetTree<Person> p2 = tree[1];
+            ISetTree<Person> p3 = tree[2];
+        }//TestObjectsConverter
+        //private static T placeholder<T>()
         private static void TestSetOperations()
         {
             Console.Clear();

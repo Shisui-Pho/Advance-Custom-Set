@@ -1,6 +1,6 @@
 ﻿using SetLibrary.Generic;
 using System;
-namespace SetLibrary.Model
+namespace SetLibrary
 {
     public abstract class BaseSet<T>
         where T : IComparable
@@ -24,11 +24,10 @@ namespace SetLibrary.Model
                 return tree[index];
             }//end getter
         }//end indexer
-
         public BaseSet()
         {
             Settings = new SetExtractionSettings<T>(",");
-            tree = new CSetTree<T>(new System.Collections.Generic.List<T>());
+            tree = new CSetTree<T>(new System.Collections.Generic.List<T>(), Settings);
         }//ctor main
         public BaseSet(string setString, SetExtractionSettings<T> settings)
         {
@@ -45,6 +44,11 @@ namespace SetLibrary.Model
             //Extract the set tree
             this.tree = SetExtraction.Extract(expression, this.Settings);
         }//BuildSetString
+        public virtual bool Contains(ISetTree<T> tree)
+        {
+            return this.tree.IndexOf(tree.ToString()) >= 0;
+        }//Contains
+        #region Addingd and removing element on a set tree
         public virtual void AddElement(T Element)
         {
             this.tree.AddElement(Element);
@@ -63,12 +67,16 @@ namespace SetLibrary.Model
         {
             return tree.RemoveElement(Element);
         }//RemoveElement
-        public virtual bool Contains(ISetTree<T> tree)
+        #endregion Adding and removing elements from a set tree
+        public override string ToString()
         {
-            return this.tree.IndexOf(tree.ToString()) >= 0;
-        }//Contains
+            return ElementString;
+        }//ToString
+
+        #region Abstract method to be implemented by the inherited classes
         public abstract bool Contains(T Element);
         public abstract bool IsSubSetOf(ISet<T> setB);
         public abstract ISet<T> MergeWith(ISet<T> set);
+        #endregion Abstract method to be implemented by the inherited classes
     }//class
 }//namespace

@@ -24,7 +24,6 @@ namespace SetLibrary
         {
             get
             {
-                
                 //Error handling
                 if (index >= Cardinality || index < 0)
                     throw new IndexOutOfRangeException();
@@ -40,7 +39,6 @@ namespace SetLibrary
                 return (ISetTree<T>)this.lstSubsets[index];
             }//end getter
         }//INDEXER
-
         #region Constructures
         //This will be used to return 
         private CSetTree(T element, SetExtractionSettings<T> settings)
@@ -106,11 +104,7 @@ namespace SetLibrary
             this.ExtractionSettings = settings;
         }//ctor 04
         #endregion Constructers
-
-        public int CompareTo(object obj)
-        {
-            return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
-        }//CompareTo
+        #region Adding and removing elements and subtrees
         public void AddSubSetTree(ISetTree<T> tree)
         {
             //First check if the set is already in the tree or not
@@ -121,35 +115,6 @@ namespace SetLibrary
             this.lstSubsets.Add(tree);
             //this.lstSubsets = this.lstSubsets.OrderBy(x => x.Cardinality).ToList();
         }//AddSubTree
-        private int IndexOfSet(string element)
-        {
-            //first check in the root elements
-            for(int index = 0; index < this.Cardinality; index++)
-            {
-                ISetTree<T> item = this[index];
-                if (index < lstRootElements.Count)//In the root element
-                {
-                    //We enclose the element with oppening and clossing brace since the indexer will return the item in a set format
-                    if (item.ToString() == ("{" + element + "}"))
-                        return index;
-                }//end if in root element
-                else if (item.ToString() == element) //Not in the root element
-                    return index;
-            }//end for
-            
-            //index not found
-            return -1;
-        }//IndexOfSet
-        public int IndexOf(T element)
-        {
-            //Call the inside function
-            return IndexOfSet(element.ToString());
-        }//IndexOf
-        public int IndexOf(string element)
-        {
-            //Call the inside function
-            return IndexOfSet(element);
-        }//IndexOf
         public bool RemoveElement(ISetTree<T> element)
         {
             //Find the index of the element/subset in the tree
@@ -201,6 +166,40 @@ namespace SetLibrary
                 this.AddSubSetTree(tree);
             }//end else
         }//AddElement
+
+        #endregion Adding and removing elements and subtrees
+        #region IndexOf methods
+        private int IndexOfSet(string element)
+        {
+            //first check in the root elements
+            for(int index = 0; index < this.Cardinality; index++)
+            {
+                ISetTree<T> item = this[index];
+                if (index < lstRootElements.Count)//In the root element
+                {
+                    //We enclose the element with oppening and clossing brace since the indexer will return the item in a set format
+                    if (item.ToString() == ("{" + element + "}"))
+                        return index;
+                }//end if in root element
+                else if (item.ToString() == element) //Not in the root element
+                    return index;
+            }//end for
+            
+            //index not found
+            return -1;
+        }//IndexOfSet
+        public int IndexOf(T element)
+        {
+            //Call the inside function
+            return IndexOfSet(element.ToString());
+        }//IndexOf
+        public int IndexOf(string element)
+        {
+            //Call the inside function
+            return IndexOfSet(element);
+        }//IndexOf
+        #endregion IndexOf methods
+        #region Interface Implementations
         public IEnumerable<ISetTree<T>> GetSubsetsEnumarator()
         {
             foreach (var item in this.lstSubsets)
@@ -208,11 +207,17 @@ namespace SetLibrary
                 yield return item;
             }//eend for each
         }//GetSubsetsEnumarator
+        public int CompareTo(object obj)
+        {
+            return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
+        }//CompareTo
         public override string ToString()
         {
             //Builf the tree
             return CSetTree<T>.ToSetString(this);
         }//ToString
+
+        #endregion Interface Implementations
         /// <summary>
         /// Recuresive procedure to build a set string using a dept first retrieval/search
         /// </summary>

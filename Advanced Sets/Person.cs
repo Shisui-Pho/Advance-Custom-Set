@@ -7,7 +7,7 @@ namespace Advanced_Sets
     {
         public string FirstName { get; }
         public string LastName { get; }
-
+        public Person() { }
         public Person(string firstName, string lastName)
         {
             FirstName = firstName;
