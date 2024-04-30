@@ -79,8 +79,6 @@ namespace SetLibrary
         public static List<T> SortAndRemoveDuplicates<T>(string rootElements, SetExtractionSettings<T> settings)
             where T : IComparable
         {
-            if(settings.Seperator != " ")
-                rootElements = rootElements.Replace(" ", "");
             //Get the elements
             string[] elements = rootElements.Split(new string[] { settings.Seperator }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -90,6 +88,8 @@ namespace SetLibrary
             //Loop through all elements
             foreach (string element in elements)
             {
+                if (element == " ")
+                    continue;
                 T item = default;
                 try
                 {
@@ -103,10 +103,8 @@ namespace SetLibrary
                 if (!uniqueElements.Contains(item, c))//check if it is unique
                     uniqueElements.Add(item);//add if unique
             }//end foreach
-
-
             uniqueElements.Sort();
             return uniqueElements;
         }//SortAndRemoveDuplicates
-    }
-}
+    }//class
+}//namespace
