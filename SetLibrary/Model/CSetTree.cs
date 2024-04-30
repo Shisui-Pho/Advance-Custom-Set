@@ -1,5 +1,6 @@
 ﻿using SetLibrary.Generic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -200,6 +201,10 @@ namespace SetLibrary
         }//IndexOf
         #endregion IndexOf methods
         #region Interface Implementations
+        /// <summary>
+        /// Enumarate through the subelements element of the current set
+        /// </summary>
+        /// <returns>A tree of type <typeparamref name="T"/> as an element from this tree</returns>
         public IEnumerable<ISetTree<T>> GetSubsetsEnumarator()
         {
             foreach (var item in this.lstSubsets)
@@ -207,6 +212,19 @@ namespace SetLibrary
                 yield return item;
             }//eend for each
         }//GetSubsetsEnumarator
+        /// <summary>
+        /// Enumarate through the root element of the current set
+        /// </summary>
+        /// <returns>A root element of type T</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return lstRootElements.GetEnumerator();
+        }//GetEnumerator
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }//GetEnumerator
         public int CompareTo(object obj)
         {
             return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);

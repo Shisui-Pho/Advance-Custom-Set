@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SetLibrary
 {
-    public interface ISetTree<T> : IComparable
+    public interface ISetTree<T> : IComparable, IEnumerable<T>
         where T : IComparable
     {
         string RootElement { get; }
