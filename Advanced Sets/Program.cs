@@ -10,11 +10,11 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
-            //TestCSet();
+            TestCSet();
             //TestGenericSetWithNumbers();
             // TestISetTree();
             //TestSetOperations();
-            TestObjectsConverter<Person>();
+            //TestObjectsConverter<Person>();
             Console.ReadKey();
         }//Main
         private static void TestObjectsConverter<T>()

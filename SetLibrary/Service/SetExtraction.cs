@@ -89,8 +89,6 @@ namespace SetLibrary
             //Loop through all elements
             foreach (string element in elements)
             {
-                if (element == " ")
-                    continue;
                 T item = default;
                 try
                 {
@@ -101,7 +99,16 @@ namespace SetLibrary
                         item = (((IObjectConverter<T>)placeHolder).ToObject(element, settings));
                     }
                     else
-                        item = (T)Convert.ChangeType(element, typeof(T));
+                    {
+                        //Remove spaces
+                        string _elem = element.Replace(" ", "");
+
+                        //If it is a space then continue.
+                        if (_elem == "")
+                            continue;
+                        item = (T)Convert.ChangeType(_elem, typeof(T));
+                    }
+                        
                 }//end try
                 catch
                 {

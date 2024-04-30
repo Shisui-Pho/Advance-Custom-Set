@@ -10,7 +10,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}","{1}")]
         [InlineData("{6,0,1,2,9,0,6}","{0,1,2,6,9}")]
         [InlineData("{3,1,3}","{1,3}")]
-        [InlineData("5,6,6,6,2","{2,5,6}")]
+        [InlineData("{5,6,6,6,2}","{2,5,6}")]
         public void ElementStringsWithoutNestedSetsTest(string elementString, string expectedString)
         {
             //Create the new set objec
@@ -25,7 +25,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}", 1)]
         [InlineData("{6,0,1,2,9,0,6}", 5)]
         [InlineData("{3,1,3}", 2)]
-        [InlineData("5,6,6,6,2", 3)]
+        [InlineData("{5,6,6,6,2}", 3)]
         public void ElementStringsWithoutNestedSetsCardinalityTest(string elementString, int expectedCardinality)
         {
             ISet<string> set = new CSet(elementString);
