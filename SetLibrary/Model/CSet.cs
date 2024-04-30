@@ -21,7 +21,7 @@ namespace SetLibrary
                 //Check if that element is there or not
                 return this.tree.RootElement.Contains(Element);
             }//end if clean string/To look at the root
-            if (Element.StartsWith("{") || Element.EndsWith("}"))
+            if (Element.StartsWith("{") && Element.EndsWith("}"))
             {
                 string s = SetExtraction.Extract(Element, Settings).ToString();
                 return this.tree.IndexOf(s) >= 0;
