@@ -8,7 +8,7 @@ namespace SetLibrary
         public static List<T> ToListRootElements<T>(this ISet<T> set)
            where T : IComparable
         {
-            List<T> elem = new List<T>(0);
+            List<T> elem = new List<T>();
             for (int i = 0; i <set.Cardinality ; i++)
             {
                 ISetTree<T> tree = set[i];
