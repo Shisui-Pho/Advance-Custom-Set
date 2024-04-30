@@ -1,16 +1,17 @@
 ﻿using System.Linq;
 using Xunit;
 using SetLibrary;
+using SetLibrary.Generic;
 namespace SetLibraryTests.CSetTests
 {
     public class AddElementTests
     {
         private CSet testSet;
-
         public AddElementTests()
         {
             // Initialize testSet if needed before each test
             testSet = new CSet("{1,2,3}");
+            settings = new SetExtractionSettings<string>(",");
         }
 
         [Fact]
@@ -19,7 +20,11 @@ namespace SetLibraryTests.CSetTests
             testSet.AddElement("4");
             Assert.True(testSet.Contains("4"));
         }//TestAddSingleElement
-
+        [Fact]
+        public void TestAddSingleCetTree()
+        {
+            
+        }//TestAddSingleCetTree
         [Fact]
         public void TestAddElementAlreadyExists()
         {
