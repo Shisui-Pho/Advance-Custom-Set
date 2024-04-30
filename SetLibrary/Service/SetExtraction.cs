@@ -79,7 +79,8 @@ namespace SetLibrary
         public static List<T> SortAndRemoveDuplicates<T>(string rootElements, SetExtractionSettings<T> settings)
             where T : IComparable
         {
-            rootElements = rootElements.Replace(" ", "");
+            if(settings.Seperator != " ")
+                rootElements = rootElements.Replace(" ", "");
             //Get the elements
             string[] elements = rootElements.Split(new string[] { settings.Seperator }, StringSplitOptions.RemoveEmptyEntries);
 
