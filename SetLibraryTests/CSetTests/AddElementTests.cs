@@ -11,7 +11,7 @@ namespace SetLibraryTests.CSetTests
         {
             // Initialize testSet if needed before each test
             testSet = new CSet("{1,2,3}");
-            settings = new SetExtractionSettings<string>(",");
+            //settings = new SetExtractionSettings<string>(",");
         }
 
         [Fact]
