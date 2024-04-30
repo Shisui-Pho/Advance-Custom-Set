@@ -81,7 +81,10 @@
     <Compile Include="CSetTests\SetContainsSingleElement.cs" />
     <Compile Include="CSetTests\SetExceptions.cs" />
     <Compile Include="CSetTests\SetTests.cs" />
+    <Compile Include="CSetTreeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetExtractionTests.cs" />
+    <Compile Include="SortAndRemoveDuplicatesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
