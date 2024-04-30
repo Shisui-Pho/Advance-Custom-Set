@@ -1,4 +1,5 @@
 ﻿using SetLibrary.Generic;
+using SetLibrary.Objects_Sets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,8 +94,15 @@ namespace SetLibrary
                 T item = default;
                 try
                 {
-                    item = (T)Convert.ChangeType(element, typeof(T));
-                }
+                    //First check if the value is an objects that uses the IObjects convert class
+                    if(settings.PlaceHolder != null && settings.PlaceHolder is IObjectConverter<T>)
+                    {
+                        T placeHolder = settings.PlaceHolder;
+                        item = (((IObjectConverter<T>)placeHolder).ToObject(element, settings));
+                    }
+                    else
+                        item = (T)Convert.ChangeType(element, typeof(T));
+                }//end try
                 catch
                 {
                     throw;
