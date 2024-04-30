@@ -80,7 +80,7 @@ namespace SetLibrary
             where T : IComparable
         {
             //Get the elements
-            string[] elements = rootElements.Split(new string[] { settings.Seperator }, StringSplitOptions.RemoveEmptyEntries);
+            string[] elements = rootElements.Split(new string[] { settings.ElementSeperator }, StringSplitOptions.RemoveEmptyEntries);
 
             //Create a list of elements that are unique
             List<T> uniqueElements = new List<T>();
