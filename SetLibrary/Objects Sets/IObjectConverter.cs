@@ -9,6 +9,12 @@ namespace SetLibrary.Objects_Sets
     public interface IObjectConverter<T>
         where T : IComparable
     {
+        /// <summary>
+        /// Converts a string object to a specified object
+        /// </summary>
+        /// <param name="field">The string representation of the the object.</param>
+        /// <param name="settings">The extaction of the object</param>
+        /// <returns>Returns the converted objects as type T.</returns>
         T ToObject(string field, SetExtractionSettings<T> settings);
     }//class
 }//namespace
