@@ -13,7 +13,7 @@ namespace SetLibrary
 
         public int Cardinality => tree.Cardinality;
 
-        public SetExtractionSettings<T> Settings { get; private set; }
+        public SetExtractionSettings<T> Settings { get; protected set; }
 
         public ISetTree<T> this[int index]
         {

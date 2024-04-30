@@ -4,19 +4,18 @@ namespace SetLibrary.Generic
     public class GenericSet<T> :BaseSet<T> ,ISet<T> 
         where T : IComparable
     {
-        public GenericSet()
+        public GenericSet():base()
         {
-            Settings = new SetExtractionSettings<T>(",");
-            tree = new CSetTree<T>(new System.Collections.Generic.List<T>()); 
         }//ctor 01
         public GenericSet(SetExtractionSettings<T> settings)
+            : base()
         {
-            Settings = new SetExtractionSettings<T>(",");
-            tree = new CSetTree<T>(new System.Collections.Generic.List<T>());
+            //Override the base collection
+            base.Settings = settings;
         }//ctor 01
         public GenericSet(string setString,SetExtractionSettings<T> settings)
+            :base(setString,settings)
         {
-            this.Settings = settings;
         }//CTOR
         public override ISet<T> MergeWith(ISet<T> set)
         {
