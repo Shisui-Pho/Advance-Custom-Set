@@ -13,7 +13,7 @@ namespace SetLibrary
         private SortedSubSets<T> lstSubsets;
 
         //Public data members to represent the internal data
-        public string RootElement => string.Join(",",this.lstRootElements);
+        public string RootElement => string.Join(ExtractionSettings.ElementSeperator,this.lstRootElements);
         public int Cardinality => lstRootElements.Count + lstSubsets.Count;
         public int NumberOfSubsets => this.lstSubsets.Count;
         public bool IsInRoot { get; private set; }
