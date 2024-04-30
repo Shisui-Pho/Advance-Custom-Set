@@ -166,6 +166,9 @@ namespace Advanced_Sets
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
 
+            var list = set.ToListRootElements();
+            var sub = set.ToListSubSets();
+
             expression = "{5,2,1,0}";
             Console.WriteLine();
             Console.WriteLine();

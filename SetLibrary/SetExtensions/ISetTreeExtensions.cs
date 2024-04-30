@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace SetLibrary.SetExtensions
+namespace SetLibrary
 {
     public static class ISetTreeExtensions
     {

@@ -52,6 +52,7 @@
     <Compile Include="Model\ISetTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BracesEvaluation.cs" />
+    <Compile Include="SetExtensions\ISetExtensions.cs" />
     <Compile Include="SetExtensions\ISetTreeExtensions.cs" />
     <Compile Include="SetExtensions\SetOperations.cs" />
     <Compile Include="SetExtensions\SetType.cs" />
