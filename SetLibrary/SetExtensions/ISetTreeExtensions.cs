@@ -39,6 +39,7 @@ namespace SetLibrary
             {
                 if (index == count)
                     return item;
+                count++;
             }
             return default(T);
         }//GetRootValueByIndex
@@ -51,6 +52,7 @@ namespace SetLibrary
             {
                 if (index == count)
                     return item;
+                count++;
             }
             return default(ISetTree<T>);
         }//GetSubSetElementByIndex

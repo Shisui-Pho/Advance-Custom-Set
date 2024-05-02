@@ -61,6 +61,7 @@ namespace SetLibrary
 
                 if (count == index)
                     return tree.FindFirstRootElement();
+                count++;
             }//end for
             return default(T);
         }//GetRootValueByIndex
