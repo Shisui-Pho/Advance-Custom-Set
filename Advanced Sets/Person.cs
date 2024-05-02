@@ -3,7 +3,7 @@ using SetLibrary.Objects_Sets;
 using System;
 namespace Advanced_Sets
 {
-    public class Person : IObjectConverter<Person>, IComparable
+    public class Person : IObjectConverter<Person>, IComparable, IEquatable<Person>
     {
         public string FirstName { get; }
         public string LastName { get; }
@@ -17,15 +17,22 @@ namespace Advanced_Sets
         public Person ToObject(string field, SetExtractionSettings<Person> settings)
         {
             string[] fields = field.Split(new string[] { settings.FieldTerminator }, StringSplitOptions.RemoveEmptyEntries);
-            if (fields.Length > 2)
+            if (fields.Length != 2)
                 throw new ArgumentException("Cannot convert to type of Person");
             return new Person(fields[0], fields[1]);
         }//ToObject
-
         public int CompareTo(object obj)
         {
             return this.FirstName.CompareTo(((Person)obj).FirstName);
         }//CompareTo
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }//ToString
+        public bool Equals(Person other)
+        {
+            return this.FirstName == other.FirstName && this.LastName == other.LastName;
+        }//Equals
     }//class
 }//namespace
 #region Alternative but not working for all cases

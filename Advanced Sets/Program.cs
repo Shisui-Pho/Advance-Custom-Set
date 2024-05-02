@@ -11,30 +11,102 @@ namespace Advanced_Sets
         static void Main(string[] args)
         {
             TestCSet();
-            //TestGenericSetWithNumbers();
-            // TestISetTree();
-            //TestSetOperations();
-            //TestObjectsConverter<Person>();
+            TestGenericSetWithNumbers();
+            TestISetTree();
+            TestSetOperations();
+            TestObjectsConverter();
             Console.ReadKey();
         }//Main
-        private static void TestObjectsConverter<T>()
-            where T : IObjectConverter<Person>
+        private static void TestObjectsConverter()
         {
+            Console.Clear();
+            Console.WriteLine("TESTING Object Set with a Person Model");
+            Console.WriteLine("=======================================");
+            Console.WriteLine("Note : The person model has two field which are First Name and Last name, The sorting happens based on first name.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
             SetExtractionSettings<Person> settings = new SetExtractionSettings<Person>(",", " ", new Person());
-            string field = "{Phiwokwakhe Khathwane,Hellbraze Octa,{Fundi Dlamini, Anele Ntuli}}";
-            //Person p = settings.PlaceHolder.ToObject(field, settings);
-            ISetTree<Person> tree = SetExtraction.Extract(field, settings);
-            ISetTree<Person> p1 = tree[0];
-            ISetTree<Person> p2 = tree[1];
-            ISetTree<Person> p3 = tree[2];
+
+            //Expression 01
+            Console.WriteLine("Expression 01 : ");
+            string expression = "{Phiwokwakhe Khathwane,Phiwokwakhe Khathwane,Phiwokwakhe Khathwane,Anabel Hillson,Anabel Bananna,Lesbary Mathew,William Shakesphere,{Muton Sugar,Henry MacDonald,{}}}";
+            ISet<Person> setPeople = new SetObjects<Person>(expression,settings);
+            Console.WriteLine("The original set expression was :");
+            Console.WriteLine("   "+ expression);
+            Console.WriteLine();
+            Console.WriteLine("The evaluated string is : ");
+            Console.WriteLine("   " + setPeople);
+            Console.WriteLine();
+            Console.WriteLine("The first person on the set will be : " + setPeople.FindFirstRootElement());
+            Console.WriteLine("The first sub set of people will be : " + setPeople.GetSubSetElementByIndex(0));
+            Console.WriteLine("Person on index 2 on root will be   : " + setPeople.GetRootElementByIndex(2));
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Expression 02
+            Console.WriteLine("Expression 02 : ");
+            expression = "{{John Doe,Alice Cooper},{Bob Marley,Carol Johnson,Jane Smith},{David Lee,Susan Adams},{Michael Jordan,Sarah Parker,Thomas Edison}, {Emily Watson,Christopher Brown}}";
+            setPeople = new SetObjects<Person>(expression, settings);
+            Console.WriteLine("The original set expression was :");
+            Console.WriteLine("   " + expression);
+            Console.WriteLine();
+            Console.WriteLine("The evaluated string is : ");
+            Console.WriteLine("   " + setPeople);
+            Console.WriteLine();
+            Console.WriteLine("The first person on the set will be : " + setPeople.FindFirstRootElement());
+            Console.WriteLine("The first sub set of people will be : " + setPeople.GetSubSetElementByIndex(0));
+            Console.WriteLine("Person on index 2 on root will be   : " + setPeople.GetRootElementByIndex(2));
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            //Expression 03
+            Console.WriteLine("Expression 03 : ");
+            expression = "{{John Doe, {}}, {Jane Smith, {Bob Marley, {}, Carol Johnson}}, {}, {David Lee, {Susan Adams, {Michael Jordan, Sarah Parker}, Thomas Edison}}, {Emily Watson, {Christopher Brown}}}";
+            setPeople = new SetObjects<Person>(expression, settings);
+            Console.WriteLine("The original set expression was :");
+            Console.WriteLine("   " + expression);
+            Console.WriteLine();
+            Console.WriteLine("The evaluated string is : ");
+            Console.WriteLine("   " + setPeople);
+            Console.WriteLine();
+            Console.WriteLine("The first person on the set will be : " + setPeople.FindFirstRootElement());
+            Console.WriteLine("The first sub set of people will be : " + setPeople.GetSubSetElementByIndex(0));
+            Console.WriteLine("Person on index 2 on root will be   : " + setPeople.GetRootElementByIndex(2));
+            Console.WriteLine();
+            Console.WriteLine();
+            //string expression3 = "{{John Doe, Alice Cooper}, Bob Marley, Carol Johnson, Jane Smith, David Lee, {Susan Adams, Michael Jordan, Sarah Parker, Thomas Edison}, Robert Smith, {Laura Davis, {Emily Watson, {Christopher Brown, Emma Thompson}}}}";
+
+            //Expression 04
+            Console.WriteLine("Expression 04 : ");
+            expression = "{{John Doe, Alice Cooper}, Bob Marley, Carol Johnson, Jane Smith, David Lee, {Susan Adams, Michael Jordan, Sarah Parker, Thomas Edison}, Robert Smith, {Laura Davis, {Emily Watson, {Christopher Brown, Emma Thompson}}}}";
+            setPeople = new SetObjects<Person>(expression, settings);
+            Console.WriteLine("The original set expression was :");
+            Console.WriteLine("   " + expression);
+            Console.WriteLine();
+            Console.WriteLine("The evaluated string is : ");
+            Console.WriteLine("   " + setPeople);
+            Console.WriteLine();
+            Console.WriteLine("The first person on the set will be : " + setPeople.FindFirstRootElement());
+            Console.WriteLine("The first sub set of people will be : " + setPeople.GetSubSetElementByIndex(0));
+            Console.WriteLine("Person on index 2 on root will be   : " + setPeople.GetRootElementByIndex(2));
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine("End of the line!!!");
+            Console.WriteLine();
+            Console.Write("Press any key to exit......");
         }//TestObjectsConverter
-        //private static T placeholder<T>()
         private static void TestSetOperations()
         {
             Console.Clear();
             //For a generic sts
             Console.WriteLine("Testing set operations with a generic set class");
             Console.WriteLine("=================================================");
+            Console.WriteLine("Note : A generic set of intergers is being used");
+            Console.WriteLine();
             Console.WriteLine();
             SetExtractionSettings<int> settings = new SetExtractionSettings<int>(",");
             int padding = 30;
@@ -79,39 +151,60 @@ namespace Advanced_Sets
             Console.WriteLine("setA union set B".PadRight(padding) + " : " + union.ToString());
             Console.WriteLine();
 
-            //Complement
-            Console.WriteLine("Complement : ");
-            ISet<int> complement1 = setA.Complement(setB, out bool isUniversal);
-            Console.WriteLine("Set A complement Set B");
-            if (!isUniversal)
-            {
-                Console.WriteLine("setB is not universal to setA".PadRight(padding) + " : " + complement1.ToString());
-            }
-            else
-                Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement1.ToString());
-            
+
+            //Intersection
+            Console.WriteLine("Intersection : ");
+            //A and B
+            ISet<int> intersectionA = setA.Intersection(setB);
+            Console.WriteLine("SetA intersect SetB".PadRight(padding) + " : " + intersectionA.ToString());
             Console.WriteLine();
 
-            var a = setA.Complement(union, out isUniversal);
+            //B and A
+            ISet<int> intersectionB = setB.Intersection(setA);
+            Console.WriteLine("SetB intersect SetA".PadRight(padding) + " : " + intersectionB.ToString());
+            Console.WriteLine();
 
-            ISet<int> complement2 = setA.Complement(universal, out isUniversal);
-            Console.WriteLine("Universal complement Set B");
-            if (!isUniversal)
-            {
-                Console.WriteLine("Set A is not subset of the universal set".PadRight(padding) + " : " + complement2.ToString());
-            }
-            else
-                Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement2.ToString());
+            ISet<int> intersectionC = universal.Intersection(setA);
+            Console.WriteLine("Universal intersect SetA".PadRight(padding) + " : " + intersectionC.ToString());
+            Console.WriteLine("From the above result we expect to set SetA itself.");
+            Console.WriteLine();
+            ////Complement
+            //Console.WriteLine("Complement : ");
+            //ISet<int> complement1 = setA.Complement(setB, out bool isUniversal);
+            //Console.WriteLine("Set A complement Set B");
+            //if (!isUniversal)
+            //{
+            //    Console.WriteLine("setB is not universal to setA".PadRight(padding) + " : " + complement1.ToString());
+            //}
+            //else
+            //    Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement1.ToString());
+
+            //Console.WriteLine();
+
+            //var a = setA.Complement(union, out isUniversal);
+
+            //ISet<int> complement2 = setA.Complement(universal, out isUniversal);
+            //Console.WriteLine("Universal complement Set B");
+            //if (!isUniversal)
+            //{
+            //    Console.WriteLine("Set A is not subset of the universal set".PadRight(padding) + " : " + complement2.ToString());
+            //}
+            //else
+            //    Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement2.ToString());
 
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.Write("Press any key to move on to the next test.......");
-            //Console.ReadKey();
-        }//TestSetOperations
+            AnyKey();
+           }//TestSetOperations
         private static void TestISetTree()
         {
             Console.Clear();
+            Console.WriteLine("TESTING the set tree");
+            Console.WriteLine("=====================");
+            Console.WriteLine("Note : A non-generic set of strings is being used, thus the sorting may be in-accurate with numbers");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
             //Test CSet
             string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
             ISet<string> set = new CSet(expression);
@@ -123,16 +216,19 @@ namespace Advanced_Sets
             set.RemoveElement(tree);
             Console.WriteLine("Removed the following tree : {0}", tree);
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
             set.RemoveElement("2");
             Console.WriteLine("Remove the following element : \"2\"");
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
             tree.AddElement("{2,6,7}");
             tree.AddElement("{2,2}");
             set.AddElement(tree);
             Console.WriteLine("Added the following element: {0}", tree);
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
-            //TestCSet();
-            //TestGenericSetWithNumbers();
+
+            Console.WriteLine();
+            AnyKey();
         }//TestISetTree
         private static void TestCSet()
         {
@@ -140,7 +236,7 @@ namespace Advanced_Sets
             Console.WriteLine("TESTING CSet : Non-Generic set");
             Console.WriteLine("===============================");
             Console.WriteLine();
-            Console.WriteLine("Please note that the sorting may not be acurate because it does a string sorting!");
+            Console.WriteLine("Note :The sorting may not be acurate because it does a string sorting!");
             Console.WriteLine();
             Console.WriteLine();
 
@@ -165,9 +261,6 @@ namespace Advanced_Sets
             set = new CSet(expression);
             Console.WriteLine("The element string will be : " + set.ElementString);
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
-
-            var list = set.ToListRootElements();
-            var sub = set.ToListSubSets();
 
             expression = "{5,2,1,0}";
             Console.WriteLine();
@@ -194,12 +287,7 @@ namespace Advanced_Sets
             Console.WriteLine("The cardinality will be : " + set.Cardinality);
             
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Finnished!!!");
-            Console.Write("Press any key to see the generic set(with integers : generic version of the above data).......");
-            Console.ReadLine();
-            Console.Clear();
+            AnyKey();
         }//TestCSet
         private static void TestGenericSetWithNumbers()
         {
@@ -261,14 +349,15 @@ namespace Advanced_Sets
 
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Finnished!!!");
-            Console.Write("Press any key to see the generic set.......");
-            Console.ReadLine();
+            AnyKey();
         }//TestGenericSetWithNumbers
-        private static void TestSettingsGenericSet()
+        private static void AnyKey()
         {
-
-        }//TestSettingsGenericSet
+            Console.Write("Press any key to continue.........");
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("\x1b[3J");//This sequence removes the whole content of the console. (But it only works reliable if the clear command is called first)
+            Console.Clear();
+        }//AnyKey
     }//class
 }//namespace
