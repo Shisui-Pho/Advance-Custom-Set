@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using Xunit;
-using SetLibrary;
+﻿using SetLibrary;
 using SetLibrary.Generic;
 namespace SetLibraryTests.SetObjectTests
 {
     using SetLibrary.Objects_Sets;
+    using System;
     using Xunit;
 
     public class SetObjectsTests
@@ -154,5 +153,71 @@ namespace SetLibraryTests.SetObjectTests
             // Assert
             Assert.Null(subset);
         }//GetSubSetElementByIndex_ReturnsNull_WhenIndexIsOutOfRange
+        [Fact]
+        public void ToString_ReturnsStringRepresentationOfSet()
+        {
+            // Arrange
+            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var expectedString = "{Alice Cooper,Bob Marley,John Doe}";
+
+            // Act
+            var result = set.ToString();
+
+            // Assert
+            Assert.Equal(expectedString, result);
+        }//ToString_ReturnsStringRepresentationOfSet
+
+        [Fact]
+        public void Constructor_ThrowsArgumentException_WhenGivenNullSettings()
+        {
+            // Arrange
+            SetExtractionSettings<Person> nullSettings = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => new SetObjects<Person>("{John Doe, Alice Cooper}", nullSettings));
+        }//Constructor_ThrowsArgumentException_WhenGivenNullSettings
+
+        [Fact]
+        public void Contains_ReturnsFalse_WhenPersonDoesNotExistInSet()
+        {
+            // Arrange
+            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var personNotInSet = new Person("Michael", "Jackson");
+
+            // Act
+            bool result = set.Contains(personNotInSet);
+
+            // Assert
+            Assert.False(result);
+        }//Contains_ReturnsFalse_WhenPersonDoesNotExistInSet
+
+        [Fact]
+        public void MergeWith_ReturnsNewSetWithMergedElements_WhenMergingNonEmptySets()
+        {
+            // Arrange
+            var setA = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
+            var setB = new SetObjects<Person>("{Bob Marley, Carol Johnson}", settings);
+            var expectedSet = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley, Carol Johnson}", settings);
+
+            // Act
+            var mergedSet = setA.MergeWith(setB);
+
+            // Assert
+            Assert.Equal(expectedSet.ToString(), mergedSet.ToString());
+        }//MergeWith_ReturnsNewSetWithMergedElements_WhenMergingNonEmptySets
+
+        [Fact]
+        public void MergeWith_ReturnsOriginalSet_WhenMergingWithEmptySet()
+        {
+            // Arrange
+            var nonEmptySet = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
+            var emptySet = new SetObjects<Person>("{}", settings);
+
+            // Act
+            var mergedSet = nonEmptySet.MergeWith(emptySet);
+
+            // Assert
+            Assert.Equal(nonEmptySet.ToString(), mergedSet.ToString());
+        }//MergeWith_ReturnsOriginalSet_WhenMergingWithEmptySet
     }//class
 }//namespace
