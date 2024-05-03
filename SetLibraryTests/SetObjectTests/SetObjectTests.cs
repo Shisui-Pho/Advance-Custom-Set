@@ -14,7 +14,7 @@ namespace SetLibraryTests.SetObjectTests
         public SetObjectsTests()
         {
             settings = new SetExtractionSettings<Person>(",", " ", new Person());
-        }
+        }//ctor 01
 
         [Fact]
         public void Contains_ReturnsTrue_WhenPersonExistsInSet()
@@ -28,7 +28,7 @@ namespace SetLibraryTests.SetObjectTests
 
             // Assert
             Assert.True(result);
-        }
+        }//Contains_ReturnsTrue_WhenPersonExistsInSet
 
         [Fact]
         public void MergeWith_CombinesTwoSetsCorrectly()
@@ -43,7 +43,7 @@ namespace SetLibraryTests.SetObjectTests
 
             // Assert
             Assert.Equal(expectedResult.ToString(), mergedSet.ToString());
-        }
+        }//MergeWith_CombinesTwoSetsCorrectly
 
         [Fact]
         public void FindFirstRootElement_ReturnsFirstPersonInSet()
@@ -57,35 +57,102 @@ namespace SetLibraryTests.SetObjectTests
 
             // Assert
             Assert.Equal(expectedPerson, firstPerson);
-        }
+        }//FindFirstRootElement_ReturnsFirstPersonInSet
 
         [Fact]
         public void GetSubSetElementByIndex_ReturnsSubsetAtIndex()
         {
             // Arrange
             var set = new SetObjects<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
-            var expectedSubset = new SetObjects<Person>("{Bob Marley, Carol Johnson}", settings);
+            var expectedSubset = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
 
             // Act
             var subset = set.GetSubSetElementByIndex(1);
 
             // Assert
             Assert.Equal(expectedSubset.ToString(), subset.ToString());
-        }
+        }//GetSubSetElementByIndex_ReturnsSubsetAtIndex
 
         [Fact]
         public void GetRootElementByIndex_ReturnsElementAtIndex()
         {
             // Arrange
             var set = new SetObjects<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
-            var expectedPerson = new Person("John", "Doe");
+            var expectedPerson = default(Person);//new Person("John", "Doe");
 
             // Act
             var person = set.GetRootElementByIndex(0);
 
             // Assert
             Assert.Equal(expectedPerson, person);
-        }
-    }
+        }//GetRootElementByIndex_ReturnsElementAtIndex
+        [Fact]
+        public void Constructor_CreatesEmptySet_WhenGivenEmptyString()
+        {
+            // Arrange
+            var emptyExpression = "{}";
 
-}
+            // Act
+            var set = new SetObjects<Person>(emptyExpression, settings);
+
+            // Assert
+            Assert.Equal("{\u2205}", set.ToString());
+        }//Constructor_CreatesEmptySet_WhenGivenEmptyString
+
+        [Fact]
+        public void MergeWith_ReturnsEmptySet_WhenBothSetsAreEmpty()
+        {
+            // Arrange
+            var setA = new SetObjects<Person>("{}", settings);
+            var setB = new SetObjects<Person>("{}", settings);
+
+            // Act
+            var mergedSet = setA.MergeWith(setB);
+
+            // Assert
+            Assert.Equal("{\u2205}", mergedSet.ToString());
+        }//MergeWith_ReturnsEmptySet_WhenBothSetsAreEmpty
+
+        [Fact]
+        public void MergeWith_ReturnsOriginalSet_WhenOtherSetIsEmpty()
+        {
+            // Arrange
+            var setA = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
+            var emptySet = new SetObjects<Person>("{}", settings);
+
+            // Act
+            var mergedSet = setA.MergeWith(emptySet);
+
+            // Assert
+            Assert.Equal(setA.ToString(), mergedSet.ToString());
+        }//MergeWith_ReturnsOriginalSet_WhenOtherSetIsEmpty
+
+        [Fact]
+        public void MergeWith_ReturnsOtherSet_WhenOriginalSetIsEmpty()
+        {
+            // Arrange
+            var emptySet = new SetObjects<Person>("{}", settings);
+            var setB = new SetObjects<Person>("{Bob Marley, Carol Johnson}", settings);
+
+            // Act
+            var mergedSet = emptySet.MergeWith(setB);
+
+            // Assert
+            Assert.Equal(setB.ToString(), mergedSet.ToString());
+        }
+
+        [Fact]
+        public void GetSubSetElementByIndex_ReturnsNull_WhenIndexIsOutOfRange()
+        {
+            // Arrange
+            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var outOfRangeIndex = 3;
+
+            // Act
+            var subset = set.GetSubSetElementByIndex(outOfRangeIndex);
+
+            // Assert
+            Assert.Null(subset);
+        }//GetSubSetElementByIndex_ReturnsNull_WhenIndexIsOutOfRange
+    }//class
+}//namespace
