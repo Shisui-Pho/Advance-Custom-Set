@@ -90,6 +90,8 @@ namespace SetLibrary
             foreach (string element in elements)
             {
                 T item = default;
+                if (element == "\u2205")
+                    continue;
                 try
                 {
                     //First check if the value is an objects that uses the IObjects convert class
