@@ -113,7 +113,7 @@ namespace SetLibrary
         }//set difference
         public static ISet<T> operator + (BaseSet<T> setA, ISet<T> setB)
         {
-            return setA.Intersection(setB);
+            return setA.MergeWith(setB);
         }//Set intersection
         #endregion
 
