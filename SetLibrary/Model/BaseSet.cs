@@ -25,18 +25,22 @@ namespace SetLibrary
                 return tree[index];
             }//end getter
         }//end indexer
-        public BaseSet()
+        public BaseSet():
+            this(new SetExtractionSettings<T>(","))
         {
-            Settings = new SetExtractionSettings<T>(",");
-            tree = new CSetTree<T>(new System.Collections.Generic.List<T>(), Settings);
         }//ctor main
+        protected BaseSet(SetExtractionSettings<T> settings)
+        {
+            this.Settings = settings;
+            tree = new CSetTree<T>(new System.Collections.Generic.List<T>(), settings);
+        }//ctor 02
         public BaseSet(string setString, SetExtractionSettings<T> settings)
         {
             if (settings == null)
                 throw new ArgumentException("Settings cannot be null");
             this.Settings = settings;
             BuildSetString(setString);
-        }//ctor 02
+        }//ctor 03
         private void BuildSetString(string expression)
         {
             if(!BracesEvaluation.AreBracesCorrect(expression))
@@ -104,7 +108,7 @@ namespace SetLibrary
         #endregion Adding and removing elements from a set tree
         public override string ToString()
         {
-            return ElementString;
+            return tree.ToString();//ElementString;
         }//ToString
         #region Operator overloading
         public static ISet<T> operator - (BaseSet<T> setA, ISet<T> setB)

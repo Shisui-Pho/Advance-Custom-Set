@@ -8,7 +8,7 @@ namespace SetLibrary.Generic
         {
         }//ctor 01
         public GenericSet(SetExtractionSettings<T> settings)
-            : base()
+            : base(settings)
         {
             //Override the base collection
             base.Settings = settings;

@@ -262,7 +262,7 @@ namespace SetLibrary
                 //-The end results will be {,{,{,{,{5}}}}}
                 //That's why we have this check which will yield : {{{{{5}}}}}
                 if (root != "{")
-                    root += "," + nested;
+                    root += tree.ExtractionSettings.ElementSeperator + nested;
                 else
                     root += nested;
             }//end
