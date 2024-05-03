@@ -32,6 +32,8 @@ namespace SetLibrary
         }//ctor main
         public BaseSet(string setString, SetExtractionSettings<T> settings)
         {
+            if (settings == null)
+                throw new ArgumentException("Settings cannot be null");
             this.Settings = settings;
             BuildSetString(setString);
         }//ctor 02
