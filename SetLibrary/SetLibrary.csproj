@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions.cs" />
     <Compile Include="Model\BaseSet.cs" />
     <Compile Include="Model\SortedSubSets.cs" />
     <Compile Include="Objects Sets\IObjectConverter.cs" />
