@@ -75,7 +75,7 @@ namespace SetLibrary
 
         #region Abstract method to be implemented by the inherited classes
         public abstract bool Contains(T Element);
-        public abstract bool IsSubSetOf(ISet<T> setB);
+        public abstract bool IsSubSetOf(ISet<T> setB,out SetType type);
         public abstract ISet<T> MergeWith(ISet<T> set);
         #endregion Abstract method to be implemented by the inherited classes
     }//class

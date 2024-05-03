@@ -30,8 +30,9 @@ namespace SetLibrary.Generic
         {
             return this.tree.IndexOf(Element) >= 0;
         }//Contains
-        public override bool IsSubSetOf(ISet<T> setB)
+        public override bool IsSubSetOf(ISet<T> setB, out SetType type)
         {
+            type = SetType.Default;
             if (setB.Cardinality < this.Cardinality)
                 return false;
 

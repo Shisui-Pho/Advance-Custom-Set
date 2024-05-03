@@ -29,9 +29,32 @@ namespace SetLibrary
             return false;
         }//Contains
         #region Set Operations
-        public override bool IsSubSetOf(ISet<string> setB)
+        public override bool IsSubSetOf(ISet<string> setB,out SetType type)
         {
-            throw new NotImplementedException();
+            //Assume that SetA is not a proper/sebset of B
+            type = SetType.NotASubSet;
+            //First start with the root elements and seee if they sre contained in the above set
+            foreach (string element in this.tree)
+            {
+                //If the setB does not contain an element in set A then A is not a subset of B
+                if (!setB.Contains(element))
+                    return false;
+            }//end for each
+
+            //Now look at the Subsets
+            foreach (ISetTree<string> subset in tree.GetSubsetsEnumarator())
+            {
+                //If the setB does not contain the sub set then A cannot be a subset of B
+                if (!setB.Contains(subset))
+                    return false;
+            }//end for each
+
+            //This means they are proper sets
+            if (setB.Cardinality == this.Cardinality)
+                type = SetType.SubSet;
+            else
+                type = SetType.ProperSet;
+            return true;
         }//IsSubSetOf
         public override ISet<string> MergeWith(ISet<string> set)
         {

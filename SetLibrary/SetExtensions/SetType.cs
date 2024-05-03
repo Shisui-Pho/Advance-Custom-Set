@@ -11,6 +11,7 @@ namespace SetLibrary
         Default,
         Universal,
         SubSet,
+        NotASubSet,
         ProperSet,
         Non_Universal
     }//enum

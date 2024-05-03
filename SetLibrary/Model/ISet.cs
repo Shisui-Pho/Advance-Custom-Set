@@ -78,7 +78,7 @@ namespace SetLibrary
         /// </summary>
         /// <param name="tree">The set to check for.</param>
         /// <returns>True if the set is a subset.</returns>
-        bool IsSubSetOf(ISet<T> setB);
+        bool IsSubSetOf(ISet<T> setB, out SetType type);
 
     }//interface : ISet
 }//namespace

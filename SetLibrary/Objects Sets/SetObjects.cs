@@ -19,10 +19,12 @@ namespace SetLibrary.Objects_Sets
         {
             throw new NotImplementedException();
         }//Contains
-        public override bool IsSubSetOf(ISet<T> setB)
+
+        public override bool IsSubSetOf(ISet<T> setB, out SetType type)
         {
             throw new NotImplementedException();
-        }//IsSubSetOf
+        }
+
         public override ISet<T> MergeWith(ISet<T> set)
         {
             throw new NotImplementedException();
