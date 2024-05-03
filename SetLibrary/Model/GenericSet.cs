@@ -22,7 +22,7 @@ namespace SetLibrary.Generic
             string s1 = set.ToString();
             string s2 = this.ToString();
 
-            string expression = s1.Remove(s1.Length - 1) + "," + s2.Remove(0, 1);
+            string expression = s1.Remove(s1.Length - 1) + Settings.ElementSeperator + s2.Remove(0, 1);
             return new GenericSet<T>(expression, Settings);
         }//MergeWith
 
