@@ -82,6 +82,7 @@
     <Compile Include="CSetTests\SetExceptions.cs" />
     <Compile Include="CSetTests\SetTests.cs" />
     <Compile Include="CSetTreeTests.cs" />
+    <Compile Include="GenericSetTests\GenericSetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetExtractionTests.cs" />
     <Compile Include="SetObjectTests\Person.cs" />
@@ -97,9 +98,7 @@
       <Name>SetLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GenericSetTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
