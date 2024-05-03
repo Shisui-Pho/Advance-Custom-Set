@@ -1,8 +1,9 @@
 ﻿using SetLibrary.Generic;
+using SetLibrary.Operations;
 using System;
 namespace SetLibrary
 {
-    public abstract class BaseSet<T>
+    public abstract class BaseSet<T> : ISet<T>
         where T : IComparable
     {
         //Data members
@@ -48,7 +49,38 @@ namespace SetLibrary
         {
             return this.tree.IndexOf(tree.ToString()) >= 0;
         }//Contains
-        #region Addingd and removing element on a set tree
+        public virtual bool IsSubSetOf(ISet<T> setB, out SetType type)
+        {
+            //Assume that SetA is not a proper/sebset of B
+            type = SetType.NotASubSet;
+
+            //If set A has a higher cardinalty compared to set B then set A cannot be a subset of SetA
+            if (this.Cardinality > setB.Cardinality)
+                return false;
+            //First start with the root elements and seee if they sre contained in the above set
+            foreach (var element in this.tree)
+            {
+                //If the setB does not contain an element in set A then A is not a subset of B
+                if (!setB.Contains(element))
+                    return false;
+            }//end for each
+
+            //Now look at the Subsets
+            foreach (ISetTree<T> subset in tree.GetSubsetsEnumarator())
+            {
+                //If the setB does not contain the sub set then A cannot be a subset of B
+                if (!setB.Contains(subset))
+                    return false;
+            }//end for each
+
+            //This means they are proper sets
+            if (setB.Cardinality == this.Cardinality)
+                type = SetType.SubSet;
+            else
+                type = SetType.ProperSet;
+            return true;
+        }//IsSubSetOf
+        #region Adding and removing element on a set tree
         public virtual void AddElement(T Element)
         {
             this.tree.AddElement(Element);
@@ -72,10 +104,20 @@ namespace SetLibrary
         {
             return ElementString;
         }//ToString
+        #region Operator overloading
+        public static ISet<T> operator - (BaseSet<T> setA, ISet<T> setB)
+        {
+            return setA.Difference(setB);
+        }//set difference
+        public static ISet<T> operator + (BaseSet<T> setA, ISet<T> setB)
+        {
+            return setA.Intersection(setB);
+        }//Set intersection
+        #endregion
+
 
         #region Abstract method to be implemented by the inherited classes
         public abstract bool Contains(T Element);
-        public abstract bool IsSubSetOf(ISet<T> setB,out SetType type);
         public abstract ISet<T> MergeWith(ISet<T> set);
         #endregion Abstract method to be implemented by the inherited classes
     }//class

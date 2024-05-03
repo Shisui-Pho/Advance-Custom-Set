@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Model\BaseSet.cs" />
     <Compile Include="Model\SortedSubSets.cs" />
-    <Compile Include="Objects Sets\IObjectConverter.cs" />
-    <Compile Include="Objects Sets\SetObjects.cs" />
+    <Compile Include="Model\IObjectConverter.cs" />
+    <Compile Include="Model\SetObjects.cs" />
     <Compile Include="Service\SetExtraction.cs" />
     <Compile Include="Service\SetExtractionSettings.cs" />
     <Compile Include="Model\GenericSet.cs" />
