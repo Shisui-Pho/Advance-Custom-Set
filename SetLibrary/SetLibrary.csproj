@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Model\BaseSet.cs" />
     <Compile Include="Model\Element.cs" />
-    <Compile Include="Model\ISortedSetCollection.cs" />
-    <Compile Include="Model\SortedSubSets.cs" />
+    <Compile Include="Collections\ISortedSetCollection.cs" />
+    <Compile Include="Collections\SortedSubSets.cs" />
     <Compile Include="Model\IObjectConverter.cs" />
     <Compile Include="Model\SetObjects.cs" />
     <Compile Include="Service\SetExtraction.cs" />
@@ -60,10 +60,8 @@
     <Compile Include="SetExtensions\SetType.cs" />
     <Compile Include="Model\CSet.cs" />
     <Compile Include="Model\CSetTree.cs" />
-    <Compile Include="Model\SortedElements.cs" />
+    <Compile Include="Collections\SortedElements.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Collections\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
