@@ -21,11 +21,6 @@ namespace SetLibraryTests.CSetTests
             Assert.True(testSet.Contains("4"));
         }//TestAddSingleElement
         [Fact]
-        public void TestAddSingleCetTree()
-        {
-            
-        }//TestAddSingleCetTree
-        [Fact]
         public void TestAddElementAlreadyExists()
         {
             // Adding an element that already exists should not change the set

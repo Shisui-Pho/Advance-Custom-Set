@@ -81,6 +81,7 @@
     <Compile Include="CSetTests\SetContainsSingleElement.cs" />
     <Compile Include="CSetTests\SetExceptions.cs" />
     <Compile Include="CSetTests\SetTests.cs" />
+    <Compile Include="CSetTests\SubSetsTests.cs" />
     <Compile Include="CSetTreeTests.cs" />
     <Compile Include="GenericSetTests\GenericSetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
