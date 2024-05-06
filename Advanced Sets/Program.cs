@@ -1,5 +1,6 @@
 ﻿using System;
 using SetLibrary;
+using SetLibrary.Collections;
 using SetLibrary.Generic;
 using SetLibrary.Objects_Sets;
 using SetLibrary.Operations;

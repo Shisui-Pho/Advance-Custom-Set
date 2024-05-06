@@ -5,11 +5,16 @@ using System.Collections.Generic;
 
 namespace SetLibrary.Collections
 {
-    internal class SortedSubSets<T> : IEnumerable<ISetTree<T>>
+    public class SortedSubSets<T> : ISortedSubSets<T>
         where T : IComparable
     {
+        //private datamembers
         private List<ISetTree<T>> _collection;
+
         public int Count => _collection.Count;
+
+        Element<T> ISortedSetCollection<T>.this[int index] => FindByIndex(index);
+
         public ISetTree<T> this[int index]
         {
             get
@@ -23,13 +28,10 @@ namespace SetLibrary.Collections
         public SortedSubSets()
         {
             this._collection = new List<ISetTree<T>>();
-        }//ctor 02
-        public SortedSubSets(IEnumerable<ISetTree<T>> subsets) : base()
+        }//ctor 01
+        public SortedSubSets(IEnumerable<ISetTree<T>> subsets) : this()
         {
-            foreach (var item in subsets)
-            {
-                Add(item);
-            }//end for each
+            this.AddRange(subsets);
         }//ctor 02
         public void Add(ISetTree<T> value)
         {
@@ -55,14 +57,61 @@ namespace SetLibrary.Collections
             }//end while
             _collection[++index] = value;
         }//AddSort
+        public Element<T> FindByIndex(int index)
+        {
+            int nestingLevel = 0, currentIndex = 0;
+            return FindElement(_collection[0],ref currentIndex, index, nestingLevel);
+            //return new Element<T>(val, nestingLevel, nestingLevel == 1);
+        }//FindByIndex
+        private Element<T> FindElement(ISetTree<T> currentTree, ref int currentIndex, int index, int nestinglevel)
+        {
+            Element<T> element = default(Element<T>);
+            nestinglevel++;
+            //First start with the root elements
+            foreach (var item in currentTree)
+            {
+                if (currentIndex == index)
+                {
+                    element = new Element<T>(item, nestinglevel, nestinglevel == 1);
+                    return element;
+                }
+                //increase the current index
+                currentIndex++;
+            }//end root elements foreach
+
+            foreach (var item in currentTree.GetSubsetsEnumarator())
+            {
+                element = FindElement(item, ref currentIndex, index, nestinglevel);
+                
+                if (currentIndex > index)
+                    return element;
+            }//end for each
+            return element;
+        }//FindElement
+        public bool Remove(ISetTree<T> val)
+        {
+            return this._collection.Remove(val);
+        }//Remove
         public void RemoveAt(int index) => _collection.RemoveAt(index);
         public IEnumerator<ISetTree<T>> GetEnumerator()
         {
             return _collection.GetEnumerator();
-        }
+        }//end enumarator
+        public bool Contains(ISetTree<T> val)
+        {
+            return this._collection.Contains(val);
+        }//Contains
+        public int IndexOf(ISetTree<T> val) => _collection.IndexOf(val);
+        public void AddRange(IEnumerable<ISetTree<T>> coll)
+        {
+            foreach (var item in coll)
+            {
+                this.Add(item);
+            }
+        }//AddRange
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
-        }//
+        }//GetEnumerator
     }//namespace
 }//namespace

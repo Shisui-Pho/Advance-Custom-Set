@@ -3,12 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 namespace SetLibrary.Collections
 {
-    internal class SortedElements<T> : IEnumerable<T> where T : IComparable
+    internal class SortedElements<T> : ISortedElements<T>
+        where T : IComparable
     { 
         //embeded lists
         private List<T> _collection;
-
         public int Count => _collection.Count;
+        Element<T> ISortedSetCollection<T>.this[int index] 
+        {
+            get
+            {
+                if (index < 0 || index >= Count)
+                    throw new IndexOutOfRangeException();
+
+                T val = _collection[index];
+                return new Element<T>(val);
+            }//getter
+        }//end indexer
         public T this[int index]
         {
             get
@@ -27,7 +38,7 @@ namespace SetLibrary.Collections
             _collection = new List<T>();
             AddRange(collection);
         }//ctor 2
-        public virtual void Add(T value)
+        public void Add(T value)
         {
             if (_collection.Count <= 0)
             {
@@ -64,7 +75,7 @@ namespace SetLibrary.Collections
         {
             return this._collection.GetEnumerator();
         }//GetEnumerator
-        public virtual bool Contains(T val) => this._collection.Contains(val);
+        public bool Contains(T val) => this._collection.Contains(val);
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
