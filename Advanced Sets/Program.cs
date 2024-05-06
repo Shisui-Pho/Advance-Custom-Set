@@ -1,5 +1,6 @@
 ﻿using System;
 using SetLibrary;
+using SetLibrary.Collections;
 using SetLibrary.Generic;
 using SetLibrary.Objects_Sets;
 using SetLibrary.Operations;
@@ -10,6 +11,12 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
+            ISet<int> set = new GenericSet<int>("{2,6,1,73,10,15,{8,6,{3,{6,{6}}},{7,5}}}", new SetExtractionSettings<int>(","));
+
+            ISortedSubSets<int> coll = new SortedSubSets<int>(set.ToListSubSets());
+
+            Element<int> val = coll.FindByIndex(6);
+            string s = set.ToString();
             TestCSet();
             TestGenericSetWithNumbers();
             TestISetTree();
