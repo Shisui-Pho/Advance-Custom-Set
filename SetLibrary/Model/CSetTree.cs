@@ -1,4 +1,5 @@
-﻿using SetLibrary.Generic;
+﻿using SetLibrary.Collections;
+using SetLibrary.Generic;
 using System;
 using System.Collections;
 using System.Collections.Generic;

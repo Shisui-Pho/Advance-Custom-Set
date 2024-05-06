@@ -1,5 +1,5 @@
 ﻿using System;
-namespace SetLibrary.Model
+namespace SetLibrary
 {
     /// <summary>
     /// This structure represents all root elements in the set including element in a subset in the root.

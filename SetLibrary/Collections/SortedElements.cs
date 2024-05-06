@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-namespace SetLibrary
+namespace SetLibrary.Collections
 {
     internal class SortedElements<T> : IEnumerable<T> where T : IComparable
     { 

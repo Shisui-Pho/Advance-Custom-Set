@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SetLibrary.Model
+namespace SetLibrary.Collections
 {
     internal interface ISortedSetCollection<T> : IEnumerable<T>
         where T : IComparable

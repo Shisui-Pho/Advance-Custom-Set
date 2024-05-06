@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace SetLibrary
+
+namespace SetLibrary.Collections
 {
     internal class SortedSubSets<T> : IEnumerable<ISetTree<T>>
         where T : IComparable
