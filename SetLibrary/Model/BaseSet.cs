@@ -22,7 +22,8 @@ namespace SetLibrary
             {
                 if (index >= tree.Cardinality || index < 0)
                     throw new IndexOutOfRangeException();
-                return tree[index];
+                return tree.GetElementAsSubsetByIndex(index);
+                //return new CSetTree<T>(tree[index].Value, this.Settings);
             }//end getter
         }//end indexer
         public BaseSet():

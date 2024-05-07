@@ -19,10 +19,8 @@ namespace SetLibrary
         public int Cardinality => lstRootElements.Count + lstSubsets.Count;
         public int NumberOfSubsets => this.lstSubsets.Count;
         public bool IsInRoot { get; private set; }
-
         public SetExtractionSettings<T> ExtractionSettings { get; private set; }
-
-        public Element<T> this[int index, int flag_for_now = 0]
+        public Element<T> this[int index]
         {
             get
             {
@@ -36,29 +34,9 @@ namespace SetLibrary
                 return ((ISortedSubSets<T>)lstSubsets)[index];
             }//getter
         }//indexer
-
-        public ISetTree<T> this[int index] 
-        {
-            get
-            {
-                //Error handling
-                if (index >= Cardinality || index < 0)
-                    throw new IndexOutOfRangeException();
-
-                //If it is in the root
-                if (index < lstRootElements.Count)
-                    return new CSetTree<T>(lstRootElements[index], this.ExtractionSettings);//use the private constructor to build a new set of one element
-                
-                //Scale the index to macth the 
-                index -= lstRootElements.Count;
-
-                //Return the subset
-                return (ISetTree<T>)this.lstSubsets[index];
-            }//end getter
-        }//INDEXER
         #region Constructures
         //This will be used to return 
-        private CSetTree(T element, SetExtractionSettings<T> settings)
+        internal CSetTree(T element, SetExtractionSettings<T> settings)
         {
             //Create the new list of sets
             this.lstRootElements = new SortedElements<T>();
@@ -206,6 +184,20 @@ namespace SetLibrary
                 yield return item;
             }
         }//GetRootElementsEnumarator
+        public IEnumerable<ISetTree<T>> GetAllElementsAsSetEnumarator()
+        {
+            //Start with the root elements
+            foreach (var item in lstRootElements)
+            {
+                yield return new CSetTree<T>(item, this.ExtractionSettings);
+            }
+
+            //The do the subsets
+            foreach (var item in lstSubsets)
+            {
+                yield return item;
+            }
+        }//GetAllElementsAsSetEnumarator
         public int CompareTo(object obj)
         {
             return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);

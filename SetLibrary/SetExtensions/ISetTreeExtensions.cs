@@ -56,5 +56,18 @@ namespace SetLibrary
             }
             return default(ISetTree<T>);
         }//GetSubSetElementByIndex
+
+        public static ISetTree<T> GetElementAsSubsetByIndex<T>(this ISetTree<T> tree, int index)
+            where T: IComparable
+        {
+            int i = 0;
+            foreach (var item in tree.GetAllElementsAsSetEnumarator())
+            {
+                if (i == index)
+                    return item;
+                i++;
+            }
+            return default(ISetTree<T>);
+        }//end if
     }//class
 }//namespace

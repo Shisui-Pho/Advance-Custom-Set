@@ -35,8 +35,12 @@ namespace SetLibrary
         /// </summary>
         /// <param name="index">The zero based index inside the set.</param>
         /// <returns>An element in a set format.</returns>
-        ISetTree<T> this[int index]{get;}
-        Element<T> this[int index, int flag_for_now = 0] { get; }
+        Element<T> this[int index] { get; }
+        /// <summary>
+        /// Returns an enumerator that iterates through the elements as subsets. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the subsets</returns>
+        IEnumerable<ISetTree<T>> GetAllElementsAsSetEnumarator();
         /// <summary>
         /// Returns an enumerator that iterates through the subsets. 
         /// </summary>
