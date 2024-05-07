@@ -22,6 +22,14 @@ namespace SetLibrary
 
         public SetExtractionSettings<T> ExtractionSettings { get; private set; }
 
+        public Element<T> this[int index, int flag_for_now = 0]
+        {
+            get
+            {
+                return default;
+            }//getter
+        }//indexer
+
         public ISetTree<T> this[int index] 
         {
             get
