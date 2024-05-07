@@ -10,16 +10,24 @@ namespace SetLibrary
     public class CSetTree<T> : ISetTree<T>
         where T : IComparable
     {
+        #region Data members
         //private data members to hold the data
         private SortedElements<T> lstRootElements;
         private SortedSubSets<T> lstSubsets;
 
+        #endregion Data members
+
+        #region Properties
         //Public data members to represent the internal data
         public string RootElement => string.Join(ExtractionSettings.ElementSeperator,this.lstRootElements);
         public int Cardinality => lstRootElements.Count + lstSubsets.Count;
         public int NumberOfSubsets => this.lstSubsets.Count;
         public bool IsInRoot { get; private set; }
         public SetExtractionSettings<T> ExtractionSettings { get; private set; }
+        #endregion Properties
+
+        #region Indexers
+        //Indexer
         public Element<T> this[int index]
         {
             get
@@ -34,8 +42,14 @@ namespace SetLibrary
                 return ((ISortedSubSets<T>)lstSubsets)[index];
             }//getter
         }//indexer
+        #endregion Indexers
+
         #region Constructures
-        //This will be used to return 
+        /// <summary>
+        /// Creates a setTree containing only one root element.
+        /// </summary>
+        /// <param name="element">The root element</param>
+        /// <param name="settings">The extraction settings</param>
         internal CSetTree(T element, SetExtractionSettings<T> settings)
         {
             //Create the new list of sets
@@ -99,6 +113,7 @@ namespace SetLibrary
             this.ExtractionSettings = settings;
         }//ctor 04
         #endregion Constructers
+
         #region Adding and removing elements and subtrees
         public void AddSubSetTree(ISetTree<T> tree)
         {
@@ -126,6 +141,7 @@ namespace SetLibrary
         }//AddElement
 
         #endregion Adding and removing elements and subtrees
+
         #region IndexOf methods
         private int IndexOfSet(string element)
         {
@@ -165,7 +181,8 @@ namespace SetLibrary
             return lstSubsets.IndexOf(subset) + lstRootElements.Count;
         }//IndexOf
         #endregion IndexOf methods
-        #region Interface Implementations
+
+        #region IEnumerable implementations
         /// <summary>
         /// Enumarate through the subelements element of the current set
         /// </summary>
@@ -198,6 +215,9 @@ namespace SetLibrary
                 yield return item;
             }
         }//GetAllElementsAsSetEnumarator
+        #endregion IEnumerable implementations
+
+        #region Other 
         public int CompareTo(object obj)
         {
             return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
@@ -207,8 +227,6 @@ namespace SetLibrary
             //Builf the tree
             return CSetTree<T>.ToSetString(this);
         }//ToString
-
-        #endregion Interface Implementations
         /// <summary>
         /// Recuresive procedure to build a set string using a dept first retrieval/search
         /// </summary>
@@ -243,5 +261,6 @@ namespace SetLibrary
             //Return the root element of the current set to gether with it's subsets
             return root + "}";
         }//ToString
+        #endregion Other 
     }//CTRee
 }//namespace
