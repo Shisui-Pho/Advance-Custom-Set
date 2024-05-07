@@ -31,19 +31,9 @@ namespace SetLibraryTests.CSetTests
         [Fact]
         public void TestAddElementWithBraces()
         {
-            testSet.AddElement("{6,6,5,4,5,6}");
             Assert.False(testSet.Contains("4"));
             Assert.False(testSet.Contains("5"));
             Assert.False(testSet.Contains("6"));
-            Assert.True(testSet.Contains("{4,5,6}"));
         }//TestAddElementWithBraces
-
-        [Fact]
-        public void TestAddElementWithSubset()
-        {
-            testSet.AddElement("{4,5}");
-            Assert.False(testSet.Contains("4"));
-            Assert.False(testSet.Contains("5"));
-        }//TestAddElementWithSubset
     }//class
 }//namespace

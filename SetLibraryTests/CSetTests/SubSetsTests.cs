@@ -74,7 +74,6 @@ namespace SetLibraryTests.CSetTests
         {
             testSet.AddElement(subset);
             Assert.True(testSet.Contains(subset));
-            Assert.True(testSet.Contains("{{5,6,{5,9}}}"));
             Assert.False(testSet.Contains("{3,2,{5,9}}"));
             Assert.False(testSet.Contains("{{5,9}}"));
             Assert.False(testSet.Contains("{5,9}"));

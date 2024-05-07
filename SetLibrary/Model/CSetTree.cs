@@ -26,7 +26,14 @@ namespace SetLibrary
         {
             get
             {
-                return default;
+                if (index < 0)
+                    throw new IndexOutOfRangeException();
+                if (index < lstRootElements.Count)
+                    return ((ISortedElements<T>)lstRootElements)[index];
+
+                //Scale the index to match the subset zero based index
+                index = index - lstRootElements.Count;
+                return ((ISortedSubSets<T>)lstSubsets)[index];
             }//getter
         }//indexer
 
@@ -149,32 +156,8 @@ namespace SetLibrary
         }//RemoveElement
         public void AddElement(T element)
         {
-            //Covert it into a string
-            string elem = element.ToString();
-
-            //Check if it is posible subset or not
-            if (!elem.Contains("}") && !elem.Contains("{"))
-            {
-                //Check if the element is already there
-                if (this.lstRootElements.Contains(element))
-                    return;
-
-                //Get the unique elements
-                List<T> elements = SetExtraction.SortAndRemoveDuplicates(elem, ExtractionSettings);
-
-                //Add to the lsist of root elements
-                this.lstRootElements.AddRange(elements);
-                //this.lstRootElements.Sort();
-            }//end if
-            else
-            {
-                //Check for braces first
-                if (!BracesEvaluation.AreBracesCorrect(elem))
-                    throw new ArgumentException("The braces are not matching, please re-check them");
-
-                ISetTree<T> tree = SetExtraction.Extract(elem, ExtractionSettings);
-                this.AddSubSetTree(tree);
-            }//end else
+            //Add it in the root
+            lstRootElements.Add(element);
         }//AddElement
 
         #endregion Adding and removing elements and subtrees
@@ -221,19 +204,13 @@ namespace SetLibrary
                 yield return item;
             }//eend for each
         }//GetSubsetsEnumarator
-        /// <summary>
-        /// Enumarate through the root element of the current set
-        /// </summary>
-        /// <returns>A root element of type T</returns>
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerable<T> GetRootElementsEnumarator()
         {
-            return lstRootElements.GetEnumerator();
-        }//GetEnumerator
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }//GetEnumerator
+            foreach (var item in lstRootElements)
+            {
+                yield return item;
+            }
+        }//GetRootElementsEnumarator
         public int CompareTo(object obj)
         {
             return string.Compare(this.RootElement, ((ISetTree<T>)obj).RootElement);
