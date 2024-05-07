@@ -64,7 +64,7 @@ namespace SetLibrary
             if (this.Cardinality > setB.Cardinality)
                 return false;
             //First start with the root elements and seee if they sre contained in the above set
-            foreach (var element in this.tree)
+            foreach (var element in this.tree.GetRootElementsEnumarator())
             {
                 //If the setB does not contain an element in set A then A is not a subset of B
                 if (!setB.Contains(element))

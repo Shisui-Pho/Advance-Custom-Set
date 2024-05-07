@@ -68,7 +68,7 @@ namespace SetLibrary.Collections
             Element<T> element = default(Element<T>);
             nestinglevel++;
             //First start with the root elements
-            foreach (var item in currentTree)
+            foreach (var item in currentTree.GetRootElementsEnumarator())
             {
                 if (currentIndex == index)
                 {

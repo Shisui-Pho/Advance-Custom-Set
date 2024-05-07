@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace SetLibrary
 {
-    //Element<T> this[int index,int flag_for_now = 0] { get; }
-    public interface ISetTree<T> : IComparable, IEnumerable<T>
+    public interface ISetTree<T> : IComparable
         where T : IComparable
     {
         /// <summary>
@@ -37,11 +36,17 @@ namespace SetLibrary
         /// <param name="index">The zero based index inside the set.</param>
         /// <returns>An element in a set format.</returns>
         ISetTree<T> this[int index]{get;}
+        Element<T> this[int index, int flag_for_now = 0] { get; }
         /// <summary>
         /// Returns an enumerator that iterates through the subsets. 
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the subsets</returns>
         IEnumerable<ISetTree<T>> GetSubsetsEnumarator();
+        /// <summary>
+        /// Returns an enumerator that iterates through the root elements. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the root elements</returns>
+        IEnumerable<T> GetRootElementsEnumarator();
         /// <summary>
         /// Adds a subset inside the current set.
         /// </summary>

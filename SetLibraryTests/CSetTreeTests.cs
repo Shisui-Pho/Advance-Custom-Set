@@ -54,7 +54,7 @@ namespace SetLibraryTests
 
             // Assert
             Assert.Equal(2, setTree.Cardinality);
-            Assert.DoesNotContain(2, setTree);
+            Assert.False(setTree.IndexOf(2) >= 0);
         }//RemoveElement_TreeExists_RemovesFromRoot
 
         [Fact]
@@ -109,7 +109,7 @@ namespace SetLibraryTests
 
             // Assert
             Assert.Equal(4, setTree.Cardinality);
-            Assert.Contains(4, setTree);
+            Assert.True(setTree.IndexOf(4)>=0);
         }//AddElement_NewElement_AddsToRoot
 
         [Fact]
@@ -184,7 +184,7 @@ namespace SetLibraryTests
 
             // Assert
             Assert.Equal(4, setTree.Cardinality);
-            Assert.Contains("grape", setTree);
+            Assert.True(setTree.IndexOf("grape")>= 0);
         }//AddElement_NewElement_AddsToRoot2
 
         [Fact]
@@ -263,9 +263,9 @@ namespace SetLibraryTests
 
             // Assert
             Assert.Equal(4, setTree.Cardinality);
-            Assert.True(setTree.Contains(3));
-            Assert.False(setTree.Contains(4));
-            Assert.False(setTree.Contains(5));
+            Assert.True(setTree.IndexOf(3)>=0);
+            Assert.False(setTree.IndexOf(4)>=0);
+            Assert.False(setTree.IndexOf(5)>=0);
         }//AddSubSetTree_TreeWithDuplicateElements_AddsToSubsets
 
         [Fact]

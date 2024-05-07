@@ -8,7 +8,7 @@ namespace SetLibrary
             where T : IComparable
         {
             List<T> elements = new List<T>();
-            foreach (var item in tree)
+            foreach (var item in tree.GetRootElementsEnumarator())
                 elements.Add(item);
             return elements;
         }//ToListRootElements
@@ -23,7 +23,7 @@ namespace SetLibrary
         public static T FindFirstRootElement<T>(this ISetTree<T> tree)
             where T : IComparable
         {
-            foreach (var item in tree)
+            foreach (var item in tree.GetRootElementsEnumarator())
             {
                 //Return the very first item
                 return item;
@@ -35,7 +35,7 @@ namespace SetLibrary
         {
             int count = 0;
 
-            foreach (var item in tree)
+            foreach (var item in tree.GetRootElementsEnumarator())
             {
                 if (index == count)
                     return item;

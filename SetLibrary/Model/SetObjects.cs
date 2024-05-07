@@ -18,7 +18,7 @@ namespace SetLibrary.Objects_Sets
         public override bool Contains(T Element)
         {
             //First check the base elements
-            foreach (T elem in base.tree)
+            foreach (T elem in base.tree.GetRootElementsEnumarator())
             {
                 if (elem.Equals(Element))
                     return true;
