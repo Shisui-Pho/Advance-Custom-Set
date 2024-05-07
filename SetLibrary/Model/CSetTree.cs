@@ -184,12 +184,16 @@ namespace SetLibrary
         public int IndexOf(T element)
         {
             //Call the inside function
-            return IndexOfSet(element.ToString());
+            return lstRootElements.IndexOf(element);
         }//IndexOf
         public int IndexOf(string element)
         {
             //Call the inside function
             return IndexOfSet(element);
+        }//IndexOf
+        public int IndexOf(ISetTree<T> subset)
+        {
+            return lstSubsets.IndexOf(subset) + lstRootElements.Count;
         }//IndexOf
         #endregion IndexOf methods
         #region Interface Implementations

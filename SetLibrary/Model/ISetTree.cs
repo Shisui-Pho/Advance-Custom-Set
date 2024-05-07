@@ -79,8 +79,14 @@ namespace SetLibrary
         /// Gets the index of the element in the set, could be oon the root or a subset.
         /// </summary>
         /// <param name="element">A string representation of the element.</param>
-        /// <returns>A zero based index of the element within the root.</returns>
+        /// <returns>A zero based index of the element within the set.</returns>
         int IndexOf(string element);
+        /// <summary>
+        /// Gets the index of the subset in the nested in the current set.
+        /// </summary>
+        /// <param name="subset"></param>
+        /// <returns>A zero based index of the element within the set.</returns>
+        int IndexOf(ISetTree<T> subset);
         /// <summary>
         /// Get the string representation of the current set tree.
         /// </summary>
