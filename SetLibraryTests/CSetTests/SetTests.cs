@@ -104,7 +104,7 @@ namespace SetLibraryTests.CSetTests
         {
             ISet<string> set = new CSet(elementString);
 
-        Assert.Equal(expextedElementString, set.ElementString);
+            Assert.Equal(expextedElementString, set.ElementString);
         }//ElementStringWithMultipleSubsetsOfOneDegreeNestingLevel
 
         [Theory]

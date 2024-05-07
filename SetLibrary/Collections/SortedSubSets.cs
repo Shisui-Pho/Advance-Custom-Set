@@ -88,6 +88,18 @@ namespace SetLibrary.Collections
             }//end for each
             return element;
         }//FindElement
+        public int IndexOf(ISetTree<T> val) 
+        {
+            string set = val.ToString();
+            int index = 0;
+            foreach (var item in this)
+            {
+                if (item.ToString() == set)
+                    return index;
+                index++;
+            }
+            return -1;
+        }//end index
         public bool Remove(ISetTree<T> val)
         {
             return this._collection.Remove(val);
@@ -101,7 +113,6 @@ namespace SetLibrary.Collections
         {
             return this._collection.Contains(val);
         }//Contains
-        public int IndexOf(ISetTree<T> val) => _collection.IndexOf(val);
         public void AddRange(IEnumerable<ISetTree<T>> coll)
         {
             foreach (var item in coll)
