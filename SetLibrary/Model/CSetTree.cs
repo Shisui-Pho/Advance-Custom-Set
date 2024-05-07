@@ -125,7 +125,7 @@ namespace SetLibrary
         public void AddSubSetTree(ISetTree<T> tree)
         {
             //First check if the set is already in the tree or not
-            if (IndexOfSet(tree.ToString()) >= 0)
+            if (this.lstSubsets.IndexOf(tree) >= 0)
                 return;
 
             //Add and sort the elements
@@ -134,20 +134,7 @@ namespace SetLibrary
         }//AddSubTree
         public bool RemoveElement(ISetTree<T> element)
         {
-            //Find the index of the element/subset in the tree
-            int index = IndexOfSet(element.ToString());
-
-            //If not found, then we cannot remove
-            if (index < 0)
-                return false;
-
-            //This means that it is in the root elements
-            if (index < lstRootElements.Count)
-                this.lstRootElements.RemoveAt(index);
-            else
-                //It must be in the list of subsets
-                this.lstSubsets.RemoveAt(index - lstRootElements.Count);
-            return true;
+            return lstSubsets.Remove(element);
         }//RemoveElement
         public bool RemoveElement(T element)
         {
@@ -164,21 +151,25 @@ namespace SetLibrary
         #region IndexOf methods
         private int IndexOfSet(string element)
         {
-            //first check in the root elements
-            for(int index = 0; index < this.Cardinality; index++)
+            int index = 0;
+
+            //First check in the root elements
+            foreach (var item in lstRootElements)
             {
-                ISetTree<T> item = this[index];
-                if (index < lstRootElements.Count)//In the root element
-                {
-                    //We enclose the element with oppening and clossing brace since the indexer will return the item in a set format
-                    if (item.ToString() == ("{" + element + "}"))
-                        return index;
-                }//end if in root element
-                else if (item.ToString() == element) //Not in the root element
+                if (item.ToString() == element)
                     return index;
-            }//end for
-            
-            //index not found
+                index++;
+            }//eand for each
+
+            //Then check in the subsets
+            foreach (var item in lstSubsets)
+            {
+                if (item.ToString() == element)
+                    return index;
+                index++;
+            }//end for each
+
+            //If it was not found on the both the collection then it is not there
             return -1;
         }//IndexOfSet
         public int IndexOf(T element)
