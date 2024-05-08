@@ -33,7 +33,7 @@ namespace SetLibrary.Collections
         /// </summary>
         /// <param name="coll">The elements to be added.</param>
         void AddRange(IEnumerable<ISetTree<T>> coll);
-        Element<T> FindByIndex(int index);
+        Element<T> FindElementByIndex(int index);
 
     }//ISortedSubSets
 }//namespace

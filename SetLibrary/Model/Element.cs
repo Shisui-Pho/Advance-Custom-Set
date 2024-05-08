@@ -20,12 +20,17 @@ namespace SetLibrary
         /// Represents the level of nesting of the element within the main set.
         /// </summary>
         public int NestedLevel { get; private set; }
+        /// <summary>
+        /// A property to determine if an element was found or not.
+        /// </summary>
+        public bool ElementFound { get; private set; }
         //ctor main
         public Element(T value, bool isInRoot = true)
         {
             this.Value = value;
             this.IsInRoot = isInRoot;
             this.NestedLevel = 0;
+            this.ElementFound = true;
         }//ctor main
         public Element(T value,int nestinglevel, bool isInRoot = true) 
             : this(value,isInRoot)

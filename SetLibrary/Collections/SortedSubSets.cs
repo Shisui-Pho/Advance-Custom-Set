@@ -13,7 +13,7 @@ namespace SetLibrary.Collections
 
         public int Count => _collection.Count;
 
-        Element<T> ISortedSetCollection<T>.this[int index] => FindByIndex(index);
+        Element<T> ISortedSetCollection<T>.this[int index] => FindElementByIndex(index);
 
         public ISetTree<T> this[int index]
         {
@@ -57,7 +57,7 @@ namespace SetLibrary.Collections
             }//end while
             _collection[++index] = value;
         }//AddSort
-        public Element<T> FindByIndex(int index)
+        public Element<T> FindElementByIndex(int index)
         {
             int nestingLevel = 0, currentIndex = 0;
             return FindElement(_collection[0],ref currentIndex, index, nestingLevel);
@@ -66,6 +66,7 @@ namespace SetLibrary.Collections
         private Element<T> FindElement(ISetTree<T> currentTree, ref int currentIndex, int index, int nestinglevel)
         {
             Element<T> element = default(Element<T>);
+             var a = element.ElementFound == true;
             nestinglevel++;
             //First start with the root elements
             foreach (var item in currentTree.GetRootElementsEnumarator())
@@ -83,7 +84,7 @@ namespace SetLibrary.Collections
             {
                 element = FindElement(item, ref currentIndex, index, nestinglevel);
                 
-                if (currentIndex > index)
+                if (currentIndex >= index && element.ElementFound)
                     return element;
             }//end for each
             return element;
