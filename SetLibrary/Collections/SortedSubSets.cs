@@ -42,24 +42,13 @@ namespace SetLibrary.Collections
             }//end if collection is empty
 
             //Add an empty cell first at the end of the list
-
             _collection.Add(default(ISetTree<T>));
 
+            //Start at the end of the list
             int index = _collection.Count - 2;
 
-            ////First do a cardinality check which will be faster if trees are not the same length
-            //bool foundPointOfInsertion = _collection[index].Cardinality > value.Cardinality;
-
-            ////If false check other posibilities
-            //while (foundPointOfInsertion && index >= 0)
-            //{
-            //    _collection[index + 1] = _collection[index];
-            //    index--;
-            //    if (index < 0)
-            //        break;
-            //    foundPointOfInsertion = _collection[index].Cardinality < value.Cardinality;
-            //}//end while
-            bool insertionPositionNotFound;// = default;
+            //will be used to determine when to insert
+            bool insertionPositionNotFound;
             do
             {
                 int cardinalNew = value.Cardinality;
@@ -67,10 +56,14 @@ namespace SetLibrary.Collections
                 insertionPositionNotFound = cardinalExisting < cardinalNew;
                 if (cardinalNew == cardinalExisting)
                     insertionPositionNotFound = NewElementBeforeExistingElement(value, _collection[index]);
-
-                if (insertionPositionNotFound)
+                
+                //Special cases for empty sets
+                //-An empty set should come before a normal set.
+                if (cardinalExisting == 0 || cardinalNew == 0)
+                    insertionPositionNotFound = true;
+   
+                if (insertionPositionNotFound && !(cardinalNew == 0))
                     break;
-
                 //Move the items
                 _collection[index + 1] = _collection[index];
                 
