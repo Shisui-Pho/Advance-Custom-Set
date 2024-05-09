@@ -46,17 +46,84 @@ namespace SetLibrary.Collections
             _collection.Add(default(ISetTree<T>));
 
             int index = _collection.Count - 2;
-            bool Comparer = _collection[index].Cardinality > value.Cardinality;
-            while (Comparer && index >= 0)
+
+            ////First do a cardinality check which will be faster if trees are not the same length
+            //bool foundPointOfInsertion = _collection[index].Cardinality > value.Cardinality;
+
+            ////If false check other posibilities
+            //while (foundPointOfInsertion && index >= 0)
+            //{
+            //    _collection[index + 1] = _collection[index];
+            //    index--;
+            //    if (index < 0)
+            //        break;
+            //    foundPointOfInsertion = _collection[index].Cardinality < value.Cardinality;
+            //}//end while
+            bool insertionPositionNotFound;// = default;
+            do
             {
-                _collection[index + 1] = _collection[index];
-                index--;
-                if (index < 0)
+                int cardinalNew = value.Cardinality;
+                int cardinalExisting = _collection[index].Cardinality;
+                insertionPositionNotFound = cardinalExisting < cardinalNew;
+                if (cardinalNew == cardinalExisting)
+                    insertionPositionNotFound = NewElementBeforeExistingElement(value, _collection[index]);
+
+                if (insertionPositionNotFound)
                     break;
-                Comparer = _collection[index].Cardinality < value.Cardinality;
-            }//end while
+
+                //Move the items
+                _collection[index + 1] = _collection[index];
+                
+                index--;
+
+            } while (insertionPositionNotFound && index >= 0);
+
             _collection[++index] = value;
         }//AddSort
+        private bool NewElementBeforeExistingElement(ISetTree<T> newTree, ISetTree<T> existing)
+        {
+            //If the new tree has less subsets than the existsing one then the new one comes before the existsing one 
+            if (newTree.NumberOfSubsets < existing.NumberOfSubsets)
+                return true;
+
+            if (newTree.NumberOfSubsets > existing.NumberOfSubsets)
+                return false;
+
+            //Here it means they have the same number of elements and subset subsets
+
+            //-If both of them have no subsets
+            if(newTree.NumberOfSubsets == 0 && existing.NumberOfSubsets == 0)
+            {
+                bool foundCondition = true;
+                int i = 0;
+                int cardinality = newTree.Cardinality;
+                while (foundCondition && i < cardinality)
+                {
+                    int compareVal = existing.GetRootElementByIndex(i).CompareTo(newTree.GetRootElementByIndex(i));
+                    if (compareVal < 0)
+                        return true;
+                    if (compareVal > 0)
+                        return false;
+                    i++;
+                }//end while
+                return false;
+            }//end if no subsets
+
+
+            //-Compare the nesting levels of the first elements in the subtrees
+            int levelNew = newTree[0].NestedLevel, levelExisting = existing[0].NestedLevel;
+            if (levelNew > levelExisting)
+                return false;
+            if (levelExisting > levelNew)
+                return true;
+
+            //Here were dealing with nested subset
+            for(int i =0; i < newTree.Cardinality; i++)
+            {
+                return NewElementBeforeExistingElement(newTree.GetSubSetElementByIndex(i), existing.GetSubSetElementByIndex(i));
+            }
+            return false;
+        }//NewElementBeforeExistingElement
         public Element<T> FindElementByIndex(int index)
         {
             int nestingLevel = 0, currentIndex = 0;

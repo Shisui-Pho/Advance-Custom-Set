@@ -11,21 +11,11 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
-            //ISet<int> set = new GenericSet<int>("{2,6,1,73,10,15,{8,6,{3,{6,{6}}},{7,5}}}", new SetExtractionSettings<int>(","));
-
-            //ISortedSubSets<int> coll = new SortedSubSets<int>(set.ToListSubSets());
-
-            //Element<int> val = coll.FindByIndex(6);
-            //string s = set.ToString();
             //TestCSet();
             //TestGenericSetWithNumbers();
-            //TestISetTree();
-            //TestSetOperations();
-            //TestObjectsConverter();
-            var settings = new SetExtractionSettings<Person>(",", " ", new Person());
-            var set = new SetObjects<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
-            var expectedSubset = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
-
+            TestISetTree();
+            TestSetOperations();
+            TestObjectsConverter();
             Console.ReadKey();
         }//Main
         private static void TestObjectsConverter()
@@ -232,8 +222,8 @@ namespace Advanced_Sets
             Console.WriteLine("Remove the following element : \"2\"");
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
             Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
-            tree.AddElement("{2,6,7}");
-            tree.AddElement("{2,2}");
+            tree.AddSubSetTree(SetExtraction.Extract("{2,6,7}",set.Settings));
+            tree.AddSubSetTree(SetExtraction.Extract("{2,2}",set.Settings));
             set.AddElement(tree);
             Console.WriteLine("Added the following element: {0}", tree);
             Console.WriteLine("The element string will be  :  {0} ", set.ElementString);

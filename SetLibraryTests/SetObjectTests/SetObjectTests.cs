@@ -63,7 +63,7 @@ namespace SetLibraryTests.SetObjectTests
         {
             // Arrange
             var set = new SetObjects<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
-            var expectedSubset = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
+            var expectedSubset = new SetObjects<Person>("{Bob Marley,Carol Johnson}", settings);
 
             // Act
             var subset = set.GetSubSetElementByIndex(1);
