@@ -19,7 +19,7 @@ namespace SetLibraryTests.SetObjectTests
         public void Contains_ReturnsTrue_WhenPersonExistsInSet()
         {
             // Arrange
-            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var set = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
             var personToFind = new Person("John", "Doe");
 
             // Act
@@ -33,9 +33,9 @@ namespace SetLibraryTests.SetObjectTests
         public void MergeWith_CombinesTwoSetsCorrectly()
         {
             // Arrange
-            var setA = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
-            var setB = new SetObjects<Person>("{Bob Marley, Carol Johnson}", settings);
-            var expectedResult = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley, Carol Johnson}", settings);
+            var setA = new ObjectSet<Person>("{John Doe, Alice Cooper}", settings);
+            var setB = new ObjectSet<Person>("{Bob Marley, Carol Johnson}", settings);
+            var expectedResult = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley, Carol Johnson}", settings);
 
             // Act
             var mergedSet = setA.MergeWith(setB);
@@ -48,7 +48,7 @@ namespace SetLibraryTests.SetObjectTests
         public void FindFirstRootElement_ReturnsFirstPersonInSet()
         {
             // Arrange
-            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var set = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
             var expectedPerson = new Person("Alice", "Cooper");
 
             // Act
@@ -62,8 +62,8 @@ namespace SetLibraryTests.SetObjectTests
         public void GetSubSetElementByIndex_ReturnsSubsetAtIndex()
         {
             // Arrange
-            var set = new SetObjects<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
-            var expectedSubset = new SetObjects<Person>("{Bob Marley,Carol Johnson}", settings);
+            var set = new ObjectSet<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
+            var expectedSubset = new ObjectSet<Person>("{Bob Marley,Carol Johnson}", settings);
 
             // Act
             var subset = set.GetSubSetElementByIndex(1);
@@ -76,7 +76,7 @@ namespace SetLibraryTests.SetObjectTests
         public void GetRootElementByIndex_ReturnsElementAtIndex()
         {
             // Arrange
-            var set = new SetObjects<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
+            var set = new ObjectSet<Person>("{{John Doe, Alice Cooper}, {Bob Marley, Carol Johnson}}", settings);
             var expectedPerson = default(Person);//new Person("John", "Doe");
 
             // Act
@@ -92,7 +92,7 @@ namespace SetLibraryTests.SetObjectTests
             var emptyExpression = "{}";
 
             // Act
-            var set = new SetObjects<Person>(emptyExpression, settings);
+            var set = new ObjectSet<Person>(emptyExpression, settings);
 
             // Assert
             Assert.Equal("{\u2205}", set.ToString());
@@ -102,8 +102,8 @@ namespace SetLibraryTests.SetObjectTests
         public void MergeWith_ReturnsEmptySet_WhenBothSetsAreEmpty()
         {
             // Arrange
-            var setA = new SetObjects<Person>("{}", settings);
-            var setB = new SetObjects<Person>("{}", settings);
+            var setA = new ObjectSet<Person>("{}", settings);
+            var setB = new ObjectSet<Person>("{}", settings);
 
             // Act
             var mergedSet = setA.MergeWith(setB);
@@ -116,8 +116,8 @@ namespace SetLibraryTests.SetObjectTests
         public void MergeWith_ReturnsOriginalSet_WhenOtherSetIsEmpty()
         {
             // Arrange
-            var setA = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
-            var emptySet = new SetObjects<Person>("{}", settings);
+            var setA = new ObjectSet<Person>("{John Doe, Alice Cooper}", settings);
+            var emptySet = new ObjectSet<Person>("{}", settings);
 
             // Act
             var mergedSet = setA.MergeWith(emptySet);
@@ -130,8 +130,8 @@ namespace SetLibraryTests.SetObjectTests
         public void MergeWith_ReturnsOtherSet_WhenOriginalSetIsEmpty()
         {
             // Arrange
-            var emptySet = new SetObjects<Person>("{}", settings);
-            var setB = new SetObjects<Person>("{Bob Marley, Carol Johnson}", settings);
+            var emptySet = new ObjectSet<Person>("{}", settings);
+            var setB = new ObjectSet<Person>("{Bob Marley, Carol Johnson}", settings);
 
             // Act
             var mergedSet = emptySet.MergeWith(setB);
@@ -144,7 +144,7 @@ namespace SetLibraryTests.SetObjectTests
         public void GetSubSetElementByIndex_ReturnsNull_WhenIndexIsOutOfRange()
         {
             // Arrange
-            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var set = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
             var outOfRangeIndex = 3;
 
             // Act
@@ -157,7 +157,7 @@ namespace SetLibraryTests.SetObjectTests
         public void ToString_ReturnsStringRepresentationOfSet()
         {
             // Arrange
-            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var set = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
             var expectedString = "{Alice Cooper,Bob Marley,John Doe}";
 
             // Act
@@ -174,14 +174,14 @@ namespace SetLibraryTests.SetObjectTests
             SetExtractionSettings<Person> nullSettings = null;
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => new SetObjects<Person>("{John Doe, Alice Cooper}", nullSettings));
+            Assert.Throws<ArgumentException>(() => new ObjectSet<Person>("{John Doe, Alice Cooper}", nullSettings));
         }//Constructor_ThrowsArgumentException_WhenGivenNullSettings
 
         [Fact]
         public void Contains_ReturnsFalse_WhenPersonDoesNotExistInSet()
         {
             // Arrange
-            var set = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
+            var set = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley}", settings);
             var personNotInSet = new Person("Michael", "Jackson");
 
             // Act
@@ -195,9 +195,9 @@ namespace SetLibraryTests.SetObjectTests
         public void MergeWith_ReturnsNewSetWithMergedElements_WhenMergingNonEmptySets()
         {
             // Arrange
-            var setA = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
-            var setB = new SetObjects<Person>("{Bob Marley, Carol Johnson}", settings);
-            var expectedSet = new SetObjects<Person>("{John Doe, Alice Cooper, Bob Marley, Carol Johnson}", settings);
+            var setA = new ObjectSet<Person>("{John Doe, Alice Cooper}", settings);
+            var setB = new ObjectSet<Person>("{Bob Marley, Carol Johnson}", settings);
+            var expectedSet = new ObjectSet<Person>("{John Doe, Alice Cooper, Bob Marley, Carol Johnson}", settings);
 
             // Act
             var mergedSet = setA.MergeWith(setB);
@@ -210,8 +210,8 @@ namespace SetLibraryTests.SetObjectTests
         public void MergeWith_ReturnsOriginalSet_WhenMergingWithEmptySet()
         {
             // Arrange
-            var nonEmptySet = new SetObjects<Person>("{John Doe, Alice Cooper}", settings);
-            var emptySet = new SetObjects<Person>("{}", settings);
+            var nonEmptySet = new ObjectSet<Person>("{John Doe, Alice Cooper}", settings);
+            var emptySet = new ObjectSet<Person>("{}", settings);
 
             // Act
             var mergedSet = nonEmptySet.MergeWith(emptySet);

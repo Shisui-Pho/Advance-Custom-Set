@@ -48,7 +48,7 @@
     <Compile Include="Collections\ISortedSetCollection.cs" />
     <Compile Include="Collections\SortedSubSets.cs" />
     <Compile Include="Model\IObjectConverter.cs" />
-    <Compile Include="Model\SetObjects.cs" />
+    <Compile Include="Model\ObjectSet.cs" />
     <Compile Include="Service\SetExtraction.cs" />
     <Compile Include="Service\SetExtractionSettings.cs" />
     <Compile Include="Model\GenericSet.cs" />

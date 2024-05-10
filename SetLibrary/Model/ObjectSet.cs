@@ -2,14 +2,14 @@
 using System;
 namespace SetLibrary.Objects_Sets
 {
-    public class SetObjects<T> : BaseSet<T>, ISet<T>
+    public class ObjectSet<T> : BaseSet<T>, ISet<T>
         where T : IObjectConverter<T>, IComparable, IEquatable<T>
     {
-        public SetObjects(T placeHolder) : base()
+        public ObjectSet(T placeHolder) : base()
         {
             base.Settings = new SetExtractionSettings<T>(",", " ", placeHolder);
         }//ctor main
-        public SetObjects(string setString, SetExtractionSettings<T> settings)
+        public ObjectSet(string setString, SetExtractionSettings<T> settings)
             : base(setString, settings)
         {
             if (settings.PlaceHolder == null)
@@ -32,7 +32,7 @@ namespace SetLibrary.Objects_Sets
             string s2 = setB.ToString();
 
             string final = s1.Remove(s1.Length - 1) + Settings.ElementSeperator + s2.Remove(0, 1);
-            return new SetObjects<T>(final, Settings);
+            return new ObjectSet<T>(final, Settings);
         }//MergeWith
     }//class
 }//namespace

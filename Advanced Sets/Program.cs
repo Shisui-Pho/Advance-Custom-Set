@@ -34,7 +34,7 @@ namespace Advanced_Sets
             //Expression 01
             Console.WriteLine("Expression 01 : ");
             string expression = "{Phiwokwakhe Khathwane,Phiwokwakhe Khathwane,Phiwokwakhe Khathwane,Anabel Hillson,Anabel Bananna,Lesbary Mathew,William Shakesphere,{Muton Sugar,Henry MacDonald,{}}}";
-            ISet<Person> setPeople = new SetObjects<Person>(expression,settings);
+            ISet<Person> setPeople = new ObjectSet<Person>(expression,settings);
             Console.WriteLine("The original set expression was :");
             Console.WriteLine("   "+ expression);
             Console.WriteLine();
@@ -50,7 +50,7 @@ namespace Advanced_Sets
             //Expression 02
             Console.WriteLine("Expression 02 : ");
             expression = "{{John Doe,Alice Cooper},{Bob Marley,Carol Johnson,Jane Smith},{David Lee,Susan Adams},{Michael Jordan,Sarah Parker,Thomas Edison}, {Emily Watson,Christopher Brown}}";
-            setPeople = new SetObjects<Person>(expression, settings);
+            setPeople = new ObjectSet<Person>(expression, settings);
             Console.WriteLine("The original set expression was :");
             Console.WriteLine("   " + expression);
             Console.WriteLine();
@@ -67,7 +67,7 @@ namespace Advanced_Sets
             //Expression 03
             Console.WriteLine("Expression 03 : ");
             expression = "{{John Doe, {}}, {Jane Smith, {Bob Marley, {}, Carol Johnson}}, {}, {David Lee, {Susan Adams, {Michael Jordan, Sarah Parker}, Thomas Edison}}, {Emily Watson, {Christopher Brown}}}";
-            setPeople = new SetObjects<Person>(expression, settings);
+            setPeople = new ObjectSet<Person>(expression, settings);
             Console.WriteLine("The original set expression was :");
             Console.WriteLine("   " + expression);
             Console.WriteLine();
@@ -84,7 +84,7 @@ namespace Advanced_Sets
             //Expression 04
             Console.WriteLine("Expression 04 : ");
             expression = "{{John Doe, Alice Cooper}, Bob Marley, Carol Johnson, Jane Smith, David Lee, {Susan Adams, Michael Jordan, Sarah Parker, Thomas Edison}, Robert Smith, {Laura Davis, {Emily Watson, {Christopher Brown, Emma Thompson}}}}";
-            setPeople = new SetObjects<Person>(expression, settings);
+            setPeople = new ObjectSet<Person>(expression, settings);
             Console.WriteLine("The original set expression was :");
             Console.WriteLine("   " + expression);
             Console.WriteLine();
