@@ -11,11 +11,12 @@ namespace Advanced_Sets
     {
         static void Main(string[] args)
         {
-            //TestCSet();
-            //TestGenericSetWithNumbers();
+            TestCSet();
+            TestGenericSetWithNumbers();
             TestISetTree();
             TestSetOperations();
             TestObjectsConverter();
+            LawOfSetTheory();
             Console.ReadKey();
         }//Main
         private static void TestObjectsConverter()
@@ -169,64 +170,346 @@ namespace Advanced_Sets
             Console.WriteLine("Universal intersect SetA".PadRight(padding) + " : " + intersectionC.ToString());
             Console.WriteLine("From the above result we expect to set SetA itself.");
             Console.WriteLine();
-            ////Complement
-            //Console.WriteLine("Complement : ");
-            //ISet<int> complement1 = setA.Complement(setB, out bool isUniversal);
-            //Console.WriteLine("Set A complement Set B");
-            //if (!isUniversal)
-            //{
-            //    Console.WriteLine("setB is not universal to setA".PadRight(padding) + " : " + complement1.ToString());
-            //}
-            //else
-            //    Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement1.ToString());
+            //Complement
+            Console.WriteLine("Complement : ");
+            ISet<int> complement1 = setA.Complement(setB, out bool isUniversal);
+            Console.WriteLine("Set A complement Set B");
+            if (!isUniversal)
+            {
+                Console.WriteLine("setB is not universal to setA".PadRight(padding) );
+            }
+            else
+                Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement1.ToString());
 
-            //Console.WriteLine();
+            Console.WriteLine();
 
-            //var a = setA.Complement(union, out isUniversal);
-
-            //ISet<int> complement2 = setA.Complement(universal, out isUniversal);
-            //Console.WriteLine("Universal complement Set B");
-            //if (!isUniversal)
-            //{
-            //    Console.WriteLine("Set A is not subset of the universal set".PadRight(padding) + " : " + complement2.ToString());
-            //}
-            //else
-            //    Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement2.ToString());
+            ISet<int> complement2 = setA.Complement(universal, out isUniversal);
+            Console.WriteLine("Universal complement Set B");
+            if (!isUniversal)
+            {
+                Console.WriteLine("Set A is not subset of the universal set".PadRight(padding) + " : " + complement2.ToString());
+            }
+            else
+                Console.WriteLine("Complement of setA from setB".PadRight(padding) + " : " + complement2.ToString());
 
             Console.WriteLine();
             AnyKey();
            }//TestSetOperations
+        private static void LawOfSetTheory()
+        {
+            //Clear console window
+            Console.Clear();
+            //Display infor to user.
+            Console.WriteLine("  TESTING Laws Of Set Theory");
+            Console.WriteLine("  ===========================");
+            Console.WriteLine("  Note : A generic set of intergers is being used.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Create the sttings
+            var settings = new SetExtractionSettings<int>(",");
+
+            Console.WriteLine("  Creating the set");
+            Console.WriteLine("  ================");
+            //Create the universal set
+            Console.WriteLine("  Universal Set :::::");
+            string uniex_ = "{17,16,16,4,68,1,1,16,4,{12,6,8,6,{8,9,{}}},5,9,4,3,{},{6,8},{6,8,6,8},9,7,3,17,{19,6,19},{6,6,6}}";
+            ISet<int> universal = new GenericSet<int>(uniex_, settings);
+            Console.WriteLine("  The original string for the universal set will be : ");
+            Console.WriteLine("  ---> {0}", uniex_);
+            Console.WriteLine("  The evaluated set string will be : ");
+            Console.WriteLine("  ---> {0}", universal);
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            //Empty Set
+            Console.WriteLine("  Empty Set :::::");
+            string emptyex_ = "{}";
+            ISet<int> emptySet = new GenericSet<int>(emptyex_, settings);
+            Console.WriteLine("  The original string of set C will be : ");
+            Console.WriteLine("  ---> {0}", emptyex_);
+            Console.WriteLine("  The evaluated set string will be : ");
+            Console.WriteLine("  ---> {0}", emptySet);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Create set A
+            Console.WriteLine("  Set A :::::");
+            string setAex_ = "{17,17,68,4,{6,6,6},{6,6,6}}";
+            ISet<int> setA = new GenericSet<int>(setAex_, settings);
+            Console.WriteLine("  The original string of set A will be : ");
+            Console.WriteLine("  ---> {0}", setAex_);
+            Console.WriteLine("  The evaluated set string will be : ");
+            Console.WriteLine("  ---> {0}", setA);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            
+            //Create set B
+            Console.WriteLine("  Set B :::::");
+            string setBex_ = "{5,9,4,3,{},{6,8}}";
+            ISet<int> setB = new GenericSet<int>(setBex_, settings);
+            Console.WriteLine("  The original string of set B will be : ");
+            Console.WriteLine("  ---> {0}", setBex_);
+            Console.WriteLine("  The evaluated set string will be : ");
+            Console.WriteLine("  ---> {0}", setB);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Create set C
+            Console.WriteLine("  Set C :::::");
+            string setCex_ = "{{},{6,8},{6,8,6,8},9,7,3,17,{19,6,19},{6,6,6}}";
+            ISet<int> setC = new GenericSet<int>(setCex_, settings);
+            Console.WriteLine("  The original string of set C will be : ");
+            Console.WriteLine("  ---> {0}", setCex_);
+            Console.WriteLine("  The evaluated set string will be : ");
+            Console.WriteLine("  ---> {0}", setC);
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            //Set laws
+            Console.WriteLine("  SET LAWS");
+            Console.WriteLine("  ===========");
+            Console.WriteLine();
+            Console.WriteLine();
+            //Cummutativity
+            Console.WriteLine("  Cummutative law :" );
+            Console.WriteLine("  ================");
+            Console.WriteLine("  A U B = B U A");
+            ISet<int> cummutativeA = setA.Union(setB);
+            Console.WriteLine("     A U B :");
+            Console.WriteLine("  ---> {0}", cummutativeA);
+            ISet<int> cummutativeB = setB.Union(setA);
+            Console.WriteLine("     B U A :");
+            Console.WriteLine("  ---> {0}", cummutativeB);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Associative
+            Console.WriteLine("  Associative Laws : ");
+            Console.WriteLine("  ====================");
+            Console.WriteLine("  * 1: A U ( B U C ) = ( A U B) U C ::");
+            Console.WriteLine("     A U ( B U C ) : ");
+            ISet<int> leftUnions = setA.Union(setB.Union(setC));
+            Console.WriteLine("  ---> {0}", leftUnions);
+            Console.WriteLine("     ( A U B) U C : ");
+            ISet<int> rightUnions = (setA.Union(setB)).Union(setC);
+            Console.WriteLine("  ---> {0}", rightUnions);
+
+            Console.WriteLine();
+            Console.WriteLine($"  * 2 : A \u2229  ( B \u2229 C ) = (A \u2229 B) \u2229 C ::");
+            Console.WriteLine("     A \u2229  ( B \u2229 C ) : ");
+            ISet<int> leftintersection = setA.Intersection(setB.Intersection(setC));
+            Console.WriteLine("  ---> {0}", leftintersection);
+            Console.WriteLine("     (A \u2229 B) \u2229 C : ");
+            ISet<int> rightintersection = (setA.Intersection(setB)).Intersection(setC);
+            Console.WriteLine("  ---> {0}", rightintersection);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Distributivity
+            Console.WriteLine("  Distributive Law : ");
+            Console.WriteLine("  ====================");
+            Console.WriteLine("  * 1 : A U ( B \u2229 C ) = ( A U B ) \u2229 ( A U C) ::");
+            Console.WriteLine("     A U ( B \u2229 C )");
+            ISet<int> leftdisA = setA.Union(setB.Intersection(setC));
+            Console.WriteLine("  ---> {0}", leftdisA);            
+            Console.WriteLine("     ( A U B ) \u2229 ( A U C)");
+            ISet<int> rightdisA = (setA.Union(setB)).Intersection(setA.Union(setC));
+            Console.WriteLine("  ---> {0}", rightdisA);
+            Console.WriteLine();
+
+            Console.WriteLine("  * 2 : A \u2229 ( B U C ) = ( A \u2229 B ) U ( A \u2229 C) ::");
+            Console.WriteLine("     A \u2229 ( B U C )");
+            ISet<int> leftdisB = setA.Intersection(setB.Union(setC));
+            Console.WriteLine("  ---> {0}", leftdisB);
+            Console.WriteLine("     ( A \u2229 B ) U ( A \u2229 C)");
+            ISet<int> rightdisB = (setA.Intersection(setB)).Union(setA.Intersection(setC));
+            Console.WriteLine("  ---> {0}", rightdisB);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Double Complement
+            Console.WriteLine("  Double complement : ");
+            Console.WriteLine("  =====================");
+            Console.WriteLine("  ~(~A) = A ::");
+            Console.WriteLine("     ~(~A)");
+            ISet<int> complementleft = setA.Complement(universal, out _).Complement(universal, out _);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", complementleft);
+            Console.WriteLine("     A");
+            ISet<int> complementright = setA;
+            Console.WriteLine("  ---> {0}", complementright);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Demorgan's Laws
+            Console.WriteLine("  DeMorgan's Law : ");
+            Console.WriteLine("  ==================");
+            Console.WriteLine("  * 1 : ~( A U B ) = ~A \u2229 ~B ::");
+            Console.WriteLine("     ~( A U B )");
+            ISet<int> DeMorgRight1 = (setA.Union(setB)).Complement(universal, out _);
+            Console.WriteLine("  ---> {0}", DeMorgRight1);
+            Console.WriteLine("     ~A \u2229 ~B");
+            ISet<int> DeMorgLeft1 = setA.Complement(universal, out _).Intersection(setB.Complement(universal, out _));
+            Console.WriteLine("  ---> {0}", DeMorgLeft1);
+            Console.WriteLine();
+
+            Console.WriteLine("  * 2 : ~( A \u2229 B ) = ~A U ~B ::");
+            Console.WriteLine("     ~( A U B )");
+            ISet<int> DeMorgRight2 = (setA.Intersection(setB)).Complement(universal, out _);
+            Console.WriteLine("  ---> {0}", DeMorgRight2);
+            Console.WriteLine("     ~A \u2229 ~B");
+            ISet<int> DeMorgLeft2 = setA.Complement(universal, out _).Union(setB.Complement(universal, out _));
+            Console.WriteLine("  ---> {0}", DeMorgLeft2);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Identity
+            Console.WriteLine("  Identity : ");
+            Console.WriteLine("  ============");
+            Console.WriteLine("  * 1 : \u2205 U A = A ::");
+            Console.WriteLine("     \u2205 U A");
+            ISet<int> identity1left = emptySet.Union(setA);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", identity1left);
+            Console.WriteLine("     A");
+            ISet<int> identity1right = setA;
+            Console.WriteLine("  ---> {0}", identity1right);
+            Console.WriteLine();
+
+            Console.WriteLine("  * 2 : Uni \u2229 A = A ::");
+            Console.WriteLine("     Uni \u2229 A");
+            ISet<int> identity2left = universal.Intersection(setA);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", identity2left);
+            Console.WriteLine("     A");
+            ISet<int> identity2right = setA;
+            Console.WriteLine("  ---> {0}", identity2right);
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            //Idempotence
+            Console.WriteLine("  Idempotence : ");
+            Console.WriteLine("  ============");
+            Console.WriteLine("  * 1 : A U A = A ::");
+            Console.WriteLine("     A U A ");
+            ISet<int> idompleft1 = setA.Union(setA);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", idompleft1);
+            Console.WriteLine("     A");
+            ISet<int> idompleright1 = setA;
+            Console.WriteLine("  ---> {0}", idompleright1);
+            Console.WriteLine();
+
+            Console.WriteLine("  * 2 : A \u2229 A = A ::");
+            Console.WriteLine("     A \u2229 A");
+            ISet<int> idompleft2 = setA.Intersection(setA);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", idompleft2);
+            Console.WriteLine("     A");
+            ISet<int> idompright2 = setA;
+            Console.WriteLine("  ---> {0}", idompright2);
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            //Idempotence
+            Console.WriteLine("  Dominance : ");
+            Console.WriteLine("  ============");
+            Console.WriteLine("  * 1 : A U Univeral = Univeral ::");
+            Console.WriteLine("     A U Univeral ");
+            ISet<int> domileft1 = setA.Union(universal);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", domileft1);
+            Console.WriteLine("     Univeral");
+            ISet<int> domiright1 = universal;
+            Console.WriteLine("  ---> {0}", domiright1);
+            Console.WriteLine();
+
+            Console.WriteLine("  * 2 : A \u2229 \u2205 = \u2205 ::");
+            Console.WriteLine("     A \u2229 \u2205");
+            ISet<int> domileft2 = setA.Intersection(emptySet);//universal.Difference(universal.Difference(setA));
+            Console.WriteLine("  ---> {0}", domileft2);
+            Console.WriteLine("     \u2205");
+            ISet<int> domiright2 = emptySet;
+            Console.WriteLine("  ---> {0}", domiright2);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            AnyKey();
+
+            //Set equalities
+            Console.WriteLine("  Testing set operations with a generic set class");
+            Console.WriteLine("  =================================================");
+            Console.WriteLine("  Note : A generic set of intergers is being used");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("  Arguments that prove logical equivalences can be directly translated into arguments that prove set equalities.");
+            Console.WriteLine();
+            Console.WriteLine("  Set Equalities of note :");
+            Console.WriteLine("  1. A - B =  A \u2229 ~B");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.WriteLine("  2. A \u2206 B =  ( A U B ) - ( A \u2229 B )");
+            Console.OutputEncoding = System.Text.Encoding.Default;
+            Console.WriteLine();
+            Console.WriteLine("  Recall that : ");
+            Console.WriteLine("  Universal set = : {0}", universal);
+            Console.WriteLine("  Set A = : {0}", setA);
+            Console.WriteLine("  Set B = : {0}", setB);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine("  1. A - B =  A \u2229 ~B");
+            Console.WriteLine("     A - B");
+            ISet<int> left1 = setA.Difference(setB);
+            Console.WriteLine("  ---> {0}", left1);
+            Console.WriteLine("     A \u2229 ~B");
+            ISet<int> right1 = setA.Intersection(setB.Complement(universal, out _));
+            Console.WriteLine("  ---> {0}", right1);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.WriteLine("  2. A \u2206 B =  ( A U B ) - ( A \u2229 B )");
+            Console.WriteLine("     A \u2206 B");
+            Console.OutputEncoding = System.Text.Encoding.Default;
+            //ISet<int> left2 = setA.Difference(setB);
+            Console.WriteLine("  ---> {0}", "To be implemented......");
+            Console.WriteLine("     ( A U B ) - ( A \u2229 B )");
+            ISet<int> right2 = (setA.Union(setB).Difference(setA.Intersection(setB)));
+            Console.WriteLine("  ---> {0}", right2);
+            AnyKey();
+        }//TestSetLaws
         private static void TestISetTree()
         {
             Console.Clear();
-            Console.WriteLine("TESTING the set tree");
-            Console.WriteLine("=====================");
-            Console.WriteLine("Note : A non-generic set of strings is being used, thus the sorting may be in-accurate with numbers");
+            Console.WriteLine("  TESTING the set tree");
+            Console.WriteLine("  =====================");
+            Console.WriteLine("  Note : A non-generic set of strings is being used, thus the sorting may be in-accurate with numbers");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
 
             //Test CSet
-            string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
+            string expression = "  {2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
             ISet<string> set = new CSet(expression);
             ISetTree<string> tree = set[3];
-            Console.WriteLine("The expression is :  {0} ", expression);
-            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
-            Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
-            Console.WriteLine("The set/element in index {0} is {1} ", 3, set[3]);
+            Console.WriteLine("  The expression is :  {0} ", expression);
+            Console.WriteLine("  The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("  The cardinality will be : {0}  ", set.Cardinality);
+            Console.WriteLine("  The set/element in index {0} is {1} ", 3, set[3]);
             set.RemoveElement(tree);
-            Console.WriteLine("Removed the following tree : {0}", tree);
-            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
-            Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
+            Console.WriteLine("  Removed the following tree : {0}", tree);
+            Console.WriteLine("  The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("  The cardinality will be : {0}  ", set.Cardinality);
             set.RemoveElement("2");
-            Console.WriteLine("Remove the following element : \"2\"");
-            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
-            Console.WriteLine("The cardinality will be : {0}  ", set.Cardinality);
+            Console.WriteLine("  Remove the following element : \"2\"");
+            Console.WriteLine("  The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("  The cardinality will be : {0}  ", set.Cardinality);
             tree.AddSubSetTree(SetExtraction.Extract("{2,6,7}",set.Settings));
             tree.AddSubSetTree(SetExtraction.Extract("{2,2}",set.Settings));
             set.AddElement(tree);
-            Console.WriteLine("Added the following element: {0}", tree);
-            Console.WriteLine("The element string will be  :  {0} ", set.ElementString);
+            Console.WriteLine("  Added the following element: {0}", tree);
+            Console.WriteLine("  The element string will be  :  {0} ", set.ElementString);
 
             Console.WriteLine();
             AnyKey();
@@ -234,58 +517,58 @@ namespace Advanced_Sets
         private static void TestCSet()
         {
             Console.Clear();
-            Console.WriteLine("TESTING CSet : Non-Generic set");
-            Console.WriteLine("===============================");
+            Console.WriteLine("  TESTING CSet : Non-Generic set");
+            Console.WriteLine("  ===============================");
             Console.WriteLine();
-            Console.WriteLine("Note :The sorting may not be acurate because it does a string sorting!");
+            Console.WriteLine("  Note :The sorting may not be acurate because it does a string sorting!");
             Console.WriteLine();
             Console.WriteLine();
 
             string expression = "{1,{2,{5,{6,6,7,{6},{6}}},{7}},{8}}";
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             CSet set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{{{{{{{{6}}}}}}}}";
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{5,5,3,{6,{5,8},{5,3},5,6},{6,{5,8},{5,3},5,6},7}";
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{5,2,1,0}";
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{ 8, 7, 5, 2, 14, 1, { 5, 8, 9, 6, 33 } }";
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{5,5,3,{6,{5,8},5,6},7}";
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             set = new CSet(expression);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
             
             Console.WriteLine();
             AnyKey();
@@ -293,9 +576,9 @@ namespace Advanced_Sets
         private static void TestGenericSetWithNumbers()
         {
             Console.Clear();
-            Console.WriteLine("Test Generic set : Using intagers");
-            Console.WriteLine("=================================");
-            Console.WriteLine("Note that the integers are seperated by a comma (\",\")");
+            Console.WriteLine("  Test Generic set : Using intagers");
+            Console.WriteLine("  =================================");
+            Console.WriteLine("  Note that the integers are seperated by a comma (\",\")");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
@@ -303,18 +586,18 @@ namespace Advanced_Sets
             SetExtractionSettings<int> settings = new SetExtractionSettings<int>(",");
 
             string expression = "{5,5,3,{6,{5,8},{5,3},5,6},{6,{5,8},{5,3},5,6},7}";
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             GenericSet<int> set = new GenericSet<int>(expression, settings);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{{{{{{{{6}}}}}}}}";
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("The expression is : " + expression);
+            Console.WriteLine("  The expression is : " + expression);
             set = new GenericSet<int>(expression, settings);
-            Console.WriteLine("The element string will be : " + set.ElementString);
-            Console.WriteLine("The cardinality will be : " + set.Cardinality);
+            Console.WriteLine("  The element string will be : " + set.ElementString);
+            Console.WriteLine("  The cardinality will be : " + set.Cardinality);
 
             expression = "{1,{2,{5},{7}},{8}}";
             Console.WriteLine();
