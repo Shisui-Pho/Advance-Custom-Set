@@ -132,6 +132,11 @@ namespace SetLibrary
         public abstract bool Contains(T Element);
         public abstract ISet<T> MergeWith(ISet<T> set);
         public abstract ISet<T> Without(ISet<T> setB);
+
+        public void Clear()
+        {
+            this.tree = CSetTree<T>.GetEmptyTree(this.Settings);
+        }//Clear
         #endregion Abstract method to be implemented by the inherited classes
     }//class
 }//namespace

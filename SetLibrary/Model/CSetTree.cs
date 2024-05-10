@@ -258,6 +258,8 @@ namespace SetLibrary
             //Return the root element of the current set to gether with it's subsets
             return root + "}";
         }//ToString
+        public static ISetTree<T> GetEmptyTree(SetExtractionSettings<T> settings)
+            => new CSetTree<T>(new List<T>(), settings);
         #endregion Other 
     }//CTRee
 }//namespace

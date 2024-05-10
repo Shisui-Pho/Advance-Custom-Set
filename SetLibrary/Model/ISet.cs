@@ -90,6 +90,9 @@ namespace SetLibrary
         /// <param name="tree">The set to check for.</param>
         /// <returns>True if the set is a subset.</returns>
         bool IsSubSetOf(ISet<T> setB, out SetType type);
-
+        /// <summary>
+        /// Clears the entire set tree.
+        /// </summary>
+        void Clear();
     }//interface : ISet
 }//namespace
