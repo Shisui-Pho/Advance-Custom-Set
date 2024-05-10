@@ -40,9 +40,9 @@ namespace SetLibrary
             if (settings == null)
                 throw new ArgumentException("Settings cannot be null");
             this.Settings = settings;
-            BuildSetString(setString);
+            this.tree = BuildSetString(setString);
         }//ctor 03
-        private void BuildSetString(string expression)
+        private ISetTree<T> BuildSetString(string expression)
         {
             if(!BracesEvaluation.AreBracesCorrect(expression))
                 throw new ArgumentException("Braces are not matching");
@@ -50,7 +50,7 @@ namespace SetLibrary
             //At this point the set string braces are okay
 
             //Extract the set tree
-            this.tree = SetExtraction.Extract(expression, this.Settings);
+            return SetExtraction.Extract(expression, this.Settings);
         }//BuildSetString
         public virtual bool Contains(ISetTree<T> tree)
         {
@@ -111,6 +111,11 @@ namespace SetLibrary
         {
             return tree.ToString();//ElementString;
         }//ToString
+        public void AddSubsetAsString(string subset)
+        {
+            ISetTree<T> tree = BuildSetString(subset);
+            this.tree.AddSubSetTree(tree);
+        }//AddSubsetAsString
         #region Operator overloading
         public static ISet<T> operator - (BaseSet<T> setA, ISet<T> setB)
         {
@@ -126,6 +131,7 @@ namespace SetLibrary
         #region Abstract method to be implemented by the inherited classes
         public abstract bool Contains(T Element);
         public abstract ISet<T> MergeWith(ISet<T> set);
+        public abstract ISet<T> Without(ISet<T> setB);
         #endregion Abstract method to be implemented by the inherited classes
     }//class
 }//namespace

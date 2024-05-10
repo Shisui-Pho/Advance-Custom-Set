@@ -59,7 +59,7 @@
     <Compile Include="SetExtensions\ISetExtensions.cs" />
     <Compile Include="SetExtensions\ISetTreeExtensions.cs" />
     <Compile Include="SetExtensions\SetOperations.cs" />
-    <Compile Include="SetExtensions\SetType.cs" />
+    <Compile Include="Model\SetType.cs" />
     <Compile Include="Model\CSet.cs" />
     <Compile Include="Model\CSetTree.cs" />
     <Compile Include="Collections\SortedElements.cs" />

@@ -41,7 +41,7 @@ namespace SetLibrary
             //Return a new instance of the set
             return new CSet(final);
         }//MergeSets
-        public ISet<string> Without(ISet<string> setB)
+        public override ISet<string> Without(ISet<string> setB)
         {
             return this - setB;
         }//Without

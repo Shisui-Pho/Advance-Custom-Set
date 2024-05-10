@@ -1,9 +1,7 @@
 ﻿using SetLibrary.Collections;
 using SetLibrary.Generic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SetLibrary
 {
@@ -123,7 +121,6 @@ namespace SetLibrary
 
             //Add and sort the elements
             this.lstSubsets.Add(tree);
-            //this.lstSubsets = this.lstSubsets.OrderBy(x => x.Cardinality).ToList();
         }//AddSubTree
         public bool RemoveElement(ISetTree<T> element)
         {

@@ -43,6 +43,11 @@ namespace SetLibrary
         /// <param name="tree"></param>
         void AddElement(ISetTree<T> tree);
         /// <summary>
+        /// Adds a new subset in the current string by exctracting the tree.
+        /// </summary>
+        /// <param name="subset">A string representation of the subset.</param>
+        void AddSubsetAsString(string subset);
+        /// <summary>
         /// Adds a new tree as an element in the current set. If the tree already exists it will not be added.
         /// The tree will be on the first nesting level of the current set.
         /// </summary>
@@ -53,6 +58,12 @@ namespace SetLibrary
         /// </summary>
         /// <param name="set"></param>
         ISet<T> MergeWith(ISet<T> set);
+        /// <summary>
+        /// Removes all elements of SetB that are in setA and return the resulting set.
+        /// </summary>
+        /// <param name="setB"></param>
+        /// <returns>A new setA without elements in setB.</returns>
+        ISet<T> Without(ISet<T> setB);
         /// <summary>
         /// Removes an element in the current set. This element could be a set or just an single element.
         /// This element must be on the first nesting level.
