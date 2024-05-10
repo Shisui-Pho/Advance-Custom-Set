@@ -78,19 +78,21 @@ namespace SetLibrary.Operations
         public static ISet<T> Complement<T>(this ISet<T> setA, ISet<T> universalSet, out bool isUniversal)
             where T : IComparable
         {
-            string a = setA.ElementString;
-            string b = universalSet.ElementString;
-
-
-            bool bb = b.Contains(a);
-
-            if(universalSet.ToString().IndexOf(setA.ToString())< 0)//if the set is not in the universal set, then it cannot be a subset on the universal set
-            {
-                isUniversal = false;
-                return setA; 
-            }//end if
+            //Assume that it is universal
             isUniversal = true;
-            return universalSet.Difference(setA);
+            //One way to test if the universal set is universal to set A is to take the intersection of the two set's.
+            //-If the result is not setA then the universal set is not universal to setA
+
+            //Take the intersection
+            ISet<T> setC = universalSet.Intersection(setA);
+
+            //Check if setC is equal to set A
+            if(setC.ToString() == setA.ToString())
+                return universalSet.Difference(setA);
+
+            //Else return null
+            isUniversal = false;
+            return default(ISet<T>);
         }//Complement
         /// <summary>
         /// The difference between the two sets, A and B, written as A ∖ B or A − B.
