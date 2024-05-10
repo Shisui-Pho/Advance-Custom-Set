@@ -34,5 +34,10 @@ namespace SetLibrary.Objects_Sets
             string final = s1.Remove(s1.Length - 1) + Settings.ElementSeperator + s2.Remove(0, 1);
             return new ObjectSet<T>(final, Settings);
         }//MergeWith
+
+        public override ISet<T> Without(ISet<T> setB)
+        {
+            return this - setB;
+        }//Without
     }//class
 }//namespace
