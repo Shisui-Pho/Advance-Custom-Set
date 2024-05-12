@@ -15,10 +15,78 @@ namespace Advanced_Sets
             TestGenericSetWithNumbers();
             TestISetTree();
             TestSetOperations();
-            TestObjectsConverter();
             LawOfSetTheory();
-            Console.ReadKey();
+            TestObjectsConverter();
+            TestIndexingWithObject();
+            //Console.ReadKey();
         }//Main
+        private static void TestIndexingWithObject()
+        {
+            Console.Clear();
+            Console.WriteLine("Test Indexing with objects.");
+            Console.WriteLine("============================");
+            Console.WriteLine("Note that the object being used is an Animal. An animal can be a Dog or a Cat. An animal has a Name and TypeOfAnimal.");
+            Console.WriteLine("A dog has an extra property called Breed and a Cat has an extra property called Color.");
+            Console.WriteLine("The sorting happens on the Name of the animal.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Creating the set.
+            Console.WriteLine("Creating the animal set.");
+            Console.WriteLine("========================");
+            Console.WriteLine();
+            SetExtractionSettings<Animal> settings = new SetExtractionSettings<Animal>(",", " ", new Animal());
+            string setString = "{Cat Luna Black,Cat Baiely White,Cat Coco White,Cat Lola White,Dog Bella Bulldog,{Dog Molly Dachshund,Dog Bella Poodle},{Dog Molly Dachshund,Dog Bella Poodle},{{Dog Sammy Poodle}},Cat Baiely White,Dog Luna Beagle}";
+            ISet<Animal> setOfAnimals = new ObjectSet<Animal>(setString,settings);
+
+            //Display output
+            Console.WriteLine("The original set string was : \n----> {0}\n",setString);
+            Console.WriteLine("The evaluated set string will be : \n----> {0}\n", setOfAnimals);
+
+            Console.WriteLine();
+            Console.WriteLine("Testing indexing.");
+            Console.WriteLine("=================");
+
+            Element<Animal> animal = setOfAnimals.GetElementByIndex(4);
+            Console.WriteLine("Animal at index 4");
+            Console.WriteLine("Animal          : {0}", animal.Value);
+            Console.WriteLine("Is in the root  : {0}", animal.IsInRoot);
+            Console.WriteLine("Nesting level   : {0}", animal.NestedLevel);
+            Console.WriteLine("Was found       : {0}", animal.ElementFound);
+            Console.WriteLine();
+            animal = setOfAnimals.GetElementByIndex(5);
+            Console.WriteLine("Animal at index 5");
+            Console.WriteLine("Animal          : {0}", animal.Value);
+            Console.WriteLine("Is in the root  : {0}", animal.IsInRoot);
+            Console.WriteLine("Nesting level   : {0}", animal.NestedLevel);
+            Console.WriteLine("Was found       : {0}", animal.ElementFound);
+            Console.WriteLine();
+            animal = setOfAnimals.GetElementByIndex(6);
+            Console.WriteLine("Animal at index 6");
+            Console.WriteLine("Animal          : {0}", animal.Value);
+            Console.WriteLine("Is in the root  : {0}", animal.IsInRoot);
+            Console.WriteLine("Nesting level   : {0}", animal.NestedLevel);
+            Console.WriteLine("Was found       : {0}", animal.ElementFound);
+            Console.WriteLine();
+            animal = setOfAnimals.GetElementByIndex(7);
+            Console.WriteLine("Animal at index 7");
+            Console.WriteLine("Animal          : {0}", animal.Value);
+            Console.WriteLine("Is in the root  : {0}", animal.IsInRoot);
+            Console.WriteLine("Nesting level   : {0}", animal.NestedLevel);
+            Console.WriteLine("Was found       : {0}", animal.ElementFound);
+            Console.WriteLine();
+            animal = setOfAnimals.GetElementByIndex(15);
+            Console.WriteLine("Animal at index 15");
+            Console.WriteLine("Animal          : {0}", animal.Value);
+            Console.WriteLine("Is in the root  : {0}", animal.IsInRoot);
+            Console.WriteLine("Nesting level   : {0}", animal.NestedLevel);
+            Console.WriteLine("Was found       : {0}", animal.ElementFound);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            AnyKey();
+        }//TestIndexingWithObject
         private static void TestObjectsConverter()
         {
             Console.Clear();
@@ -99,7 +167,7 @@ namespace Advanced_Sets
 
             Console.WriteLine("End of the line!!!");
             Console.WriteLine();
-            Console.Write("Press any key to exit......");
+            AnyKey();
         }//TestObjectsConverter
         private static void TestSetOperations()
         {
@@ -490,7 +558,7 @@ namespace Advanced_Sets
             Console.WriteLine();
 
             //Test CSet
-            string expression = "  {2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
+            string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
             ISet<string> set = new CSet(expression);
             ISetTree<string> tree = set[3];
             Console.WriteLine("  The expression is :  {0} ", expression);
