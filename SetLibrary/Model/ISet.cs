@@ -94,5 +94,11 @@ namespace SetLibrary
         /// Clears the entire set tree.
         /// </summary>
         void Clear();
+        /// <summary>
+        /// Gets the element in the current set based on an index. The element can be in the root or nested in a subset.
+        /// </summary>
+        /// <param name="index">The index of the element.</param>
+        /// <returns>An element struct which contains the element <typeparamref name="T"/> and position on the set.</returns>
+        Element<T> GetElementByIndex(int index);
     }//interface : ISet
 }//namespace

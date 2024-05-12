@@ -116,6 +116,16 @@ namespace SetLibrary
             ISetTree<T> tree = BuildSetString(subset);
             this.tree.AddSubSetTree(tree);
         }//AddSubsetAsString
+
+        public void Clear()
+        {
+            this.tree = CSetTree<T>.GetEmptyTree(this.Settings);
+        }//Clear
+
+        public Element<T> GetElementByIndex(int index)
+        {
+            return this.tree[index];
+        }//GetElementByIndex
         #region Operator overloading
         public static ISet<T> operator - (BaseSet<T> setA, ISet<T> setB)
         {
@@ -132,11 +142,6 @@ namespace SetLibrary
         public abstract bool Contains(T Element);
         public abstract ISet<T> MergeWith(ISet<T> set);
         public abstract ISet<T> Without(ISet<T> setB);
-
-        public void Clear()
-        {
-            this.tree = CSetTree<T>.GetEmptyTree(this.Settings);
-        }//Clear
         #endregion Abstract method to be implemented by the inherited classes
     }//class
 }//namespace
