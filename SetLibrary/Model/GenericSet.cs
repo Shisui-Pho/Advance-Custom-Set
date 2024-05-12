@@ -30,5 +30,10 @@ namespace SetLibrary.Generic
         {
             return this.tree.IndexOf(Element) >= 0;
         }//Contains
-    }//
+
+        public override ISet<T> Without(ISet<T> setB)
+        {
+            return this - setB;
+        }//Without
+    }//class
 }//namespace
