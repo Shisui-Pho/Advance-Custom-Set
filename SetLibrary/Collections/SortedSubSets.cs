@@ -120,7 +120,14 @@ namespace SetLibrary.Collections
         public Element<T> FindElementByIndex(int index)
         {
             int nestingLevel = 0, currentIndex = 0;
-            return FindElement(_collection[0],ref currentIndex, index, nestingLevel);
+            Element<T> element = default(Element<T>);
+            for (int i = 0; i < _collection.Count; i++)
+            {
+                element = FindElement(_collection[i], ref currentIndex, index, nestingLevel);
+                if (element.ElementFound)
+                    break;
+            }
+            return element;
             //return new Element<T>(val, nestingLevel, nestingLevel == 1);
         }//FindByIndex
         private Element<T> FindElement(ISetTree<T> currentTree, ref int currentIndex, int index, int nestinglevel)
@@ -133,7 +140,7 @@ namespace SetLibrary.Collections
             {
                 if (currentIndex == index)
                 {
-                    element = new Element<T>(item, nestinglevel, nestinglevel == 1);
+                    element = new Element<T>(item, nestinglevel, false);
                     return element;
                 }
                 //increase the current index
