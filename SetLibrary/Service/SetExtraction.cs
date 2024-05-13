@@ -57,7 +57,7 @@ namespace SetLibrary
 
                     //This will also remove duplicates, since a set must not have duplicates
                     expression = expression.Replace(subset, "");
-                    i = -1;
+                    i = start;
                     //Clear the stack and queue
                     oppeningBraces = new Queue<int>();
                     clossingBraces = new Stack<int>();
