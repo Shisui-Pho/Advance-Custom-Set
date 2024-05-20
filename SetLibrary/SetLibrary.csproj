@@ -52,7 +52,7 @@
     <Compile Include="Service\SetExtraction.cs" />
     <Compile Include="Service\SetExtractionSettings.cs" />
     <Compile Include="Model\GenericSet.cs" />
-    <Compile Include="Model\ISet.cs" />
+    <Compile Include="Model\ICSet.cs" />
     <Compile Include="Model\ISetTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BracesEvaluation.cs" />

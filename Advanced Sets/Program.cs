@@ -38,7 +38,7 @@ namespace Advanced_Sets
             Console.WriteLine();
             SetExtractionSettings<Animal> settings = new SetExtractionSettings<Animal>(",", " ", new Animal());
             string setString = "{Cat Luna Black,Cat Baiely White,Cat Coco White,Cat Lola White,Dog Bella Bulldog,{Dog Molly Dachshund,Dog Bella Poodle},{Dog Molly Dachshund,Dog Bella Poodle},{{Dog Sammy Poodle}},Cat Baiely White,Dog Luna Beagle}";
-            ISet<Animal> setOfAnimals = new ObjectSet<Animal>(setString,settings);
+            ICSet<Animal> setOfAnimals = new ObjectSet<Animal>(setString,settings);
 
             //Display output
             Console.WriteLine("The original set string was : \n----> {0}\n",setString);
@@ -102,7 +102,7 @@ namespace Advanced_Sets
             //Expression 01
             Console.WriteLine("Expression 01 : ");
             string expression = "{Phiwokwakhe Khathwane,Phiwokwakhe Khathwane,Phiwokwakhe Khathwane,Anabel Hillson,Anabel Bananna,Lesbary Mathew,William Shakesphere,{Muton Sugar,Henry MacDonald,{}}}";
-            ISet<Person> setPeople = new ObjectSet<Person>(expression,settings);
+            ICSet<Person> setPeople = new ObjectSet<Person>(expression,settings);
             Console.WriteLine("The original set expression was :");
             Console.WriteLine("   "+ expression);
             Console.WriteLine();
@@ -181,18 +181,18 @@ namespace Advanced_Sets
             SetExtractionSettings<int> settings = new SetExtractionSettings<int>(",");
             int padding = 30;
             string expression = "{2,6,1,73,10,15,{8,6,{3},{7,5}}}";
-            ISet<int> setA = new GenericSet<int>(expression,settings);
+            ICSet<int> setA = new GenericSet<int>(expression,settings);
             Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
             Console.WriteLine("Set A will be".PadRight(padding) + " : " + setA.ToString());
 
             Console.WriteLine();
             expression = "{5,{5,6,{2}},{8,{6}},2}";
-            ISet<int> setB = new GenericSet<int>(expression, settings);
+            ICSet<int> setB = new GenericSet<int>(expression, settings);
             Console.WriteLine("The orginial expression was".PadRight(padding) + " : " + expression);
             Console.WriteLine("Set B will be".PadRight(padding) + " : " + setB.ToString());
 
             Console.WriteLine();
-            ISet<int> universal = setA.Union(setB);
+            ICSet<int> universal = setA.Union(setB);
             Console.WriteLine("Universal set will be".PadRight(padding) + " : " + universal.ToString());
 
             Console.WriteLine();
@@ -203,21 +203,21 @@ namespace Advanced_Sets
 
             //Difference
             Console.WriteLine("Difference : ");
-            ISet<int> differenceA = setA.Difference(setB);
+            ICSet<int> differenceA = setA.Difference(setB);
             Console.WriteLine("setA - setB".PadRight(padding) + " : " + differenceA.ToString());
             Console.WriteLine();
 
-            ISet<int> differenceB = setB.Difference(setA);
+            ICSet<int> differenceB = setB.Difference(setA);
             Console.WriteLine("setB - setA".PadRight(padding) + " : " + differenceB.ToString());
             Console.WriteLine();
 
-            ISet<int> differenceAA = setA.Difference(setA);
+            ICSet<int> differenceAA = setA.Difference(setA);
             Console.WriteLine("setA - setA".PadRight(padding) + " : " + differenceAA.ToString());
             Console.WriteLine();
 
             //Union
             Console.WriteLine("Union : ");
-            ISet<int> union = setA.Union(setB);
+            ICSet<int> union = setA.Union(setB);
             Console.WriteLine("setA union set B".PadRight(padding) + " : " + union.ToString());
             Console.WriteLine();
 
@@ -225,22 +225,22 @@ namespace Advanced_Sets
             //Intersection
             Console.WriteLine("Intersection : ");
             //A and B
-            ISet<int> intersectionA = setA.Intersection(setB);
+            ICSet<int> intersectionA = setA.Intersection(setB);
             Console.WriteLine("SetA intersect SetB".PadRight(padding) + " : " + intersectionA.ToString());
             Console.WriteLine();
 
             //B and A
-            ISet<int> intersectionB = setB.Intersection(setA);
+            ICSet<int> intersectionB = setB.Intersection(setA);
             Console.WriteLine("SetB intersect SetA".PadRight(padding) + " : " + intersectionB.ToString());
             Console.WriteLine();
 
-            ISet<int> intersectionC = universal.Intersection(setA);
+            ICSet<int> intersectionC = universal.Intersection(setA);
             Console.WriteLine("Universal intersect SetA".PadRight(padding) + " : " + intersectionC.ToString());
             Console.WriteLine("From the above result we expect to set SetA itself.");
             Console.WriteLine();
             //Complement
             Console.WriteLine("Complement : ");
-            ISet<int> complement1 = setA.Complement(setB, out bool isUniversal);
+            ICSet<int> complement1 = setA.Complement(setB, out bool isUniversal);
             Console.WriteLine("Set A complement Set B");
             if (!isUniversal)
             {
@@ -251,7 +251,7 @@ namespace Advanced_Sets
 
             Console.WriteLine();
 
-            ISet<int> complement2 = setA.Complement(universal, out isUniversal);
+            ICSet<int> complement2 = setA.Complement(universal, out isUniversal);
             Console.WriteLine("Universal complement Set B");
             if (!isUniversal)
             {
@@ -283,7 +283,7 @@ namespace Advanced_Sets
             //Create the universal set
             Console.WriteLine("  Universal Set :::::");
             string uniex_ = "{17,16,16,4,68,1,1,16,4,{12,6,8,6,{8,9,{}}},5,9,4,3,{},{6,8},{6,8,6,8},9,7,3,17,{19,6,19},{6,6,6}}";
-            ISet<int> universal = new GenericSet<int>(uniex_, settings);
+            ICSet<int> universal = new GenericSet<int>(uniex_, settings);
             Console.WriteLine("  The original string for the universal set will be : ");
             Console.WriteLine("  ---> {0}", uniex_);
             Console.WriteLine("  The evaluated set string will be : ");
@@ -295,7 +295,7 @@ namespace Advanced_Sets
             //Empty Set
             Console.WriteLine("  Empty Set :::::");
             string emptyex_ = "{}";
-            ISet<int> emptySet = new GenericSet<int>(emptyex_, settings);
+            ICSet<int> emptySet = new GenericSet<int>(emptyex_, settings);
             Console.WriteLine("  The original string of set C will be : ");
             Console.WriteLine("  ---> {0}", emptyex_);
             Console.WriteLine("  The evaluated set string will be : ");
@@ -306,7 +306,7 @@ namespace Advanced_Sets
             //Create set A
             Console.WriteLine("  Set A :::::");
             string setAex_ = "{17,17,68,4,{6,6,6},{6,6,6}}";
-            ISet<int> setA = new GenericSet<int>(setAex_, settings);
+            ICSet<int> setA = new GenericSet<int>(setAex_, settings);
             Console.WriteLine("  The original string of set A will be : ");
             Console.WriteLine("  ---> {0}", setAex_);
             Console.WriteLine("  The evaluated set string will be : ");
@@ -318,7 +318,7 @@ namespace Advanced_Sets
             //Create set B
             Console.WriteLine("  Set B :::::");
             string setBex_ = "{5,9,4,3,{},{6,8}}";
-            ISet<int> setB = new GenericSet<int>(setBex_, settings);
+            ICSet<int> setB = new GenericSet<int>(setBex_, settings);
             Console.WriteLine("  The original string of set B will be : ");
             Console.WriteLine("  ---> {0}", setBex_);
             Console.WriteLine("  The evaluated set string will be : ");
@@ -329,7 +329,7 @@ namespace Advanced_Sets
             //Create set C
             Console.WriteLine("  Set C :::::");
             string setCex_ = "{{},{6,8},{6,8,6,8},9,7,3,17,{19,6,19},{6,6,6}}";
-            ISet<int> setC = new GenericSet<int>(setCex_, settings);
+            ICSet<int> setC = new GenericSet<int>(setCex_, settings);
             Console.WriteLine("  The original string of set C will be : ");
             Console.WriteLine("  ---> {0}", setCex_);
             Console.WriteLine("  The evaluated set string will be : ");
@@ -347,10 +347,10 @@ namespace Advanced_Sets
             Console.WriteLine("  Cummutative law :" );
             Console.WriteLine("  ================");
             Console.WriteLine("  A U B = B U A");
-            ISet<int> cummutativeA = setA.Union(setB);
+            ICSet<int> cummutativeA = setA.Union(setB);
             Console.WriteLine("     A U B :");
             Console.WriteLine("  ---> {0}", cummutativeA);
-            ISet<int> cummutativeB = setB.Union(setA);
+            ICSet<int> cummutativeB = setB.Union(setA);
             Console.WriteLine("     B U A :");
             Console.WriteLine("  ---> {0}", cummutativeB);
             Console.WriteLine();
@@ -361,19 +361,19 @@ namespace Advanced_Sets
             Console.WriteLine("  ====================");
             Console.WriteLine("  * 1: A U ( B U C ) = ( A U B) U C ::");
             Console.WriteLine("     A U ( B U C ) : ");
-            ISet<int> leftUnions = setA.Union(setB.Union(setC));
+            ICSet<int> leftUnions = setA.Union(setB.Union(setC));
             Console.WriteLine("  ---> {0}", leftUnions);
             Console.WriteLine("     ( A U B) U C : ");
-            ISet<int> rightUnions = (setA.Union(setB)).Union(setC);
+            ICSet<int> rightUnions = (setA.Union(setB)).Union(setC);
             Console.WriteLine("  ---> {0}", rightUnions);
 
             Console.WriteLine();
             Console.WriteLine($"  * 2 : A \u2229  ( B \u2229 C ) = (A \u2229 B) \u2229 C ::");
             Console.WriteLine("     A \u2229  ( B \u2229 C ) : ");
-            ISet<int> leftintersection = setA.Intersection(setB.Intersection(setC));
+            ICSet<int> leftintersection = setA.Intersection(setB.Intersection(setC));
             Console.WriteLine("  ---> {0}", leftintersection);
             Console.WriteLine("     (A \u2229 B) \u2229 C : ");
-            ISet<int> rightintersection = (setA.Intersection(setB)).Intersection(setC);
+            ICSet<int> rightintersection = (setA.Intersection(setB)).Intersection(setC);
             Console.WriteLine("  ---> {0}", rightintersection);
             Console.WriteLine();
             Console.WriteLine();
@@ -383,19 +383,19 @@ namespace Advanced_Sets
             Console.WriteLine("  ====================");
             Console.WriteLine("  * 1 : A U ( B \u2229 C ) = ( A U B ) \u2229 ( A U C) ::");
             Console.WriteLine("     A U ( B \u2229 C )");
-            ISet<int> leftdisA = setA.Union(setB.Intersection(setC));
+            ICSet<int> leftdisA = setA.Union(setB.Intersection(setC));
             Console.WriteLine("  ---> {0}", leftdisA);            
             Console.WriteLine("     ( A U B ) \u2229 ( A U C)");
-            ISet<int> rightdisA = (setA.Union(setB)).Intersection(setA.Union(setC));
+            ICSet<int> rightdisA = (setA.Union(setB)).Intersection(setA.Union(setC));
             Console.WriteLine("  ---> {0}", rightdisA);
             Console.WriteLine();
 
             Console.WriteLine("  * 2 : A \u2229 ( B U C ) = ( A \u2229 B ) U ( A \u2229 C) ::");
             Console.WriteLine("     A \u2229 ( B U C )");
-            ISet<int> leftdisB = setA.Intersection(setB.Union(setC));
+            ICSet<int> leftdisB = setA.Intersection(setB.Union(setC));
             Console.WriteLine("  ---> {0}", leftdisB);
             Console.WriteLine("     ( A \u2229 B ) U ( A \u2229 C)");
-            ISet<int> rightdisB = (setA.Intersection(setB)).Union(setA.Intersection(setC));
+            ICSet<int> rightdisB = (setA.Intersection(setB)).Union(setA.Intersection(setC));
             Console.WriteLine("  ---> {0}", rightdisB);
             Console.WriteLine();
             Console.WriteLine();
@@ -405,10 +405,10 @@ namespace Advanced_Sets
             Console.WriteLine("  =====================");
             Console.WriteLine("  ~(~A) = A ::");
             Console.WriteLine("     ~(~A)");
-            ISet<int> complementleft = setA.Complement(universal, out _).Complement(universal, out _);//universal.Difference(universal.Difference(setA));
+            ICSet<int> complementleft = setA.Complement(universal, out _).Complement(universal, out _);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", complementleft);
             Console.WriteLine("     A");
-            ISet<int> complementright = setA;
+            ICSet<int> complementright = setA;
             Console.WriteLine("  ---> {0}", complementright);
             Console.WriteLine();
             Console.WriteLine();
@@ -418,19 +418,19 @@ namespace Advanced_Sets
             Console.WriteLine("  ==================");
             Console.WriteLine("  * 1 : ~( A U B ) = ~A \u2229 ~B ::");
             Console.WriteLine("     ~( A U B )");
-            ISet<int> DeMorgRight1 = (setA.Union(setB)).Complement(universal, out _);
+            ICSet<int> DeMorgRight1 = (setA.Union(setB)).Complement(universal, out _);
             Console.WriteLine("  ---> {0}", DeMorgRight1);
             Console.WriteLine("     ~A \u2229 ~B");
-            ISet<int> DeMorgLeft1 = setA.Complement(universal, out _).Intersection(setB.Complement(universal, out _));
+            ICSet<int> DeMorgLeft1 = setA.Complement(universal, out _).Intersection(setB.Complement(universal, out _));
             Console.WriteLine("  ---> {0}", DeMorgLeft1);
             Console.WriteLine();
 
             Console.WriteLine("  * 2 : ~( A \u2229 B ) = ~A U ~B ::");
             Console.WriteLine("     ~( A U B )");
-            ISet<int> DeMorgRight2 = (setA.Intersection(setB)).Complement(universal, out _);
+            ICSet<int> DeMorgRight2 = (setA.Intersection(setB)).Complement(universal, out _);
             Console.WriteLine("  ---> {0}", DeMorgRight2);
             Console.WriteLine("     ~A \u2229 ~B");
-            ISet<int> DeMorgLeft2 = setA.Complement(universal, out _).Union(setB.Complement(universal, out _));
+            ICSet<int> DeMorgLeft2 = setA.Complement(universal, out _).Union(setB.Complement(universal, out _));
             Console.WriteLine("  ---> {0}", DeMorgLeft2);
             Console.WriteLine();
             Console.WriteLine();
@@ -440,19 +440,19 @@ namespace Advanced_Sets
             Console.WriteLine("  ============");
             Console.WriteLine("  * 1 : \u2205 U A = A ::");
             Console.WriteLine("     \u2205 U A");
-            ISet<int> identity1left = emptySet.Union(setA);//universal.Difference(universal.Difference(setA));
+            ICSet<int> identity1left = emptySet.Union(setA);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", identity1left);
             Console.WriteLine("     A");
-            ISet<int> identity1right = setA;
+            ICSet<int> identity1right = setA;
             Console.WriteLine("  ---> {0}", identity1right);
             Console.WriteLine();
 
             Console.WriteLine("  * 2 : Uni \u2229 A = A ::");
             Console.WriteLine("     Uni \u2229 A");
-            ISet<int> identity2left = universal.Intersection(setA);//universal.Difference(universal.Difference(setA));
+            ICSet<int> identity2left = universal.Intersection(setA);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", identity2left);
             Console.WriteLine("     A");
-            ISet<int> identity2right = setA;
+            ICSet<int> identity2right = setA;
             Console.WriteLine("  ---> {0}", identity2right);
             Console.WriteLine();
             Console.WriteLine();
@@ -463,19 +463,19 @@ namespace Advanced_Sets
             Console.WriteLine("  ============");
             Console.WriteLine("  * 1 : A U A = A ::");
             Console.WriteLine("     A U A ");
-            ISet<int> idompleft1 = setA.Union(setA);//universal.Difference(universal.Difference(setA));
+            ICSet<int> idompleft1 = setA.Union(setA);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", idompleft1);
             Console.WriteLine("     A");
-            ISet<int> idompleright1 = setA;
+            ICSet<int> idompleright1 = setA;
             Console.WriteLine("  ---> {0}", idompleright1);
             Console.WriteLine();
 
             Console.WriteLine("  * 2 : A \u2229 A = A ::");
             Console.WriteLine("     A \u2229 A");
-            ISet<int> idompleft2 = setA.Intersection(setA);//universal.Difference(universal.Difference(setA));
+            ICSet<int> idompleft2 = setA.Intersection(setA);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", idompleft2);
             Console.WriteLine("     A");
-            ISet<int> idompright2 = setA;
+            ICSet<int> idompright2 = setA;
             Console.WriteLine("  ---> {0}", idompright2);
             Console.WriteLine();
             Console.WriteLine();
@@ -486,19 +486,19 @@ namespace Advanced_Sets
             Console.WriteLine("  ============");
             Console.WriteLine("  * 1 : A U Univeral = Univeral ::");
             Console.WriteLine("     A U Univeral ");
-            ISet<int> domileft1 = setA.Union(universal);//universal.Difference(universal.Difference(setA));
+            ICSet<int> domileft1 = setA.Union(universal);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", domileft1);
             Console.WriteLine("     Univeral");
-            ISet<int> domiright1 = universal;
+            ICSet<int> domiright1 = universal;
             Console.WriteLine("  ---> {0}", domiright1);
             Console.WriteLine();
 
             Console.WriteLine("  * 2 : A \u2229 \u2205 = \u2205 ::");
             Console.WriteLine("     A \u2229 \u2205");
-            ISet<int> domileft2 = setA.Intersection(emptySet);//universal.Difference(universal.Difference(setA));
+            ICSet<int> domileft2 = setA.Intersection(emptySet);//universal.Difference(universal.Difference(setA));
             Console.WriteLine("  ---> {0}", domileft2);
             Console.WriteLine("     \u2205");
-            ISet<int> domiright2 = emptySet;
+            ICSet<int> domiright2 = emptySet;
             Console.WriteLine("  ---> {0}", domiright2);
             Console.WriteLine();
             Console.WriteLine();
@@ -528,10 +528,10 @@ namespace Advanced_Sets
 
             Console.WriteLine("  1. A - B =  A \u2229 ~B");
             Console.WriteLine("     A - B");
-            ISet<int> left1 = setA.Difference(setB);
+            ICSet<int> left1 = setA.Difference(setB);
             Console.WriteLine("  ---> {0}", left1);
             Console.WriteLine("     A \u2229 ~B");
-            ISet<int> right1 = setA.Intersection(setB.Complement(universal, out _));
+            ICSet<int> right1 = setA.Intersection(setB.Complement(universal, out _));
             Console.WriteLine("  ---> {0}", right1);
             Console.WriteLine();
             Console.WriteLine();
@@ -543,7 +543,7 @@ namespace Advanced_Sets
             //ISet<int> left2 = setA.Difference(setB);
             Console.WriteLine("  ---> {0}", "To be implemented......");
             Console.WriteLine("     ( A U B ) - ( A \u2229 B )");
-            ISet<int> right2 = (setA.Union(setB).Difference(setA.Intersection(setB)));
+            ICSet<int> right2 = (setA.Union(setB).Difference(setA.Intersection(setB)));
             Console.WriteLine("  ---> {0}", right2);
             AnyKey();
         }//TestSetLaws
@@ -559,7 +559,7 @@ namespace Advanced_Sets
 
             //Test CSet
             string expression = "{2,{9,8},{16,17,8},{8,8,9,8,8},{8,8},{8,8}}";
-            ISet<string> set = new CSet(expression);
+            ICSet<string> set = new CSet(expression);
             ISetTree<string> tree = set[3];
             Console.WriteLine("  The expression is :  {0} ", expression);
             Console.WriteLine("  The element string will be  :  {0} ", set.ElementString);

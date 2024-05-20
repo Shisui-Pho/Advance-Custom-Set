@@ -47,8 +47,8 @@ namespace SetLibraryTests.GenericSetTests
             GenericSet<int> setB = new GenericSet<int>(expressionB, settings);
 
             // Act
-            ISet<int> union = setA + setB;
-            ISet<int> difference = setA - setB;
+            ICSet<int> union = setA + setB;
+            ICSet<int> difference = setA - setB;
 
             // Assert
             Assert.Equal("{1,2,3,4,5,6}", union.ToString());

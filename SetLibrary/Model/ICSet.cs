@@ -8,7 +8,7 @@ using SetLibrary.Generic;
 
 namespace SetLibrary
 {
-    public interface ISet<T>
+    public interface ICSet<T>
         where T : IComparable
     {
         /// <summary>
@@ -57,13 +57,13 @@ namespace SetLibrary
         /// Adds a set as a subset of the current set. This set will be an element on the first nesting level of the current set.
         /// </summary>
         /// <param name="set"></param>
-        ISet<T> MergeWith(ISet<T> set);
+        ICSet<T> MergeWith(ICSet<T> set);
         /// <summary>
         /// Removes all elements of SetB that are in setA and return the resulting set.
         /// </summary>
         /// <param name="setB"></param>
         /// <returns>A new setA without elements in setB.</returns>
-        ISet<T> Without(ISet<T> setB);
+        ICSet<T> Without(ICSet<T> setB);
         /// <summary>
         /// Removes an element in the current set. This element could be a set or just an single element.
         /// This element must be on the first nesting level.
@@ -89,7 +89,7 @@ namespace SetLibrary
         /// </summary>
         /// <param name="tree">The set to check for.</param>
         /// <returns>True if the set is a subset.</returns>
-        bool IsSubSetOf(ISet<T> setB, out SetType type);
+        bool IsSubSetOf(ICSet<T> setB, out SetType type);
         /// <summary>
         /// Clears the entire set tree.
         /// </summary>

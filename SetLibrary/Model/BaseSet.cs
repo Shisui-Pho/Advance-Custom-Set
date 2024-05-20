@@ -3,7 +3,7 @@ using SetLibrary.Operations;
 using System;
 namespace SetLibrary
 {
-    public abstract class BaseSet<T> : ISet<T>
+    public abstract class BaseSet<T> : ICSet<T>
         where T : IComparable
     {
         //Data members
@@ -56,7 +56,7 @@ namespace SetLibrary
         {
             return this.tree.IndexOf(tree.ToString()) >= 0;
         }//Contains
-        public virtual bool IsSubSetOf(ISet<T> setB, out SetType type)
+        public virtual bool IsSubSetOf(ICSet<T> setB, out SetType type)
         {
             //Assume that SetA is not a proper/sebset of B
             type = SetType.NotASubSet;
@@ -127,11 +127,11 @@ namespace SetLibrary
             return this.tree[index];
         }//GetElementByIndex
         #region Operator overloading
-        public static ISet<T> operator - (BaseSet<T> setA, ISet<T> setB)
+        public static ICSet<T> operator - (BaseSet<T> setA, ICSet<T> setB)
         {
             return setA.Difference(setB);
         }//set difference
-        public static ISet<T> operator + (BaseSet<T> setA, ISet<T> setB)
+        public static ICSet<T> operator + (BaseSet<T> setA, ICSet<T> setB)
         {
             return setA.MergeWith(setB);
         }//Set intersection
@@ -140,8 +140,8 @@ namespace SetLibrary
 
         #region Abstract method to be implemented by the inherited classes
         public abstract bool Contains(T Element);
-        public abstract ISet<T> MergeWith(ISet<T> set);
-        public abstract ISet<T> Without(ISet<T> setB);
+        public abstract ICSet<T> MergeWith(ICSet<T> set);
+        public abstract ICSet<T> Without(ICSet<T> setB);
         #endregion Abstract method to be implemented by the inherited classes
     }//class
 }//namespace

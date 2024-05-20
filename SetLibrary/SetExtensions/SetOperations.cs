@@ -12,7 +12,7 @@ namespace SetLibrary.Operations
         /// <param name="setA">The current set instance</param>
         /// <param name="setB">The other set to be merged with</param>
         /// <returns>The set of type Iset<typeparamref name="T"/> that consists of all elements belonging to either set A or set B (or both)</returns>
-        public static ISet<T> Union<T>(this ISet<T> setA, ISet<T> setB)
+        public static ICSet<T> Union<T>(this ICSet<T> setA, ICSet<T> setB)
             where T : IComparable
         {
             //Return the union
@@ -25,7 +25,7 @@ namespace SetLibrary.Operations
         /// <param name="setA">The current set instance.</param>
         /// <param name="setB">The other set to intersect with</param>
         /// <returns>A subset of type Iset<typeparamref name="T"/> which includes all elements that are both in set A and Set B</returns>
-        public static ISet<T> Intersection<T>(this ISet<T> setA, ISet<T> setB)
+        public static ICSet<T> Intersection<T>(this ICSet<T> setA, ICSet<T> setB)
             where T : System.IComparable
         {
             if (setA.Cardinality > setB.Cardinality)
@@ -50,10 +50,10 @@ namespace SetLibrary.Operations
                 return default(T);
             }//end catch
         }//ConvertToT
-        private static ISet<T> FindIntsersection<T>(ISet<T> setA, ISet<T> setB)
+        private static ICSet<T> FindIntsersection<T>(ICSet<T> setA, ICSet<T> setB)
             where T : IComparable
         {
-            ISet<T> intersection = new GenericSet<T>(setA.Settings);
+            ICSet<T> intersection = new GenericSet<T>(setA.Settings);
             for (int i = 0; i < setB.Cardinality; i++)
             {
                 ISetTree<T> tree = setB[i];
@@ -75,7 +75,7 @@ namespace SetLibrary.Operations
         /// <param name="setA">The current instance that exists in the universal set</param>
         /// <param name="universalSet">The universal set of which setA exists in.</param>
         /// <returns>A new set of type Iset<typeparamref name="T"/> that contains the complement elements.</returns>
-        public static ISet<T> Complement<T>(this ISet<T> setA, ISet<T> universalSet, out bool isUniversal)
+        public static ICSet<T> Complement<T>(this ICSet<T> setA, ICSet<T> universalSet, out bool isUniversal)
             where T : IComparable
         {
             //Assume that it is universal
@@ -84,7 +84,7 @@ namespace SetLibrary.Operations
             //-If the result is not setA then the universal set is not universal to setA
 
             //Take the intersection
-            ISet<T> setC = universalSet.Intersection(setA);
+            ICSet<T> setC = universalSet.Intersection(setA);
 
             //Check if setC is equal to set A
             if(setC.ToString() == setA.ToString())
@@ -92,7 +92,7 @@ namespace SetLibrary.Operations
 
             //Else return null
             isUniversal = false;
-            return default(ISet<T>);
+            return default(ICSet<T>);
         }//Complement
         /// <summary>
         /// The difference between the two sets, A and B, written as A ∖ B or A − B.
@@ -101,13 +101,13 @@ namespace SetLibrary.Operations
         /// <param name="setA">The current instance of the set, will be SetA</param>
         /// <param name="setB">The set which will be removed from setA, will be SetB</param>
         /// <returns> A set of type Iset<typeparamref name="T"/> that contains elements of A that are NOT in B</returns>
-        public static ISet<T> Difference<T>(this ISet<T> setA, ISet<T> setB)
+        public static ICSet<T> Difference<T>(this ICSet<T> setA, ICSet<T> setB)
             where T : IComparable
         {
             //The methods reads as setA without setB
 
             //Create the new set
-            ISet<T> difference = new GenericSet<T>(setA.Settings);
+            ICSet<T> difference = new GenericSet<T>(setA.Settings);
 
             //If they are the same set, then the difference will be nothing
             if (setA.ToString() == setB.ToString())

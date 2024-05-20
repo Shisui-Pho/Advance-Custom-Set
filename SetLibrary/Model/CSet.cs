@@ -5,7 +5,7 @@ namespace SetLibrary
     /// <summary>
     /// A set object for strings only
     /// </summary>
-    public class CSet : BaseSet<string> ,ISet<string>
+    public class CSet : BaseSet<string> ,ICSet<string>
     {
         public CSet() : base()
         {
@@ -29,7 +29,7 @@ namespace SetLibrary
             return false;
         }//Contains
         #region Set Operations
-        public override ISet<string> MergeWith(ISet<string> set)
+        public override ICSet<string> MergeWith(ICSet<string> set)
         {
             //Get the string representation of the sets
             string s1 = set.ToString();
@@ -41,7 +41,7 @@ namespace SetLibrary
             //Return a new instance of the set
             return new CSet(final);
         }//MergeSets
-        public override ISet<string> Without(ISet<string> setB)
+        public override ICSet<string> Without(ICSet<string> setB)
         {
             return this - setB;
         }//Without

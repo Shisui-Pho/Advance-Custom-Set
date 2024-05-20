@@ -14,7 +14,7 @@ namespace SetLibraryTests.CSetTests
         public void ElementStringsWithoutNestedSetsTest(string elementString, string expectedString)
         {
             //Create the new set objec
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedString, set.ElementString);
         }//ElementStringsWithoutNestedSetsTest
@@ -28,7 +28,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{5,6,6,6,2}", 3)]
         public void ElementStringsWithoutNestedSetsCardinalityTest(string elementString, int expectedCardinality)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedCardinality, set.Cardinality);
         }//ElementStringsWithoutNestedSetsCardinalityTest
@@ -43,7 +43,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{1,0,1,0,1,0,1,{0,1,0,1,0,1},0,1}","{0,1,{0,1}}")]
         public void ElementStringWithDegreeOneNestingLevelTest(string elementString, string expectedSetString)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedSetString, set.ElementString);
         }//ElementStringWithDegreeOneNestingLevelTest
@@ -58,7 +58,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{1,0,1,0,1,0,1,{0,1,0,1,0,1},0,1}", 3)]
         public void ElementStringWithDegreeOneNestingLevelTestCardinality(string elementString, int expectedCardinality)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedCardinality, set.Cardinality);
         }//ElementStringWithDegreeOneNestingLevelTestCardinality
@@ -73,7 +73,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{3,2,{1,{6,6},6}}","{2,3,{1,6,{6}}}")]
         public void ElementStringWithOneDegreeNestingLevelIncludingSubSets(string elementString, string expextedElementString)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expextedElementString, set.ElementString);
         }//ElementStringWithOneDegreeNestingLevelIncludingSubSets
@@ -88,7 +88,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{3,2,{1,{6,6},6}}", 3)]
         public void ElementStringWithOneDegreeNestingLevelIncludingSubSetsCardinality(string elementString, int expectedCardinality)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedCardinality, set.Cardinality);
         }//ElementStringWithOneDegreeNestingLevelIncludingSubSetsCardinality
@@ -102,7 +102,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{{2,2,2,2},{3,1,2},{1,2,3},{2,1,3},{2,2}}","{{2},{1,2,3}}")]
         public void ElementStringWithMultipleSubsetsOfOneDegreeNestingLevel(string elementString, string expextedElementString)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expextedElementString, set.ElementString);
         }//ElementStringWithMultipleSubsetsOfOneDegreeNestingLevel
@@ -117,7 +117,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{{2,2,2,2},{3,1,2},{1,2,3},{2,1,3},{2,2}}", 2)]
         public void ElementStringWithMultipleSubsetsOfOneDegreeNestingLevelCardinality(string elementString, int expectedCardinality)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedCardinality, set.Cardinality);
         }//ElementStringWithMultipleSubsetsOfOneDegreeNestingLevelCardinality
@@ -132,7 +132,7 @@ namespace SetLibraryTests.CSetTests
         [InlineData("{5,5,3,{6,{5,8},{5,3},5,6},{6,{5,8},{5,3},5,6},7}", "{3,5,7,{5,6,{3,5},{5,8}}}")]         
         public void GeneralElementStrings(string elementString, string expextedElementString)
         {
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expextedElementString, set.ElementString);
         }//ElementStringWithMultipleSubsetsOfOneDegreeNestingLevel
@@ -147,7 +147,7 @@ namespace SetLibraryTests.CSetTests
         public void GeneralElementStringsCardinality(string elementString, int expectedCardinality)
         {
             //Create the new set objec
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedCardinality, set.Cardinality);
         }//CardinalityShouldBeCorrect
@@ -161,7 +161,7 @@ namespace SetLibraryTests.CSetTests
         public void EmptySetsTests(string elementString, string expectedString)
         {
             //Create the new set objec
-            ISet<string> set = new CSet(elementString);
+            ICSet<string> set = new CSet(elementString);
 
             Assert.Equal(expectedString, set.ElementString);
         }//EmptySetsTests

@@ -10,7 +10,7 @@ namespace SetLibraryTests.CSetTests
 {
     public class SubSetsTests
     {
-        private SetLibrary.ISet<string> testSet;
+        private SetLibrary.ICSet<string> testSet;
         private ISetTree<string> subset;
         public SubSetsTests()
         {

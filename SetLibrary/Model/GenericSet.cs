@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SetLibrary.Generic
 {
-    public class GenericSet<T> :BaseSet<T> ,ISet<T> 
+    public class GenericSet<T> :BaseSet<T> ,ICSet<T> 
         where T : IComparable
     {
         public GenericSet():base()
@@ -17,7 +17,7 @@ namespace SetLibrary.Generic
             :base(setString,settings)
         {
         }//CTOR
-        public override ISet<T> MergeWith(ISet<T> set)
+        public override ICSet<T> MergeWith(ICSet<T> set)
         {
             string s1 = set.ToString();
             string s2 = this.ToString();
@@ -31,7 +31,7 @@ namespace SetLibrary.Generic
             return this.tree.IndexOf(Element) >= 0;
         }//Contains
 
-        public override ISet<T> Without(ISet<T> setB)
+        public override ICSet<T> Without(ICSet<T> setB)
         {
             return this - setB;
         }//Without

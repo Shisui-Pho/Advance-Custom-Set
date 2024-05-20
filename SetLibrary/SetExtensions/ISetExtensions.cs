@@ -5,7 +5,7 @@ namespace SetLibrary
 {
     public static class ISetExtensions
     {
-        public static List<T> ToListRootElements<T>(this ISet<T> set)
+        public static List<T> ToListRootElements<T>(this ICSet<T> set)
            where T : IComparable
         {
             List<T> elem = new List<T>();
@@ -21,7 +21,7 @@ namespace SetLibrary
             }//end for
             return elem;
         }//ToListRootElements
-        public static List<ISetTree<T>> ToListSubSets<T>(this ISet<T> set)
+        public static List<ISetTree<T>> ToListSubSets<T>(this ICSet<T> set)
             where T : IComparable
         {
             List<ISetTree<T>> trees = new List<ISetTree<T>>();
@@ -33,7 +33,7 @@ namespace SetLibrary
             }
             return trees;
         }//class
-        public static T FindFirstRootElement<T>(this ISet<T> set)
+        public static T FindFirstRootElement<T>(this ICSet<T> set)
             where T : IComparable
         {
             ISetTree<T> tree = set[0];
@@ -49,7 +49,7 @@ namespace SetLibrary
         /// <param name="set">The current instatnce of the set.</param>
         /// <param name="index">Zero base index of the element(Subsets will be ignored)</param>
         /// <returns>An element of Type <typeparamref name="T"/>.</returns>
-        public static T GetRootElementByIndex<T>(this ISet<T> set, int index)
+        public static T GetRootElementByIndex<T>(this ICSet<T> set, int index)
             where T : IComparable
         {
             int count = 0;
@@ -72,7 +72,7 @@ namespace SetLibrary
         /// <param name="set">The current instatnce of the set.</param>
         /// <param name="index">Zero base index of the subset(exluding the root elements)</param>
         /// <returns>A subset Tree</returns>
-        public static ISetTree<T> GetSubSetElementByIndex<T>(this ISet<T> set, int index)
+        public static ISetTree<T> GetSubSetElementByIndex<T>(this ICSet<T> set, int index)
             where T : IComparable
         {
             int count = 0;

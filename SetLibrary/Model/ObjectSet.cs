@@ -2,7 +2,7 @@
 using System;
 namespace SetLibrary.Objects_Sets
 {
-    public class ObjectSet<T> : BaseSet<T>, ISet<T>
+    public class ObjectSet<T> : BaseSet<T>, ICSet<T>
         where T : IObjectConverter<T>, IComparable, IEquatable<T>
     {
         public ObjectSet(T placeHolder) : base()
@@ -26,7 +26,7 @@ namespace SetLibrary.Objects_Sets
             //Else it is not in the root
             return false;
         }//Contains
-        public override ISet<T> MergeWith(ISet<T> setB)
+        public override ICSet<T> MergeWith(ICSet<T> setB)
         {
             string s1 = this.ToString();
             string s2 = setB.ToString();
@@ -35,7 +35,7 @@ namespace SetLibrary.Objects_Sets
             return new ObjectSet<T>(final, Settings);
         }//MergeWith
 
-        public override ISet<T> Without(ISet<T> setB)
+        public override ICSet<T> Without(ICSet<T> setB)
         {
             return this - setB;
         }//Without
