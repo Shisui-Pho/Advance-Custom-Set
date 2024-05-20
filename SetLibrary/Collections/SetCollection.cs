@@ -77,7 +77,7 @@ namespace SetLibrary.Collections
             }//end if we have a single character
 
             //The idea
-            //--Here in this lines of code we are considering names which are bigger that 'AA'
+            //--Here in the next lines of code we are considering names which are bigger that 'AA'
             //--So we first increament the last letter('A') to get the next name
             //--If we get a name 'AZ' and increament ('Z') we get '[' which is not correct, so the Idea is to round the new increament to
             //**              'A' and then Increament the next character ('A') thus 'AZ' --> 'BA'
