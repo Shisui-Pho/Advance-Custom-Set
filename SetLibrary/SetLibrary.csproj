@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ISetCollection.cs" />
     <Compile Include="Collections\ISortedElements.cs" />
     <Compile Include="Collections\ISortedSubSets.cs" />
+    <Compile Include="Collections\Set.cs" />
+    <Compile Include="Collections\SetCollection.cs" />
     <Compile Include="Model\BaseSet.cs" />
     <Compile Include="Model\Element.cs" />
     <Compile Include="Collections\ISortedSetCollection.cs" />
