@@ -15,7 +15,6 @@ namespace SetLibrary.Collections
         private int _count_sets;
 
         //Properties
-        public IEnumerable<ICSet<T>> EnumerateCollection => _sets;
         public int Count => _sets.Count;
 
         //Indexer
