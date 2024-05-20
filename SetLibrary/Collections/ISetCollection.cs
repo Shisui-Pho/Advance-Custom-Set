@@ -13,7 +13,7 @@ namespace SetLibrary.Collections
         void Remove(ICSet<T> item);
         void Remove(string name);
         void RemoveAt(int index);
-        IEnumerator<Set> GetCollectionEnumerator();
+        IEnumerator<Set> GetEnumerator();
         void ResetNaming();
         void Clear();
     }//interface

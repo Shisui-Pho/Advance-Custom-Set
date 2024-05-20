@@ -92,7 +92,7 @@ namespace SetLibrary.Collections
             _setNames = new List<string>();
         }//Clear
 
-        public IEnumerator<Set> GetCollectionEnumerator()
+        public IEnumerator<Set> GetEnumerator()
         {
             //Return the struct of the set
             for (int i = 0; i < _count_sets; i++)
