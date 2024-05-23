@@ -22,6 +22,24 @@ namespace SetLibrary.Collections
         /// <param name="item">The set to be added.</param>
         void Add(ICSet<T> item);
         /// <summary>
+        /// Checks weather the current set collection contains a set.
+        /// </summary>
+        /// <param name="item">The set to be searched.</param>
+        /// <returns>True if the set is in the current collection.</returns>
+        bool Contains(ICSet<T> item);
+        /// <summary>
+        /// Checks weather the current set collection contains the name of a given set.
+        /// </summary>
+        /// <param name="name">The name of the set.</param>
+        /// <returns>True if the set is in the collection.</returns>
+        bool Contains(string name);
+        /// <summary>
+        /// Finds a set by it's name in the current collection.
+        /// </summary>
+        /// <param name="name">The name of the set.</param>
+        /// <returns>A set if it was found in the collection.</returns>
+        ICSet<T> FindSetByName(string name);
+        /// <summary>
         /// Removes a set from the collection.
         /// </summary>
         /// <param name="item">The set to be removed.</param>

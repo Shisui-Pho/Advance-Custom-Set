@@ -187,5 +187,25 @@ namespace SetLibrary.Collections
             foreach (var item in copy)
                 this.Add(item);
         }//ResetNaming
+
+        public bool Contains(ICSet<T> item)
+        {
+            int index = this._sets.IndexOf(item);
+            return index >= 0;
+        }//Contains
+
+        public bool Contains(string name)
+        {
+            int index = this._setNames.IndexOf(name);
+            return index >= 0;
+        }//Contains
+
+        public ICSet<T> FindSetByName(string name)
+        {
+            int index = this._setNames.IndexOf(name);
+            if (index < 0)
+                return default(ICSet<T>);
+            return this._sets[index];
+        }//FindSetByName
     }//class
 }//namespace
