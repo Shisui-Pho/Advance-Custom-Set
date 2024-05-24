@@ -80,9 +80,11 @@ namespace SetLibrary
                     return false;
             }//end for each
 
-            //This means they are proper sets
+            //At this point it means that all elemnts in this set are also in setB
+
+
             if (setB.Cardinality == this.Cardinality)
-                type = SetType.SubSet;
+                type = SetType.SubSet & SetType.Same_Set;//This means that they are the same and subset.
             else
                 type = SetType.ProperSet;
             return true;

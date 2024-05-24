@@ -7,6 +7,7 @@
         SubSet,
         NotASubSet,
         ProperSet,
-        Non_Universal
+        Non_Universal,
+        Same_Set
     }//enum
 }//namespace
