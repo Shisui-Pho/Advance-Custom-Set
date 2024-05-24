@@ -6,17 +6,26 @@ namespace SetLibrary.Generic
     {
         public GenericSet():base()
         {
-        }//ctor 01
+        }//ctor default
         public GenericSet(SetExtractionSettings<T> settings)
             : base(settings)
         {
             //Override the base collection
             base.Settings = settings;
-        }//ctor 01
+        }//ctor 02
         public GenericSet(string setString,SetExtractionSettings<T> settings)
             :base(setString,settings)
         {
-        }//CTOR
+        }//ctor 03
+        public GenericSet(T[] elements, SetExtractionSettings<T> settings)
+            : base(elements,settings)
+        {
+        }//ctor 01
+        public GenericSet(System.Collections.Generic.IEnumerable<T> elemets,SetExtractionSettings<T> settings) :
+            base(elemets, settings)
+        {
+
+        }//ctor 04
         public override ICSet<T> MergeWith(ICSet<T> set)
         {
             string s1 = set.ToString();

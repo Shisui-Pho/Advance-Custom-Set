@@ -42,6 +42,13 @@ namespace SetLibrary
             this.Settings = settings;
             this.tree = BuildSetString(setString);
         }//ctor 03
+        public BaseSet(System.Collections.Generic.IEnumerable<T> collection, SetExtractionSettings<T> settings)
+            : this(settings)
+        {
+            //Now add the elements in the collection
+            foreach (var item in collection)
+                this.AddElement(item);
+        }//ctor 3
         private ISetTree<T> BuildSetString(string expression)
         {
             if(!BracesEvaluation.AreBracesCorrect(expression))

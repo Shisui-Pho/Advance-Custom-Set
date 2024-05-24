@@ -1,5 +1,6 @@
 ﻿using System;
 using SetLibrary.Generic;
+using System.Collections.Generic;
 namespace SetLibrary
 {
     /// <summary>
@@ -13,7 +14,14 @@ namespace SetLibrary
         public CSet(string elementString)
             : base(elementString, new SetExtractionSettings<string>(","))
         { 
-        }//ctor main
+        }//ctor 01
+        public CSet(string[] elements)
+            : base(elements, new SetExtractionSettings<string>(","))
+        {
+        }//ctor 02
+        public CSet(IEnumerable<string> elements) : base(elements, new SetExtractionSettings<string>(","))
+        {
+        }//ctor 03
         public override bool Contains(string Element)
         {
             if(!Element.Contains("{") && !Element.Contains("}"))

@@ -14,7 +14,16 @@ namespace SetLibrary.Objects_Sets
         {
             if (settings.PlaceHolder == null)
                 throw new ArgumentException("Place holder cannot be null");
-        }//ctor 01
+        }//ctor 02
+        public ObjectSet(T[] elements, SetExtractionSettings<T> settings) :
+            base(elements, settings)
+        {
+
+        }//ctor 03
+        public ObjectSet(System.Collections.Generic.IEnumerable<T> elements, SetExtractionSettings<T> settings):
+            base(elements, settings)
+        {
+        }//ctor 04
         public override bool Contains(T Element)
         {
             //First check the base elements
