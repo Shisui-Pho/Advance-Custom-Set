@@ -5,11 +5,14 @@ namespace SetLibrary.Collections
     public class SetCollection<T> : ISetCollection<T>
         where T : IComparable
     {
+        #region Datafields
         //Parallel  arrays that will hold the sets and their names
         private List<ICSet<T>> _sets;
         private List<string> _setNames;
         private int _count_sets;
+        #endregion Datafields
 
+        #region Properties, Indexers and Contructor
         //Properties
         public int Count => _sets.Count;
 
@@ -28,7 +31,20 @@ namespace SetLibrary.Collections
         public SetCollection()
         {
             Clear();
-        }//ctor
+        }//ctor main
+        public SetCollection(IEnumerable<ICSet<T>> collection)
+        {
+            Clear();
+            foreach (var item in collection)
+            {
+                //Add all elements from the incoming collection in the internal collection
+                //  and also assign a name in all the elements.
+                this.Add(item);
+            }//for each
+        }//ctor 02
+        #endregion Properties, Indexers and Contructor
+
+        #region Adding new element/set in the collection
         public void Add(ICSet<T> item)
         {
             if(_count_sets == 0)
@@ -140,26 +156,23 @@ namespace SetLibrary.Collections
 
             return newname;
         }//EvaluateName
-        public void Clear()
-        {
-            _sets = new List<ICSet<T>>();
-            _count_sets = 0;
-            _setNames = new List<string>();
-        }//Clear
+        #endregion Adding new element/set in the collection
 
+        #region Enumeration 
         public IEnumerator<Set> GetEnumerator()
         {
             //Return the struct of the set
             for (int i = 0; i < _count_sets; i++)
                 yield return new Set(_setNames[i], _sets[i].ElementString, _sets[i].Cardinality);
         }//GetCollectionEnumerator
+        #endregion Enumeration
 
+        #region Removing element/set in the colletion
         public void Remove(ICSet<T> item)
         {
             int index = _sets.IndexOf(item);
             RemoveAt(index);
         }//Remove
-
         public void Remove(string name)
         {
             int index = _setNames.IndexOf(name);
@@ -174,7 +187,29 @@ namespace SetLibrary.Collections
             _setNames.RemoveAt(index);
             _count_sets--;
         }//RemoveAt
+        #endregion Removing element/set in the collection
 
+        #region SetContainment and Finding
+        public bool Contains(ICSet<T> item)
+        {
+            int index = this._sets.IndexOf(item);
+            return index >= 0;
+        }//Contains
+        public bool Contains(string name)
+        {
+            int index = this._setNames.IndexOf(name);
+            return index >= 0;
+        }//Contains
+        public ICSet<T> FindSetByName(string name)
+        {
+            int index = this._setNames.IndexOf(name);
+            if (index < 0)
+                return default(ICSet<T>);
+            return this._sets[index];
+        }//FindSetByName
+        #endregion SetContainment and Finding
+
+        #region Resetting and Clearing
         public void Reset()
         {
             //Here we reset the naming of the sets
@@ -187,25 +222,12 @@ namespace SetLibrary.Collections
             foreach (var item in copy)
                 this.Add(item);
         }//ResetNaming
-
-        public bool Contains(ICSet<T> item)
+        public void Clear()
         {
-            int index = this._sets.IndexOf(item);
-            return index >= 0;
-        }//Contains
-
-        public bool Contains(string name)
-        {
-            int index = this._setNames.IndexOf(name);
-            return index >= 0;
-        }//Contains
-
-        public ICSet<T> FindSetByName(string name)
-        {
-            int index = this._setNames.IndexOf(name);
-            if (index < 0)
-                return default(ICSet<T>);
-            return this._sets[index];
-        }//FindSetByName
+            _sets = new List<ICSet<T>>();
+            _count_sets = 0;
+            _setNames = new List<string>();
+        }//Clear
+        #endregion Reseting and Clearing
     }//class
 }//namespace
