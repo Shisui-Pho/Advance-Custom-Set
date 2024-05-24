@@ -207,6 +207,13 @@ namespace SetLibrary.Collections
                 return default(ICSet<T>);
             return this._sets[index];
         }//FindSetByName
+        public Set GetSetByIndex(int index)
+        {
+            if (index < 0 || index >= _count_sets)
+                throw new IndexOutOfRangeException();
+            var set = new Set(_setNames[index], _sets[index].ElementString, _sets[index].Cardinality);
+            return set;
+        }//GetSetByIndex
         #endregion SetContainment and Finding
 
         #region Resetting and Clearing

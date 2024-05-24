@@ -40,6 +40,12 @@ namespace SetLibrary.Collections
         /// <returns>A set if it was found in the collection.</returns>
         ICSet<T> FindSetByName(string name);
         /// <summary>
+        /// Get the set structure in the collection by index.
+        /// </summary>
+        /// <param name="index">The zero based index of the set</param>
+        /// <returns>A structure of the set in the collection</returns>
+        Set GetSetByIndex(int index);
+        /// <summary>
         /// Removes a set from the collection.
         /// </summary>
         /// <param name="item">The set to be removed.</param>
