@@ -85,10 +85,12 @@ namespace SetLibrary
         /// <returns>Returns true if the it is in the set</returns>
         bool Contains(ISetTree<T> tree);
         /// <summary>
-        /// Checks if the current set is a subset of setB.
+        /// Checks if the given set is a subset of the current set. If they have the same cardinality and all elements in the set are in setB. 
+        /// Then the setType will be Proper set &amp; same set otherwise it will be a Proper set.
         /// </summary>
-        /// <param name="tree">The set to check for.</param>
-        /// <returns>True if the set is a subset.</returns>
+        /// <param name="setB">Set that is to contain the current set.</param>
+        /// <param name="type">The set type between the current set and setB</param>
+        /// <returns>A boolean to indeicate if a set is a subset or not.</returns>
         bool IsSubSetOf(ICSet<T> setB, out SetType type);
         /// <summary>
         /// Clears the entire set tree.
