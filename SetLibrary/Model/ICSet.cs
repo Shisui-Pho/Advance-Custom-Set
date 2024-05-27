@@ -81,7 +81,7 @@ namespace SetLibrary
         /// <summary>
         /// Checks if the element exists in the current set. This element will be on the first nesting level.
         /// </summary>
-        /// <param name="tree">The </param>
+        /// <param name="tree">The element to be checked</param>
         /// <returns>Returns true if the it is in the set</returns>
         bool Contains(ISetTree<T> tree);
         /// <summary>
@@ -92,6 +92,7 @@ namespace SetLibrary
         /// <param name="type">The set type between the current set and setB</param>
         /// <returns>A boolean to indeicate if a set is a subset or not.</returns>
         bool IsSubSetOf(ICSet<T> setB, out SetType type);
+        bool IsElementOf(ICSet<T> setB);
         /// <summary>
         /// Clears the entire set tree.
         /// </summary>

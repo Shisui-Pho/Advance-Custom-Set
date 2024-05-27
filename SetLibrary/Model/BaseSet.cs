@@ -96,6 +96,10 @@ namespace SetLibrary
                 type = SetType.ProperSet;
             return true;
         }//IsSubSetOf
+        public bool IsElementOf(ICSet<T> setB)
+        {
+            return setB.Contains(this.tree);
+        }//IsElementOf
         #region Adding and removing element on a set tree
         public virtual void AddElement(T Element)
         {
