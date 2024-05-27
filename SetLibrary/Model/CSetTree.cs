@@ -133,6 +133,9 @@ namespace SetLibrary
         }//RemoveElement
         public void AddElement(T element)
         {
+            //First check if it exists
+            if (lstRootElements.Contains(element))
+                return;
             //Add it in the root
             lstRootElements.Add(element);
         }//AddElement
