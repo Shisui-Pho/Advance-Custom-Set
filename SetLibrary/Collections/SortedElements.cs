@@ -90,5 +90,38 @@ namespace SetLibrary.Collections
             Element<T> elem = new Element<T>(a, 0, true);
             return elem;
         }//FindElementByIndex
+        public T Find<Key>(Key key, string propertyName)
+        {
+            int left = 0;
+            int right = this.Count;
+            int mid = (left + right) / 2;
+            bool isFound = false;
+            T val = default;
+            while (!isFound && left <= right)
+            {
+                int comparer = Compare(_collection[mid], key, propertyName);
+                if (comparer < 0)
+                    left = mid;
+                else if (comparer > 0)
+                    right = mid;
+                else
+                {
+                    val = _collection[mid];
+                    isFound = true;
+                }
+                mid = (left + right) / 2;
+            }//end while
+
+            return val;
+        }//Find
+        private object GetProperty(T item, string propName)
+        {
+            return item.GetType().GetProperty(propName).GetValue(item, null);
+        } //GetProperty
+        private int Compare<Key>(T x, Key key, string compareField)
+        {
+            IComparable propX = (IComparable)GetProperty(x, compareField);
+            return propX.CompareTo(key);
+        } //Compare
     }//class
 }//namespace
