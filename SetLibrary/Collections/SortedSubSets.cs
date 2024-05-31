@@ -33,46 +33,52 @@ namespace SetLibrary.Collections
         {
             this.AddRange(subsets);
         }//ctor 02
-        public void Add(ISetTree<T> value)
+        public void Add(ISetTree<T> newTree)
         {
-            if (_collection.Count <= 0)
+            //If it is empty
+            if(this.Count <= 0)
             {
-                _collection.Add(value);
+                _collection.Add(newTree);
                 return;
-            }//end if collection is empty
+            }//end if empty
 
-            //Add an empty cell first at the end of the list
-            _collection.Add(default(ISetTree<T>));
+            //Get the index of the last element
+            //-The point of insertion will always be (indexOfLast + 1)
+            int indexOfLast = _collection.Count - 1;
 
-            //Start at the end of the list
-            int index = _collection.Count - 2;
+            //Add an empty sport at the end of the list
+            _collection.Add(default);
 
-            //will be used to determine when to insert
-            bool insertionPositionNotFound;
-            do
+            //A boolean condition that will tell us if an insersion point was found or not
+            bool insertionPointFound = false;
+
+            while(!insertionPointFound && indexOfLast>= 0)
             {
-                int cardinalNew = value.Cardinality;
-                int cardinalExisting = _collection[index].Cardinality;
-                insertionPositionNotFound = cardinalExisting < cardinalNew;
-                if (cardinalNew == cardinalExisting)
-                    insertionPositionNotFound = NewElementBeforeExistingElement(value, _collection[index]);
-                
-                //Special cases for empty sets
-                //-An empty set should come before a normal set.
-                if (cardinalExisting == 0 || cardinalNew == 0)
-                    insertionPositionNotFound = true;
-   
-                if (insertionPositionNotFound && !(cardinalNew == 0))
-                    break;
-                //Move the items
-                _collection[index + 1] = _collection[index];
-                
-                index--;
+                //First compare the cardinalities
+                int cardinalityA = newTree.Cardinality;//This is the cardinality of the new element
+                int cardinalityB = _collection[indexOfLast].Cardinality;//This is the cardinality of the last element
 
-            } while (insertionPositionNotFound && index >= 0);
+                if (cardinalityA > cardinalityB)//This means that the current tree comes before the new tree
+                    insertionPointFound = true;
 
-            _collection[++index] = value;
-        }//AddSort
+                if (cardinalityA == cardinalityB)//This means that further inspection needs to be considered
+                    insertionPointFound = NewElementBeforeExistingElement(newTree, _collection[indexOfLast]);
+
+                if (cardinalityA == 0)//If this is an empty set
+                    insertionPointFound = false;
+
+                if (!insertionPointFound) 
+                {
+                    //Move the last element to next sport
+                    _collection[indexOfLast + 1] = _collection[indexOfLast];
+
+                    indexOfLast--;
+                }
+            }//end while
+
+            //Here we add the element at indexOfLast + 1
+            _collection[++indexOfLast] = newTree;
+        }//AddNew
         private bool NewElementBeforeExistingElement(ISetTree<T> newTree, ISetTree<T> existing)
         {
             //If the new tree has less subsets than the existsing one then the new one comes before the existsing one 
@@ -87,11 +93,11 @@ namespace SetLibrary.Collections
             //-If both of them have no subsets
             if(newTree.NumberOfSubsets == 0 && existing.NumberOfSubsets == 0)
             {
-                bool foundCondition = true;
                 int i = 0;
                 int cardinality = newTree.Cardinality;
-                while (foundCondition && i < cardinality)
+                while (i < cardinality)
                 {
+                    //Compare the corresponding elements
                     int compareVal = existing.GetRootElementByIndex(i).CompareTo(newTree.GetRootElementByIndex(i));
                     if (compareVal < 0)
                         return true;
@@ -110,12 +116,8 @@ namespace SetLibrary.Collections
             if (levelExisting > levelNew)
                 return true;
 
-            //Here were dealing with nested subset
-            for(int i =0; i < newTree.Cardinality; i++)
-            {
-                return NewElementBeforeExistingElement(newTree.GetSubSetElementByIndex(i), existing.GetSubSetElementByIndex(i));
-            }
-            return false;
+            //This means we have nested subset with alsmost the same structure
+            return NewElementBeforeExistingElement(newTree.GetSubSetElementByIndex(0), existing.GetSubSetElementByIndex(0));
         }//NewElementBeforeExistingElement
         public Element<T> FindElementByIndex(int index)
         {

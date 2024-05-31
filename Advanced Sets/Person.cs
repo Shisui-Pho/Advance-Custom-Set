@@ -23,7 +23,10 @@ namespace Advanced_Sets
         }//ToObject
         public int CompareTo(object obj)
         {
-            return this.FirstName.CompareTo(((Person)obj).FirstName);
+            int comparer = this.FirstName.CompareTo(((Person)obj).FirstName);
+            if(comparer == 0)
+                comparer = this.LastName.CompareTo(((Person)obj).LastName);
+            return comparer;
         }//CompareTo
         public override string ToString()
         {
