@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace SetLibrary.Collections
 {
-    internal class SortedElements<T> : ISortedElements<T>
+    public class SortedElements<T> : ISortedElements<T>
         where T : IComparable
     { 
         //embeded lists
@@ -80,5 +80,15 @@ namespace SetLibrary.Collections
         {
             return this.GetEnumerator();
         }//GetEnumerator
+
+        public Element<T> FindElementByIndex(int index)
+        {
+            if (index > _collection.Count || index < 0)
+                throw new IndexOutOfRangeException();
+            var a = this._collection[index];
+
+            Element<T> elem = new Element<T>(a, 0, true);
+            return elem;
+        }//FindElementByIndex
     }//class
 }//namespace

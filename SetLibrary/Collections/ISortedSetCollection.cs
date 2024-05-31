@@ -20,5 +20,11 @@ namespace SetLibrary.Collections
         /// </summary>
         /// <param name="index">The zero based index of the element</param>
         void RemoveAt(int index);
+        /// <summary>
+        /// Finds an element in the set collection base on an index.
+        /// </summary>
+        /// <param name="index">Zero based index of the element.</param>
+        /// <returns>An element structure with the information about that particular element.</returns>
+        Element<T> FindElementByIndex(int index);
     }//class
 }//namespace

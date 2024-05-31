@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace SetLibrary.Collections
 {
-    internal interface ISortedElements<T> : ISortedSetCollection<T>, IEnumerable<T>
+    public interface ISortedElements<T> : ISortedSetCollection<T>, IEnumerable<T>
     where T : IComparable
     {
         /// <summary>
