@@ -10,9 +10,12 @@ namespace SetLibrary
                 return false;
             //Stack that will contain all the 
             Stack<char> elements = new Stack<char>();
-            //{5,{6,7,{9,6,{5,5}}}}
+            //Remove white space
+            //expression = expression.Replace(" ", "");
 
             int lengthOfString = expression.Length;
+
+            //This will keep track of the number of elements that have been evaluated
             int Count = 0;
             foreach (char character in expression)
             {

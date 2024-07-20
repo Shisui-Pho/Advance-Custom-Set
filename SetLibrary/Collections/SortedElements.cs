@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace SetLibrary.Collections
 {
+    public delegate int Compare<T>/*<in T>*/(T val);
     public class SortedElements<T> : ISortedElements<T>
         where T : IComparable
     { 
@@ -90,6 +91,15 @@ namespace SetLibrary.Collections
             Element<T> elem = new Element<T>(a, 0, true);
             return elem;
         }//FindElementByIndex
+        public T Find(Predicate<T> predicate)
+        {
+            T val = default;
+            int count = _collection.Count;
+            for (int i = 0; i < count; i++)
+                if (predicate(_collection[i]))
+                    return _collection[i];
+            return val;
+        }//Find
         public T Find<Key>(Key key, string propertyName)
         {
             int left = 0;
@@ -109,6 +119,30 @@ namespace SetLibrary.Collections
                     val = _collection[mid];
                     isFound = true;
                 }
+                mid = (left + right) / 2;
+            }//end while
+
+            return val;
+        }//Find
+        public T Find(Compare<T> compare)
+        {
+            int left = 0;
+            int right = _collection.Count;
+            int mid = (left + right) / 2;
+            bool isFound = false;
+            T val = default;
+            while(!isFound && left <= right)
+            {
+                int compareValue = compare(_collection[mid]);
+                if (compareValue < 0)
+                    left = mid;
+                else if (compareValue > 0)
+                    right = mid;
+                else
+                {
+                    isFound = true;
+                    val = _collection[mid];
+                }//end else
                 mid = (left + right) / 2;
             }//end while
 
