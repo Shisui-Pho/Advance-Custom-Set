@@ -8,6 +8,10 @@ using SetLibrary.Generic;
 
 namespace SetLibrary
 {
+    /// <summary>
+    /// An interface for the basic set properties and operations
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ICSet<T>
         where T : IComparable
     {
@@ -16,6 +20,10 @@ namespace SetLibrary
         /// Note : Duplicates will be removed
         /// </summary>
         string ElementString { get; }
+        /// <summary>
+        /// Gets the original set string
+        /// </summary>
+        string OriginalString { get; }
         /// <summary>
         /// Gets the Cardinality of the evaluated set.
         /// </summary>

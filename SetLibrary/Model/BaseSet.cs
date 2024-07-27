@@ -12,13 +12,15 @@ namespace SetLibrary
         //-This  data fields will keep track of the element string for updates
         private string _elementString;
         private bool _updated = false;
-
+        private string _original_string;
         //Properties
         public string ElementString => this.ToString();
 
         public int Cardinality => tree.Cardinality;
 
         public SetExtractionSettings<T> Settings { get; protected set; }
+
+        public string OriginalString => _original_string;
 
         public ISetTree<T> this[int index]
         {
@@ -34,6 +36,7 @@ namespace SetLibrary
             this(new SetExtractionSettings<T>(","))
         {
             _updated = false;
+            _original_string = "";
         }//ctor main
         protected BaseSet(SetExtractionSettings<T> settings)
         {
@@ -41,6 +44,7 @@ namespace SetLibrary
             tree = new CSetTree<T>(new System.Collections.Generic.List<T>(), settings);
             _updated = false;
             this._elementString = this.tree.ToString();
+            _original_string = "";
         }//ctor 02
         public BaseSet(string setString, SetExtractionSettings<T> settings)
         {
@@ -51,6 +55,7 @@ namespace SetLibrary
             //Update the element string
             _updated = false;
             this._elementString = this.tree.ToString();
+            _original_string = setString;
         }//ctor 03
         public BaseSet(System.Collections.Generic.IEnumerable<T> collection, SetExtractionSettings<T> settings)
             : this(settings)
@@ -62,6 +67,7 @@ namespace SetLibrary
             //Update the element string
             _updated = false;
             this._elementString = this.tree.ToString();
+            _original_string = _elementString;
         }//ctor 04
         private ISetTree<T> BuildSetString(string expression)
         {
