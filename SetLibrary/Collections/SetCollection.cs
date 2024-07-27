@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 namespace SetLibrary.Collections
 {
@@ -164,7 +165,7 @@ namespace SetLibrary.Collections
             //Return the struct of the set
             for (int i = 0; i < _count_sets; i++)
                 yield return new Set(_setNames[i], _sets[i].ElementString, _sets[i].Cardinality);
-        }//GetCollectionEnumerator
+        }//
         #endregion Enumeration
 
         #region Removing element/set in the colletion

@@ -9,8 +9,12 @@ namespace SetLibrary
         //Data members
         protected ISetTree<T> tree;
 
+        //-This  data fields will keep track of the element string for updates
+        private string _elementString;
+        private bool _updated = false;
+
         //Properties
-        public string ElementString => tree.ToString();
+        public string ElementString => this.ToString();
 
         public int Cardinality => tree.Cardinality;
 
@@ -23,24 +27,30 @@ namespace SetLibrary
                 if (index >= tree.Cardinality || index < 0)
                     throw new IndexOutOfRangeException();
                 return tree.GetElementAsSubsetByIndex(index);
-                //return new CSetTree<T>(tree[index].Value, this.Settings);
             }//end getter
         }//end indexer
+
         public BaseSet():
             this(new SetExtractionSettings<T>(","))
         {
+            _updated = false;
         }//ctor main
         protected BaseSet(SetExtractionSettings<T> settings)
         {
             this.Settings = settings;
             tree = new CSetTree<T>(new System.Collections.Generic.List<T>(), settings);
+            _updated = false;
+            this._elementString = this.tree.ToString();
         }//ctor 02
         public BaseSet(string setString, SetExtractionSettings<T> settings)
         {
-            if (settings == null)
-                throw new ArgumentException("Settings cannot be null");
-            this.Settings = settings;
+            this.Settings = settings ?? throw new ArgumentException("Settings cannot be null");
+
             this.tree = BuildSetString(setString);
+
+            //Update the element string
+            _updated = false;
+            this._elementString = this.tree.ToString();
         }//ctor 03
         public BaseSet(System.Collections.Generic.IEnumerable<T> collection, SetExtractionSettings<T> settings)
             : this(settings)
@@ -48,7 +58,11 @@ namespace SetLibrary
             //Now add the elements in the collection
             foreach (var item in collection)
                 this.AddElement(item);
-        }//ctor 3
+
+            //Update the element string
+            _updated = false;
+            this._elementString = this.tree.ToString();
+        }//ctor 04
         private ISetTree<T> BuildSetString(string expression)
         {
             if(!BracesEvaluation.AreBracesCorrect(expression))
@@ -104,37 +118,56 @@ namespace SetLibrary
         public virtual void AddElement(T Element)
         {
             this.tree.AddElement(Element);
+
+            //Set the update to true
+            _updated = true;
         }//AddElement
 
         public virtual void AddElement(ISetTree<T> tree)
         {
             this.tree.AddSubSetTree(tree);
+
+            //Set the update to true
+            _updated = true;
         }//AddElement
         public virtual bool RemoveElement(ISetTree<T> tree)
         {
-            return this.tree.RemoveElement(tree);
+            bool success = this.tree.RemoveElement(tree);
+            if (success)
+                _updated = true;
+
+            return success;
         }//RemoveElement
 
         public virtual bool RemoveElement(T Element)
         {
-            return tree.RemoveElement(Element);
+            bool success = this.tree.RemoveElement(Element);
+            if (success)
+                _updated = true;
+
+            return success;
         }//RemoveElement
         #endregion Adding and removing elements from a set tree
         public override string ToString()
         {
-            return tree.ToString();//ElementString;
+            if(_updated)
+            {
+                this._elementString = this.tree.ToString();
+                _updated = false;
+            }
+            return _elementString;
         }//ToString
         public void AddSubsetAsString(string subset)
         {
             ISetTree<T> tree = BuildSetString(subset);
             this.tree.AddSubSetTree(tree);
+            _updated = true;
         }//AddSubsetAsString
-
         public void Clear()
         {
             this.tree = CSetTree<T>.GetEmptyTree(this.Settings);
+            _updated = true;
         }//Clear
-
         public Element<T> GetElementByIndex(int index)
         {
             return this.tree[index];
