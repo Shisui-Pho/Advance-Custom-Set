@@ -1,0 +1,566 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SetLibrary</name>
+    </assembly>
+    <members>
+        <member name="P:SetLibrary.Collections.ISetCollection`1.Item(System.Int32)">
+            <summary>
+            Gets the current set element in the collection.
+            </summary>
+            <param name="index">The index of the set in the collection.</param>
+            <returns>A set object in the collection.</returns>
+        </member>
+        <member name="P:SetLibrary.Collections.ISetCollection`1.Count">
+            <summary>
+            Returns the number of sets in the collection.
+            </summary>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Add(SetLibrary.ICSet{`0})">
+            <summary>
+            Adds a new set in the collection. A name will also be added for the set.
+            </summary>
+            <param name="item">The set to be added.</param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Contains(SetLibrary.ICSet{`0})">
+            <summary>
+            Checks weather the current set collection contains a set.
+            </summary>
+            <param name="item">The set to be searched.</param>
+            <returns>True if the set is in the current collection.</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Contains(System.String)">
+            <summary>
+            Checks weather the current set collection contains the name of a given set.
+            </summary>
+            <param name="name">The name of the set.</param>
+            <returns>True if the set is in the collection.</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.FindSetByName(System.String)">
+            <summary>
+            Finds a set by it's name in the current collection.
+            </summary>
+            <param name="name">The name of the set.</param>
+            <returns>A set if it was found in the collection.</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.GetSetByIndex(System.Int32)">
+            <summary>
+            Get the set structure in the collection by index.
+            </summary>
+            <param name="index">The zero based index of the set</param>
+            <returns>A structure of the set in the collection</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Remove(SetLibrary.ICSet{`0})">
+            <summary>
+            Removes a set from the collection.
+            </summary>
+            <param name="item">The set to be removed.</param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Remove(System.String)">
+            <summary>
+            Removes a set based on it's name in the collection.
+            </summary>
+            <param name="name">The letter based name of the set.</param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes a set and it's name on the collection based on an index.
+            </summary>
+            <param name="index">The zero based index of the set.</param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.GetEnumerator">
+            <summary>
+            Get an enumerator of the set structure of the sets in the collection.
+            </summary>
+            <returns>An enumerable collection of the set structure.</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Reset">
+            <summary>
+            Resets the naming(numbering) of sets in the current collection.
+            </summary>
+        </member>
+        <member name="M:SetLibrary.Collections.ISetCollection`1.Clear">
+            <summary>
+            Clear the current collection.
+            </summary>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedElements`1.Remove(`0)">
+            <summary>
+            Removes an element inside the sorted list.
+            </summary>
+            <param name="val">The element to be removed</param>
+            <returns>Bool to indicates if the element was removed or not</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedElements`1.Contains(`0)">
+            <summary>
+            Checks if a particular element is contained in the curernt collection.
+            </summary>
+            <param name="val">The element to be found</param>
+            <returns></returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedElements`1.IndexOf(`0)">
+            <summary>
+            Returns the index of a current element in the set
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedElements`1.Add(`0)">
+            <summary>
+            Adds an element in the collection in a sorted order.
+            </summary>
+            <param name="value">Value to be added of type <typeparamref name="T"/></param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedElements`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds a range of elements in the collection in a sorted order.
+            </summary>
+            <param name="coll">The elements to be added.</param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSubSets`1.Remove(SetLibrary.ISetTree{`0})">
+            <summary>
+            Removes a tree inside the sorted list.
+            </summary>
+            <param name="val">The element to be removed</param>
+            <returns>Bool to indicates if the element was removed or not</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSubSets`1.Contains(SetLibrary.ISetTree{`0})">
+            <summary>
+            Checks if a particular element is contained in the curernt collection.
+            </summary>
+            <param name="val">The element to be found</param>
+            <returns></returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSubSets`1.IndexOf(SetLibrary.ISetTree{`0})">
+            <summary>
+            Returns the index of a current tree in the set
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSubSets`1.Add(SetLibrary.ISetTree{`0})">
+            <summary>
+            Adds tree in the collection in a sorted order.
+            </summary>
+            <param name="value">Value to be added of type <typeparamref name="T"/></param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSubSets`1.AddRange(System.Collections.Generic.IEnumerable{SetLibrary.ISetTree{`0}})">
+            <summary>
+            Adds a range of trees in the collection in a sorted order.
+            </summary>
+            <param name="coll">The elements to be added.</param>
+        </member>
+        <member name="P:SetLibrary.Collections.ISortedSetCollection`1.Count">
+            <summary>
+            Get the number of elements within the collection
+            </summary>
+        </member>
+        <member name="P:SetLibrary.Collections.ISortedSetCollection`1.Item(System.Int32)">
+            <summary>
+            Get the element within the current set collection based on the index. Level of nesting will be determined.
+            </summary>
+            <param name="index">The xero based index of the element.</param>
+            <returns>An element type ref structure.</returns>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSetCollection`1.RemoveAt(System.Int32)">
+            <summary>
+            Removed an element in the currrent collection based on the index
+            </summary>
+            <param name="index">The zero based index of the element</param>
+        </member>
+        <member name="M:SetLibrary.Collections.ISortedSetCollection`1.FindElementByIndex(System.Int32)">
+            <summary>
+            Finds an element in the set collection base on an index.
+            </summary>
+            <param name="index">Zero based index of the element.</param>
+            <returns>An element structure with the information about that particular element.</returns>
+        </member>
+        <member name="T:SetLibrary.Element`1">
+            <summary>
+            This structure represents all root elements in the set including element in a subset in the root.
+            </summary>
+            <typeparam name="T"><typeparamref name="T"/></typeparam>
+        </member>
+        <member name="P:SetLibrary.Element`1.Value">
+            <summary>
+            Represents the element value in the set.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.Element`1.IsInRoot">
+            <summary>
+            Let the user know if the element is in the root of the main set or not.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.Element`1.NestedLevel">
+            <summary>
+            Represents the level of nesting of the element within the main set.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.Element`1.ElementFound">
+            <summary>
+            A property to determine if an element was found or not.
+            </summary>
+        </member>
+        <member name="T:SetLibrary.Objects_Sets.IObjectConverter`1">
+            <summary>
+            This interface defines specifies the convertion of a string to an objects of type T which can be used in the set
+            </summary>
+            <typeparam name="T">Object type that must also implement IComparable</typeparam>
+        </member>
+        <member name="M:SetLibrary.Objects_Sets.IObjectConverter`1.ToObject(System.String,SetLibrary.Generic.SetExtractionSettings{`0})">
+            <summary>
+            Converts a string object to a specified object
+            </summary>
+            <param name="field">The string representation of the the object.</param>
+            <param name="settings">The extaction of the object</param>
+            <returns>Returns the converted objects as type T.</returns>
+        </member>
+        <member name="T:SetLibrary.ICSet`1">
+            <summary>
+            An interface for the basic set properties and operations
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:SetLibrary.ICSet`1.ElementString">
+            <summary>
+            Get the evaluated string representation of the set.
+            Note : Duplicates will be removed
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ICSet`1.OriginalString">
+            <summary>
+            Gets the original set string
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ICSet`1.Cardinality">
+            <summary>
+            Gets the Cardinality of the evaluated set.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ICSet`1.Item(System.Int32)">
+            <summary>
+            An indexer that returns a "Set" of an element inside the SetTree.
+                If the the element is in the root, it will be returned in a "Set" format.
+            </summary>
+            <param name="index"></param>
+            <returns>A set of ISetTree<typeparamref name="T"/></returns>
+        </member>
+        <member name="P:SetLibrary.ICSet`1.Settings">
+            <summary>
+            Gets the current settings of the set extractor.
+            </summary>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.AddElement(`0)">
+            <summary>
+            Adds a new element in the current set. If the element already exists it will not be added.
+            </summary>
+            <param name="Element">Element to be added</param>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.AddElement(SetLibrary.ISetTree{`0})">
+            <summary>
+            Adds a new tree as an element in the current set. If the element tree already exists it will not be added.
+            This element could be a set or just an single element and will be on the first nesting level.
+            </summary>
+            <param name="tree"></param>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.AddSubsetAsString(System.String)">
+            <summary>
+            Adds a new subset in the current string by exctracting the tree.
+            </summary>
+            <param name="subset">A string representation of the subset.</param>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.RemoveElement(SetLibrary.ISetTree{`0})">
+            <summary>
+            Adds a new tree as an element in the current set. If the tree already exists it will not be added.
+            The tree will be on the first nesting level of the current set.
+            </summary>
+            <param name="tree">The tree to be removed</param>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.MergeWith(SetLibrary.ICSet{`0})">
+            <summary>
+            Adds a set as a subset of the current set. This set will be an element on the first nesting level of the current set.
+            </summary>
+            <param name="set"></param>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.Without(SetLibrary.ICSet{`0})">
+            <summary>
+            Removes all elements of SetB that are in setA and return the resulting set.
+            </summary>
+            <param name="setB"></param>
+            <returns>A new setA without elements in setB.</returns>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.RemoveElement(`0)">
+            <summary>
+            Removes an element in the current set. This element could be a set or just an single element.
+            This element must be on the first nesting level.
+            </summary>
+            <param name="Element">The element tree to be removed</param>
+            <returns>Returns a bool indicating if the element was found and removed or not</returns>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.Contains(`0)">
+            <summary>
+            Removes an element in the current set. This element could be a set or just an single element.
+            This element must be on the first nesting level.
+            </summary>
+            <param name="Element">The element to be search</param>
+            <returns>Returns a bool indicating if the element was found and removed or not</returns>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.Contains(SetLibrary.ISetTree{`0})">
+            <summary>
+            Checks if the element exists in the current set. This element will be on the first nesting level.
+            </summary>
+            <param name="tree">The element to be checked</param>
+            <returns>Returns true if the it is in the set</returns>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.IsSubSetOf(SetLibrary.ICSet{`0},SetLibrary.SetType@)">
+            <summary>
+            Checks if the given set is a subset of the current set. If they have the same cardinality and all elements in the set are in setB. 
+            Then the setType will be Proper set &amp; same set otherwise it will be a Proper set.
+            </summary>
+            <param name="setB">Set that is to contain the current set.</param>
+            <param name="type">The set type between the current set and setB</param>
+            <returns>A boolean to indeicate if a set is a subset or not.</returns>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.Clear">
+            <summary>
+            Clears the entire set tree.
+            </summary>
+        </member>
+        <member name="M:SetLibrary.ICSet`1.GetElementByIndex(System.Int32)">
+            <summary>
+            Gets the element in the current set based on an index. The element can be in the root or nested in a subset.
+            </summary>
+            <param name="index">The index of the element.</param>
+            <returns>An element struct which contains the element <typeparamref name="T"/> and position on the set.</returns>
+        </member>
+        <member name="P:SetLibrary.ISetTree`1.RootElement">
+            <summary>
+            String representation of the root elements.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ISetTree`1.Cardinality">
+            <summary>
+            Cardinality of the current set.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ISetTree`1.NumberOfSubsets">
+            <summary>
+            Number of nested subset in the root of the current set.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ISetTree`1.IsInRoot">
+            <summary>
+            Determine if an element is in the root or not.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ISetTree`1.ExtractionSettings">
+            <summary>
+            Set extraction settings.
+            </summary>
+        </member>
+        <member name="P:SetLibrary.ISetTree`1.Item(System.Int32)">
+            <summary>
+            Gets the set representation of an element in the current set.
+            </summary>
+            <param name="index">The zero based index inside the set.</param>
+            <returns>An element in a set format.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.GetAllElementsAsSetEnumarator">
+            <summary>
+            Returns an enumerator that iterates through the elements as subsets. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the subsets</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.GetSubsetsEnumarator">
+            <summary>
+            Returns an enumerator that iterates through the subsets. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the subsets</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.GetRootElementsEnumarator">
+            <summary>
+            Returns an enumerator that iterates through the root elements. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the root elements</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.AddSubSetTree(SetLibrary.ISetTree{`0})">
+            <summary>
+            Adds a subset inside the current set.
+            </summary>
+            <param name="tree">The tree represenstation of the subset.</param>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.AddElement(`0)">
+            <summary>
+            Adds a single element in the root elements of the current set.
+            </summary>
+            <param name="element">The element to be added.</param>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.RemoveElement(`0)">
+            <summary>
+            Removes an element in the root of the current set.
+            </summary>
+            <param name="element">An element to be removed</param>
+            <returns>A boolean to indicate whether an element was removed or not.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.RemoveElement(SetLibrary.ISetTree{`0})">
+            <summary>
+            Remove a subset in the current set.
+            </summary>
+            <param name="element">The element to be removed</param>
+            <returns>A boolean to indicate whether an element was removed or not.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.IndexOf(`0)">
+            <summary>
+            Gets the index of the element in the root.
+            </summary>
+            <param name="element">Element to be searched.</param>
+            <returns>A zero based index of the element within the root.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.IndexOf(System.String)">
+            <summary>
+            Gets the index of the element in the set, could be oon the root or a subset.
+            </summary>
+            <param name="element">A string representation of the element.</param>
+            <returns>A zero based index of the element within the set.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.IndexOf(SetLibrary.ISetTree{`0})">
+            <summary>
+            Gets the index of the subset in the nested in the current set.
+            </summary>
+            <param name="subset"></param>
+            <returns>A zero based index of the element within the set.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetTree`1.ToString">
+            <summary>
+            Get the string representation of the current set tree.
+            </summary>
+            <returns>A string representing the set.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetExtensions.GetRootElementByIndex``1(SetLibrary.ICSet{``0},System.Int32)">
+            <summary>
+            Get the element in the current set base on the element's index which is zero base. Subsets will be ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="set">The current instatnce of the set.</param>
+            <param name="index">Zero base index of the element(Subsets will be ignored)</param>
+            <returns>An element of Type <typeparamref name="T"/>.</returns>
+        </member>
+        <member name="M:SetLibrary.ISetExtensions.GetSubSetElementByIndex``1(SetLibrary.ICSet{``0},System.Int32)">
+            <summary>
+            Get the subset in the current set base on the subset index which is zero base(exluding root elements).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="set">The current instatnce of the set.</param>
+            <param name="index">Zero base index of the subset(exluding the root elements)</param>
+            <returns>A subset Tree</returns>
+        </member>
+        <member name="M:SetLibrary.ISetExtensions.IsUnivesalTo``1(SetLibrary.ICSet{``0},SetLibrary.ICSet{``0})">
+            <summary>
+            Tests whether a set is universal to a given set.
+            </summary>
+            <typeparam name="T">The datatype</typeparam>
+            <param name="universalSet">The universal set</param>
+            <param name="subset">The subset to be contained in the universal set.</param>
+            <returns>True if the subset is contained in the universal set</returns>
+        </member>
+        <member name="M:SetLibrary.ISetExtensions.IsUnivesalTo``1(SetLibrary.ICSet{``0},System.Collections.Generic.IEnumerable{SetLibrary.ICSet{``0}})">
+            <summary>
+            Tests whether a set is universal to a given collection of sets.
+            </summary>
+            <typeparam name="T">Data type</typeparam>
+            <param name="universalSet">The universal set</param>
+            <param name="subsets">The subset collection</param>
+            <returns>True if all subsets are contained in the universal set</returns>
+        </member>
+        <member name="M:SetLibrary.Operations.SetOperations.Union``1(SetLibrary.ICSet{``0},SetLibrary.ICSet{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setA">The current set instance</param>
+            <param name="setB">The other set to be merged with</param>
+            <returns>The set of type Iset<typeparamref name="T"/> that consists of all elements belonging to either set A or set B (or both)</returns>
+        </member>
+        <member name="M:SetLibrary.Operations.SetOperations.Intersection``1(SetLibrary.ICSet{``0},SetLibrary.ICSet{``0})">
+            <summary>
+            The intersection of two sets A and B which are subsets of the universal set U.
+            </summary>
+            <typeparam name="T">Datatype which implement the IComparable interface.</typeparam>
+            <param name="setA">The current set instance.</param>
+            <param name="setB">The other set to intersect with</param>
+            <returns>A subset of type Iset<typeparamref name="T"/> which includes all elements that are both in set A and Set B</returns>
+        </member>
+        <member name="M:SetLibrary.Operations.SetOperations.Complement``1(SetLibrary.ICSet{``0},SetLibrary.ICSet{``0},System.Boolean@)">
+            <summary>
+            The set that includes all the elements of the universal set that are not present in the given set.
+            </summary>
+            <typeparam name="T">Datatype</typeparam>
+            <param name="setA">The current instance that exists in the universal set</param>
+            <param name="universalSet">The universal set of which setA exists in.</param>
+            <param name="isUniversal"></param>
+            <returns>A new set of type Iset<typeparamref name="T"/> that contains the complement elements.</returns>
+        </member>
+        <member name="M:SetLibrary.Operations.SetOperations.Difference``1(SetLibrary.ICSet{``0},SetLibrary.ICSet{``0})">
+            <summary>
+            The difference between the two sets, A and B, written as A ∖ B or A − B.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setA">The current instance of the set, will be SetA</param>
+            <param name="setB">The set which will be removed from setA, will be SetB</param>
+            <returns> A set of type Iset<typeparamref name="T"/> that contains elements of A that are NOT in B</returns>
+        </member>
+        <member name="T:SetLibrary.CSet">
+            <summary>
+            A set object for strings only
+            </summary>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.#ctor(`0,SetLibrary.Generic.SetExtractionSettings{`0})">
+            <summary>
+            Creates a setTree containing only one root element.
+            </summary>
+            <param name="element">The root element</param>
+            <param name="settings">The extraction settings</param>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            Creates a new instance of a Set tree with the settings set to default.
+            </summary>
+            <param name="rootElements">The root elements</param>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.#ctor(System.Collections.Generic.List{`0},SetLibrary.Generic.SetExtractionSettings{`0})">
+            <summary>
+            Creates a new instance of a Set tree with the settings for extraction.
+            </summary>
+            <param name="rootElements">The root elements</param>
+            <param name="settings">The set extraction settings</param>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.#ctor(System.Collections.Generic.List{`0},System.Collections.Generic.List{SetLibrary.ISetTree{`0}})">
+            <summary>
+            Creates a new instance of a Set tree with the settings for extraction set to default.
+            </summary>
+            <param name="rootElement">The root elements.</param>
+            <param name="SubSets">The subsets</param>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.#ctor(System.Collections.Generic.List{`0},System.Collections.Generic.List{SetLibrary.ISetTree{`0}},SetLibrary.Generic.SetExtractionSettings{`0})">
+            <summary>
+             Creates a new instance of a Set tree with the settings for extraction.
+            </summary>
+            <param name="rootElements">The root elements.</param>
+            <param name="SubSets">The subsets</param>
+            <param name="settings">The extraction settings</param>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.GetSubsetsEnumarator">
+            <summary>
+            Enumarate through the subelements element of the current set
+            </summary>
+            <returns>A tree of type <typeparamref name="T"/> as an element from this tree</returns>
+        </member>
+        <member name="M:SetLibrary.CSetTree`1.ToSetString(SetLibrary.ISetTree{`0})">
+            <summary>
+            Recuresive procedure to build a set string using a dept first retrieval/search
+            </summary>
+            <param name="tree">The set tree to be traversed</param>
+            <returns>A string representation of the set tree.</returns>
+        </member>
+    </members>
+</doc>
