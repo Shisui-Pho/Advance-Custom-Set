@@ -124,7 +124,10 @@ namespace SetLibrary
         }//AddSubTree
         public bool RemoveElement(ISetTree<T> element)
         {
-            return lstSubsets.Remove(element);
+            int index = lstSubsets.IndexOf(element);
+            if (index >= 0)
+                lstSubsets.RemoveAt(index);
+            return index >= 0;
         }//RemoveElement
         public bool RemoveElement(T element)
         {
