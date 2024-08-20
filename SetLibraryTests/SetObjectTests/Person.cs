@@ -1,4 +1,5 @@
-﻿using SetLibrary.Generic;
+﻿using SetLibrary;
+using SetLibrary.Generic;
 using SetLibrary.Objects_Sets;
 using System;
 namespace SetLibraryTests.SetObjectTests

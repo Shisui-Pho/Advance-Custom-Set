@@ -49,24 +49,24 @@
     <Compile Include="Collections\Set.cs" />
     <Compile Include="Collections\SetCollection.cs" />
     <Compile Include="Model\BaseSet.cs" />
-    <Compile Include="Model\Element.cs" />
+    <Compile Include="Model\SetTree Structure\Element.cs" />
     <Compile Include="Collections\ISortedSetCollection.cs" />
     <Compile Include="Collections\SortedSubSets.cs" />
-    <Compile Include="Model\IObjectConverter.cs" />
-    <Compile Include="Model\ObjectSet.cs" />
+    <Compile Include="Model\Objects\IObjectConverter.cs" />
+    <Compile Include="Model\Objects\ObjectSet.cs" />
     <Compile Include="Service\SetExtraction.cs" />
-    <Compile Include="Service\SetExtractionSettings.cs" />
-    <Compile Include="Model\GenericSet.cs" />
+    <Compile Include="Model\SetExtractionSettings.cs" />
+    <Compile Include="Model\Generic\GenericSet.cs" />
     <Compile Include="Model\ICSet.cs" />
-    <Compile Include="Model\ISetTree.cs" />
+    <Compile Include="Model\SetTree Structure\ISetTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BracesEvaluation.cs" />
     <Compile Include="SetExtensions\ISetExtensions.cs" />
     <Compile Include="SetExtensions\ISetTreeExtensions.cs" />
     <Compile Include="SetExtensions\SetOperations.cs" />
     <Compile Include="Model\SetType.cs" />
-    <Compile Include="Model\CSet.cs" />
-    <Compile Include="Model\CSetTree.cs" />
+    <Compile Include="Model\String\CSet.cs" />
+    <Compile Include="Model\SetTree Structure\CSetTree.cs" />
     <Compile Include="Collections\SortedElements.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -1,6 +1,7 @@
 ﻿using SetLibrary.Generic;
 using SetLibrary.Objects_Sets;
 using System;
+using SetLibrary;
 namespace Advanced_Sets
 {
     public enum TypeOfAnimal
